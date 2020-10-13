@@ -46,7 +46,7 @@
      <input type="number" name="you_socsec_age" value="70" min="62" max="70">
 
      <label for="you_socsec_amt">Annual Soc Sec:</label> 	
-     <input type="number" name="you_socsec_amt" value=0, min="0" max="100000"     >
+     <input type="number" name="you_socsec_amt" value=0 min="0" max="100000"     >
     
      <label for="you_ira_start_bal_amt">IRA/401K Balance:</label>
      <input type="number" name="you_ira_start_bal_amt" value=0 min="0" max="999999999">
