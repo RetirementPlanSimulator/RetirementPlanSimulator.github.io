@@ -37,16 +37,16 @@
      <input id='youcurage' type="number" name="you_cur_age" min="20" max="99"> 
 
      <label for="you_retire_age">Retire Begin Age:</label> 
-     <input type="number" name="you_retire_age", value="65" min="20" max="99"> 
+     <input type="number" name="you_retire_age" value="65" min="20" max="99"> 
 
      <label for="you_retire_end_age">Retire End Age:</label>  
-     <input type="number" name="you_retire_end_age", value="94" min="20" max="99">
+     <input type="number" name="you_retire_end_age" value="94" min="20" max="99">
 
      <label for="you_socsec_age">Soc Sec Start Age:</label> 	
-     <input type="number" name="you_socsec_age", value="70" min="62" max="70">
+     <input type="number" name="you_socsec_age" value="70" min="62" max="70">
 
      <label for="you_socsec_amt">Annual Soc Sec:</label> 	
-     <input type="number" name="you_socsec_amt", value=0, min="0" max="100000"     >
+     <input type="number" name="you_socsec_amt" value=0, min="0" max="100000"     >
     
      <label for="you_ira_start_bal_amt">IRA/401K Balance:</label>
      <input type="number" name="you_ira_start_bal_amt" value=0 min="0" max="999999999">
