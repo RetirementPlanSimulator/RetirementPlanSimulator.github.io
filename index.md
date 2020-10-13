@@ -1960,12 +1960,12 @@ function getcurrentyear() {
 </script>
 
 
-<! ************************************ -- >
-<! adjst tax variables by inflation rate -- >
-<! ************************************* -- >
+
 <script>
 function infadj_tax_variables_func(infrate) {
-    
+// ************************************ -- >
+// adjst tax variables by inflation rate -- >
+// ************************************* -- >    
    infadj_std_deduct_married = Math.round(infadj_std_deduct_married * (1+infrate));
    infadj_std_deduct_single  = Math.round(infadj_std_deduct_single * (1+infrate));
    infadj_senior_deduct_amt  = Math.round(infadj_senior_deduct_amt * (1+infrate));
@@ -2009,9 +2009,6 @@ function infadj_tax_variables_func(infrate) {
 </script>
 
 
-<! ********************** -- >
-<! calculate rmd function -- >
-<! ********************** -- >
 <script>
 function calc_rmd(fAge, fIRA_Bal_Amt) {
 
@@ -2034,9 +2031,6 @@ function calc_rmd(fAge, fIRA_Bal_Amt) {
 </script>
  
 
-<! ********************** -- >
-<! calculate social security taxable -- >
-<! ********************** -- >
 <script>
 function calc_socsec_taxable_func(fAdjusted_Gross_Amt, fSocSec_Amt, fExemptions) {
 
@@ -2174,9 +2168,6 @@ function calc_capgains_tax(fAdjusted_Gross_Amt, fDeductions_Amt, fCapgains_Amt, 
 }
 </script>
 
-<! ********************************* -- >
-<! define internal hard coded tables -- >
-<! ********************************* -- >
 <script type="text/javascript">
 
 //********************
