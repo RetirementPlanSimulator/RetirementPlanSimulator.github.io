@@ -15,7 +15,7 @@
 
 <h1 id="myHeader">Retirement Plan Simulator</h1>
 
-<p> The purpose of yRetirement Plan Simulator (RPS) is to pressure test the survivability of financial plans for retirement by running the following simulations:</p>
+<p> The purpose of zRetirement Plan Simulator (RPS) is to pressure test the survivability of financial plans for retirement by running the following simulations:</p>
 
 <p>1)	Baseline Simulation: RPS will simulate your retirement plan against a simple smooth annual return rates of 6% for stocks and 3% for bonds, and 2.25% inflation rate. </p>
 
@@ -180,6 +180,8 @@
 
 
 </fieldset> 
+</div>
+</form>
 <br>
 <input type="button" value="Run Simulation" onclick="calcdraw(this.form,'NO')">
 
@@ -2666,7 +2668,6 @@ ratehistory[393]={year:2165,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.02};
 ratehistory[394]={year:2166,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.02};
 ratehistory[395]={year:2167,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.02};
 ratehistory[396]={year:2168,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.02};
-</div>
-</form>
+</script>
 
 </html>
