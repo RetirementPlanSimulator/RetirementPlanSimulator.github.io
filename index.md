@@ -15,7 +15,7 @@
 
 <h1 id="myHeader">Retirement Plan Simulator</h1>
 
-<p> The purpose of xRetirement Plan Simulator (RPS) is to pressure test the survivability of financial plans for retirement by running the following simulations:</p>
+<p> The purpose of yRetirement Plan Simulator (RPS) is to pressure test the survivability of financial plans for retirement by running the following simulations:</p>
 
 <p>1)	Baseline Simulation: RPS will simulate your retirement plan against a simple smooth annual return rates of 6% for stocks and 3% for bonds, and 2.25% inflation rate. </p>
 
