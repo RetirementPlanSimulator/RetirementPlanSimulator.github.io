@@ -1,37 +1,27 @@
-## Welcome to GitHub Pages
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+<html>
+<style>
+#myHeader {
+  background-color: lightblue;
+  color: black;
+  padding: 20px;
+  text-align: center;
+} 
+</style>
 
-You can use the [editor on GitHub](https://github.com/RetirementPlanSimulator/RetirementPlanSimulator.github.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+ <head>
+  <title>Back Test Retirement Plan</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+ </head>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<h1 id="myHeader">Retirement Plan Simulator</h1>
 
-### Markdown
+<p> The purpose of Retirement Plan Simulator (RPS) is to pressure test the survivability of financial plans for retirement by running the following simulations:</p>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<p>1)	Baseline Simulation: RPS will simulate your retirement plan against a simple smooth annual return rates of 6% for stocks and 3% for bonds, and 2.25% inflation rate. </p>
 
-```markdown
-Syntax highlighted code block
+<p>2)	Historical Simulation: RPS will simulate your retirement plan against actual prior historical market performance and sequence of events.  Annual return rates of the S&P500 index (or total stock market index when available), intermediate bond fund index and inflation rates are used in the simulation.</p>
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/RetirementPlanSimulator/RetirementPlanSimulator.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<p>RPS cannot definitively tell if a plan will survive retirement, but it can provide an increased level of awareness on the range of possibilities that could be experienced during retirement.  If a plan can survive every sequence of events in history (even the worst-case sequence of events), there is an excellent chance the plan will survive future scenarios.</p>  
+<p> Before using RPS, please read the <a href="RPS_Disclaimer.html" target="_blank">disclaimer</a>.  More information can be found in the <a href="RPS_User_Guide2.html" target="_blank"> user guide </a>.  Hope you find this tool useful.  Please <a href="mailto:home@josephenagy.com"> email me </a> with comments and suggestions. </p>
+</html>
