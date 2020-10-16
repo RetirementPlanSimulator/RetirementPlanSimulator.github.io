@@ -25,7 +25,5 @@
 <p> Before using RPS, please read the <a href="RPS_Disclaimer.html" target="_blank">disclaimer</a>.  More information can be found in the <a href="RPS_User_Guide2.html" target="_blank"> user guide </a>.  Hope you find this tool useful.  Please <a href="mailto:home@josephenagy.com"> email me </a> with comments and suggestions. </p>
 
 <p> If you are ready to test your financial plan, <a href="RPS.html" target="_blank">press here to get started</a>.  
- </body>
-</html>
 
 
