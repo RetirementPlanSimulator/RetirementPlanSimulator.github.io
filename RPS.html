@@ -8,6 +8,12 @@
   text-align: center;
 } 
 </style>
+<style>
+div.b {
+  line-height: .5;
+}
+
+</style>
 
  <head>
   <title>Back Test Retirement Plan</title>
@@ -26,76 +32,77 @@
 <fieldset>
   <legend> <b> Your Information </b> </legend>
      <label for="you_cur_age">Age: </label> 
-     <input id='youcurage' type="number" name="you_cur_age" min="20" max="99"> 
+     <input id='youcurage' type="number" name="you_cur_age" min="20" max="99" style="width: 50px;"> 
 
      <label for="you_retire_age">Retire Begin Age:</label> 
-     <input type="number" name="you_retire_age" value="65" min="20" max="99"> 
+     <input type="number" name="you_retire_age" value="65" min="20" max="99" style="width: 50px;"> 
 
      <label for="you_retire_end_age">Retire End Age:</label>  
-     <input type="number" name="you_retire_end_age" value="94" min="20" max="99">
+     <input type="number" name="you_retire_end_age" value="94" min="20" max="99" style="width: 50px;">
 
      <label for="you_socsec_age">Soc Sec Start Age:</label> 	
-     <input type="number" name="you_socsec_age" value="70" min="62" max="70">
+     <input type="number" name="you_socsec_age" value="70" min="62" max="70" style="width: 50px;">
 
      <label for="you_socsec_amt">Annual Soc Sec:</label> 	
-     <input type="number" name="you_socsec_amt" value=0 min="0" max="100000"     >
+     <input type="number" name="you_socsec_amt" value=0 min="0" max="100000" style="width: 75px;"     >
     
      <label for="you_ira_start_bal_amt">IRA/401K Balance:</label>
-     <input type="number" name="you_ira_start_bal_amt" value=0 min="0" max="999999999">
+     <input type="number" name="you_ira_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
      <label for="you_ira_ann_dep_amt">IRA/401K Annual Deposit:</label>
-     <input type="number" name="you_ira_ann_dep_amt" value=0 min="0" max="999999">
+     <input type="number" name="you_ira_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-     <br> 
+      <div class="b"><br> </div>
      <label for="you_pension_amt">Annual Pension:</label> 
-     <input type="number" name="you_pension_amt" value=0 min="0" max="999999">
+     <input type="number" name="you_pension_amt" value=0 min="0" max="999999" style="width: 75px;">
 
      <label for="you_pension_beg_age">Pension Begin Age:</label> 
-     <input type="number" name="you_pension_begin_age" value=0 min="0" max="99"	>
+     <input type="number" name="you_pension_begin_age" value=0 min="0" max="99" style="width: 50px;"	>
 
     <label for="you_pension_inf_pct">Annual Pension Inflation Adjustment %:</label> 
-    <input type="number" name="you_pension_inf_pct" value=0 min="0" max="10">
+    <input type="number" name="you_pension_inf_pct" value=0 min="0" max="10" style="width: 50px;">
 
     <label for="you_pension_survivor_pct">Pension Survivor %:</label> 
-    <input type="number" name="you_pension_survivor_pct" value=0 min="0" max="100">
+    <input type="number" name="you_pension_survivor_pct" value=0 min="0" max="100" style="width: 50px;">
 
 </fieldset>
 <br>
 <fieldset>
   <legend><b> Spouse Information </b> </legend>
      <label for="spo_cur_age">Age: </label>
-     <input type="number" name="spo_cur_age" value=0 min="20" max="99"> 
+     <input type="number" name="spo_cur_age" value=0 min="20" max="99" style="width: 50px;"> 
 
      <label for="spo_retire_age">Retire Begin Age:</label> 
-     <input type="number" name="spo_retire_age" value=0 min="20" max="99"> 
+     <input type="number" name="spo_retire_age" value=0 min="20" max="99" style="width: 50px;"> 
 
      <label for="spo_retire_end_age">Retire End Age:</label> 
-     <input type="number" name="spo_retire_end_age" value=0 min="20" max="99">
+     <input type="number" name="spo_retire_end_age" value=0 min="20" max="99" style="width: 50px;">
      
      <label for="spo_socsec_age">Soc Sec Start Age:</label>  	
-     <input type="number" name="spo_socsec_age" value=0 min="62" max="70">
+     <input type="number" name="spo_socsec_age" value=0 min="62" max="70" style="width: 50px;">
      
      <label for="spo_socsec_amt">Annual Soc Sec:</label>
-     <input type="number" name="spo_socsec_amt" value=0 min="0" max="100000">       
+     <input type="number" name="spo_socsec_amt" value=0 min="0" max="100000" style="width: 75px;">       
 
      <label for="spo_ira_start_bal_amt">IRA/401k Balance:</label> 
-     <input type="number" name="spo_ira_start_bal_amt" value=0 min="0" max="999999999">
+     <input type="number" name="spo_ira_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
      <label for="spo_ira_ann_dep_amt">IRA/401k Annual Deposit:</label> 
-     <input type="number" name="spo_ira_ann_dep_amt" value=0 min="0" max="999999">
+     <input type="number" name="spo_ira_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-     <br>
+     <div class="b"><br> </div>
+
      <label for="spo_pension_amt">Annual Pension:</label> 
-     <input type="number" name="spo_pension_amt" value=0 min="0" max="999999">
+     <input type="number" name="spo_pension_amt" value=0 min="0" max="999999" style="width: 75px;">
 
      <label for="spo_pension_beg_age">Pension Begin Age:</label> 
-     <input type="number" name="spo_pension_begin_age" value=0 min="0" max="99">
+     <input type="number" name="spo_pension_begin_age" value=0 min="0" max="99" style="width: 50px;">
 
     <label for="spo_pension_inf_pct">Annual Pension Inflation Adjustment %:</label> 
-    <input type="number" name="spo_pension_inf_pct" value=0 min="0" max="10">
+    <input type="number" name="spo_pension_inf_pct" value=0 min="0" max="10" style="width: 50px;">
 
     <label for="spo_pension_survivor_pct">Pension Survivor %:</label>  
-    <input type="number" name="spo_pension_survivor_pct" value=0 min="0" max="100">
+    <input type="number" name="spo_pension_survivor_pct" value=0 min="0" max="100" style="width: 50px;">
 
 </fieldset>
 <br>
@@ -103,13 +110,13 @@
   <legend><b> Brokerage Account Information </b> </legend>
 
     <label for="brkrg_start_bal_amt">Current Balance:</label>
-    <input type="number" name="brkrg_start_bal_amt" value=0 min="0" max="999999999">
+    <input type="number" name="brkrg_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
     <label for="brkrg_cost_basis_amt">Cost Basis:</label>
-    <input type="number" name="brkrg_cost_basis_amt" value=0 min="0" max="999999999">
+    <input type="number" name="brkrg_cost_basis_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
      <label for="brkrg_ann_dep_amt">Annual Deposit:</label> 
-     <input type="number" name="brkrg_ann_dep_amt" value=0 min="0" max="999999">
+     <input type="number" name="brkrg_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 </fieldset> 
 <br>
 
@@ -117,10 +124,10 @@
   <legend><b> Roth / HSA Account Information </b> </legend>
 
     <label for="roth_start_bal_amt">Current Balance:</label> 
-    <input type="number" name="roth_start_bal_amt" value=0 min="0" max="999999999">
+    <input type="number" name="roth_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
      <label for="roth_ann_dep_amt">Annual Deposit:</label> 
-     <input type="number" name="roth_ann_dep_amt" value=0 min="0" max="999999">
+     <input type="number" name="roth_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
     <label for="roth_conv_pct">Backdoor Conversion Max Tax Bracket:</label>
          <select name="roth_conv_pct" id="roth_conv_pct">
@@ -136,22 +143,22 @@
   <legend><b> Annual Budget </b> </legend>
     
     <label for="gogo_budget_amt">Go Go Years (< 75):</label> 
-    <input type="number" name="gogo_budget_amt" value=0 min="0" max="999999">
+    <input type="number" name="gogo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
 
     <label for="slowgo_budget_amt">Slow Go Years (< 85):</label> 
-    <input type="number" name="slowgo_budget_amt" value=0 min="0" max="999999">
+    <input type="number" name="slowgo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
 
     <label for="nogo_budget_amt">No Go Years (> 85):</label> 
-    <input type="number" name="nogo_budget_amt" value=0 min="0" max="999999">
+    <input type="number" name="nogo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-    <label for="last3_budget_amt">Nursing Home Years (Last 3):</label> 
-    <input type="number" name="last3_budget_amt" value=0 min="0" max="9999999">
+    <label for="last3_budget_amt">Assisted Living Years (Last 3):</label> 
+    <input type="number" name="last3_budget_amt" value=0 min="0" max="9999999" style="width: 75px;">
 
     <label for="mortgage_budget_amt">Mortgage Amount:</label> 
-    <input type="number" name="mortgage_budget_amt" value=0 min="0" max="999999">
+    <input type="number" name="mortgage_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
 
     <label for="mortgage_end_age">Age Mortgage Ends:</label> 
-    <input type="number" name="mortgage_end_age" value=0 min="0" max="99">
+    <input type="number" name="mortgage_end_age" value=0 min="0" max="99" style="width: 50px;">
 
 </fieldset> 
 <br>
@@ -159,16 +166,16 @@
   <legend><b> Other Information </b> </legend>
     
     <label for="stock_pct">Stock Allocation %:</label> 
-    <input type="number" name="stock_pct" value=60 min="0" max="100"                >
+    <input type="number" name="stock_pct" value=60 min="0" max="100" style="width: 50px;" >
 
     <label for="bonus_pct">Retirement Bonus %:</label>
-    <input type="number" name="bonus_pct" value=0 min="0" max="100">
+    <input type="number" name="bonus_pct" value=0 min="0" max="100" style="width: 50px;">
 
     <label for="baseline_stock_return_pct">Baseline Stock Return %:</label>
-    <input type="number" name="baseline_stock_return_pct" value=6 min="0" max="10">
+    <input type="number" name="baseline_stock_return_pct" value=6 min="0" max="10" style="width: 50px;">
 
     <label for="baseline_bond_return_pct">Baseline Bond Return %:</label>
-    <input type="number" name="baseline_bond_return_pct" value=3 min="0" max="10">
+    <input type="number" name="baseline_bond_return_pct" value=3 min="0" max="10" style="width: 50px;">
 
 
 </fieldset> 
