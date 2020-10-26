@@ -22,6 +22,15 @@ div.b {
 
 <h1 id="myHeader">Retirement Plan Simulator</h1>
 
+<div class="w3-bar w3-black">
+   <a href="RPS_Disclaimer.html" >Disclaimer</a>
+   &nbsp;&nbsp;&nbsp;
+   <a href="RPS_User_Guide2.html" >User Guide</a> 
+   &nbsp;&nbsp;&nbsp;
+   <a href="mailto:home@josephenagy.com" >Contact Me</a> 
+  
+</div>
+
 <form onsubmit=" ">
 <div align="left">
 <p> If you have used RPS on this computer before: 
@@ -259,10 +268,10 @@ div.b {
         {error_message = error_message + "<p> Your Retire Age must be between 20 and 99. </p>"; }
 
       if (form.you_retire_end_age.value > 99) 
-        {error_message = error_message + "<p> Your Retire End Age must be between 70 and 99. </p> "; }
+        {error_message = error_message + "<p> Your Retire End Age must be between 65 and 99. </p> "; }
   
-      if (form.you_retire_end_age.value < 70) 
-        {error_message = error_message + "<p> Your Retire End Age must be between 70 and 99. </p>"; }
+      if (form.you_retire_end_age.value < 65) 
+        {error_message = error_message + "<p> Your Retire End Age must be between 65 and 99. </p>"; }
 
       if (form.you_socsec_age.value < 62) 
         {error_message = error_message + "<p> Your Social Security Start Age must be between 62 and 70. </p> "; }
@@ -648,7 +657,10 @@ div.b {
     
     baseline =  {year : 0, age_runout : 000, years_remain: 0, end_bal : 0};   
     sim_summary = {bl : baseline}; 
-
+     
+    fYou_RMD_Age = calc_rmd_age(fCurrent_Year, fYou_Current_Age);
+    fSpo_RMD_Age = calc_rmd_age(fCurrent_Year, fSpo_Current_Age); 
+     
     fMax_Year = (fCurrent_Year - fNbr_Years + 10);
       
 for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
@@ -665,8 +677,8 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //    if (ratehistory[x].year == 1937) {fProcess = "yes";}
 //    if (fProcess == "no") {continue;}
                                                               
-    var fInfAdj_You_SocSec_Amt   = form.you_socsec_amt.value;
-    var fInfAdj_Spo_SocSec_Amt   = form.spo_socsec_amt.value;
+    fInfAdj_You_SocSec_Amt   = form.you_socsec_amt.value * 1;
+    fInfAdj_Spo_SocSec_Amt   = form.spo_socsec_amt.value * 1;
 
     fInfAdj_GoGo_Budget_Amt = form.gogo_budget_amt.value * 1;
     fInfAdj_SlowGo_Budget_Amt = form.slowgo_budget_amt.value * 1;
@@ -864,10 +876,10 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                    
           fRemain_Need_Amt = fTotal_Need_Amt;
 
-          fYou_RMD_Draw_Amt = calc_rmd(fYou_Age, fYou_IRA_Beg_Bal_Amt);  // you RMD
+          fYou_RMD_Draw_Amt = calc_rmd(fYou_Age, fYou_IRA_Beg_Bal_Amt, fYou_RMD_Age);  // you RMD
           fYou_IRA_End_Bal_Amt1 = fYou_IRA_Beg_Bal_Amt - fYou_RMD_Draw_Amt;     
           
-          fSpo_RMD_Draw_Amt = calc_rmd(fSpo_Age, fSpo_IRA_Beg_Bal_Amt);  // spouse RMD
+          fSpo_RMD_Draw_Amt = calc_rmd(fSpo_Age, fSpo_IRA_Beg_Bal_Amt, fSpo_RMD_Age);  // spouse RMD
           fSpo_IRA_End_Bal_Amt1 = fSpo_IRA_Beg_Bal_Amt - fSpo_RMD_Draw_Amt;
       
           fRemain_Need_Amt = fRemain_Need_Amt - fYou_RMD_Draw_Amt - fSpo_RMD_Draw_Amt;   
@@ -2031,15 +2043,32 @@ function infadj_tax_variables_func(infrate) {
 </script>
 
 
-<! ********************** -- >
-<! calculate rmd function -- >
-<! ********************** -- >
 <script>
-function calc_rmd(fAge, fIRA_Bal_Amt) {
+function calc_rmd_age(fCurrent_Year, fCurrent_Age) {
+//******************************************************** 
+// calculate rmd age 
+// If turn age 70 in 2019 or earlier, must start taking RMD at age 70.
+// Otherwise, must start taking RMD age 72
+//********************************************************          
+          
+    fRMD_Age = 72;
+    fYear_Born = fCurrent_Year - fCurrent_Age;   
+    fYear_Turn70 = fYear_Born + 70;
+    if (fYear_Turn70 <= 2019) {fRMD_Age = 70;}
+    return fRMD_Age;
+}
+</script>
+    
 
-  var fRMD_Amt = 0;
-  
-  if(fAge < 70) {return fRMD_Amt};
+<script>
+function calc_rmd(fAge, fIRA_Bal_Amt, fRMD_Age) {
+//******************************************************** 
+// calculate rmd function 
+//********************************************************
+    
+  fRMD_Amt = 0;
+         
+  if(fAge < fRMD_Age) {return fRMD_Amt};
   if(fAge > 114) {return fRMD_Amt};
 
   if (fIRA_Bal_Amt <= 0) {return fRMD_Amt};
