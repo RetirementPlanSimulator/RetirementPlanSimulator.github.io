@@ -48,35 +48,35 @@ ul
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Social
 Security </span></u></b></p>
 
-<p class=MsoNormal>Enter the annual benefit you expect to receive from social
+<p class=MsoNormal>Enter the annual benefit expected from social
 security. Estimated benefits are found on SSA.GOV.  I have found that SSA.GOV
-estimated benefits assume you will work until your benefit date.  So, for the
-age 70 estimated benefit SSA.GOV assumes you will work to age 70.  You will get
-a more precise estimate by using ANYPIA32 downloaded from the SSA web site.  
-    If you are planning to work until age 62 and delay benefits until age 70,
+estimated benefits assume working until benefits start.  So, for the
+age 70 estimated benefit SSA.GOV assumes working until age 70.  
+A more precise estimate can be determined by using ANYPIA32 downloaded from the SSA web site.  
+  If planning to work until age 62 and taking benefits at age 70,
 ANYPIA32 will provide a more accurate benefit estimate.</p>
 
-<p class=MsoNormal>RPS does not support scenarios such as windfall
+<p class=MsoNormal>RPS does not support complicated scenarios such as windfall
 elimination rules and file / suspend.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Roth
 Conversion</span></u></b></p>
 
 <p class=MsoNormal>RPS can look for opportunities to do a backdoor Roth
-Conversion.  Depending on your age, if you have enough in your brokerage account to live on for 1-3
-years before drawing down on your IRA, it is likely your taxes will be
+Conversion during the simulation.  If there is enough in the brokerage account to live on for 1-3
+years before drawing down from the IRA, it is likely taxes will be
 extremely low (if not zero).  This might be a good time to consider a Roth
-conversion.  RPS will limit the taxes you pay to either the 0%, 10% or 12% tax
-bracket - depending on your selection.  Try each and see what works best. </p>
+conversion.  RPS will limit the taxes paid to either the 0%, 10% or 12% tax
+bracket in the conversion year - depending on the option selected.  Try each and see what works best. </p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Annual
 Budget</span></u></b></p>
 
-<p class=MsoNormal>This should be the amount you minimally want to live on
-during retirement.  Include non-discretionary expenses such as rent, utilities,
-health care, groceries.  Also include discretionary expenses such as travel,
-hobbies and dining out.  In short, enter the amount you plan to spend in a
-comfortable retirement.  Do not include your mortgage principal and interest in
+<p class=MsoNormal>This should be the amount minimally needed to live on
+comfortably during retirement.  Include non-discretionary expenses such as rent, utilities,
+health care, groceries, Medicare, and insurance.  Also include discretionary expenses such as travel,
+hobbies and dining out.  In short, enter the amount planned to spend in a
+comfortable retirement.  Do not include mortgage principal and interest in
 this amount - that is entered in a separate field.  Do not allow for federal
 income or capital gains taxes as RPS will estimate.</p>
 
@@ -84,20 +84,16 @@ income or capital gains taxes as RPS will estimate.</p>
 is not.</p>
 
 <p class=MsoNormal>RPS separates the budget into 4 different timeframes.  This
-will allow you to simulate with budgets that will change throughout your
-retirement.</p>
+will allow RPS to simulate using budgets that will change throughout retirement.</p>
 
-<p class=MsoNormal>RPS includes a method to consider nursing home budget during
-the last 3 years of your life.  Depending on where you live, nursing home costs
-could cost at least $100,000 per year.  RPS assumes that if you do want to
-consider nursing home care costs, it will simulate using those costs the last 3
-years of your life.</p>
+<p class=MsoNormal>RPS includes a method to consider assisted living budget during
+the last 3 years of life.  Depending on state of residence, assisted liveing and nursing home costs
+could cost at least $100,000 per year.  RPS assumes that assisted living costs will be incurred in the last 3 years of the plan.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Mortgage
 Amount</span></u></b>: </p>
 
-<p class=MsoNormal>Enter the annual mortgage principal and interest you are
-paying.  RPS tracks this separately because it is not subject to inflation
+<p class=MsoNormal>Enter the annual mortgage principal and interest RPS tracks this separately because it is not subject to inflation
 adjustments.</p>
 
 <p class=MsoNormal>Enter your age when the last mortgage payment is made.</p>
@@ -105,8 +101,7 @@ adjustments.</p>
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Stock
 Allocation %</span></u></b></p>
 
-<p class=MsoNormal>This is the amount of your retirement assets you feel
-comfortable investing in stocks.  RPS assumes the remainder will be invested in
+<p class=MsoNormal>This is the precentage amount of retirement assets invested in stocks.  RPS assumes the remainder will be invested in
 an intermediate bond index fund.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Retirement
@@ -117,21 +112,17 @@ other tools.  RPS will simulate taking a bonus whenever the simulated
 historical ending balance for a given year is greater than the baseline plan
 ending balance for the same year.</p>
 
-<p class=MsoNormal>For example, assume your baseline plan shows you should have
-$900,000 for an ending balance after first year of retirement.  After year 1 of a simulated scenario, the ending balance is $950,000.  If you
-enter 10% in Retirement Bonus %, RPS will take 10% of the difference ($50,000)
-and give you a $5000 bonus withdraw for that year.</p>
+<p class=MsoNormal>For example, assume the baseline plan shows $900,000 for an ending balance after first year of retirement.  
+    After year 1 of a simulated scenario, the ending balance is $950,000.  A Retirement Bonus of 10% will result in a $5000 bonus withdraw for that year.</p>
 
-<p class=MsoNormal>The idea is for RPS to look for opportunities to withdraw
-and enjoy your retirement savings if actual results are better than your baseline
-plan.</p>
+<p class=MsoNormal>The idea is for RPS to look for additional opportunities to withdraw funds over and above the budget to be enjoyed during retirement.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Baseline
 Stock and Bond Returns</span></u></b> </p>
 
 <p class=MsoNormal>The default return rates for the baseline simulation is 6%
-stock ad 3% for bonds.  You can override this by adjusting these fields.  The
-bonus paid out during historical simulation will be impacted by your annual
+stock ad 3% for bonds.   These can be overridden for the simulation.  The
+bonus paid out during historical simulation will be impacted by annual
 baseline ending balance.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Withdrawals</span></u>
@@ -140,10 +131,10 @@ baseline ending balance.</p>
 <p class=MsoNormal>RPS will start the withdraw simulation after either you or
 your spouse have retired.</p>
 
-<p class=MsoNormal>RPS will simulate drawing down your assets in the following
+<p class=MsoNormal>RPS will simulate drawing down assets in the following
 sequence: 1) IRA RMD 2) brokerage accounts 3) IRAs non RMD 4) Roth / H.S.A.</p>
 
-<p class=MsoNormal>RPS assumes withdrawals will occur each year on January 1st.
+<p class=MsoNormal>RPS assumes withdrawals occur each year on January 1st.
 </p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Annual
@@ -151,23 +142,22 @@ Process</span></u></b> </p>
 
 <p class=MsoNormal>Inflation adjustments are made starting January 1st of each year simulated.</p>
 
-<p class=MsoNormal>RPS will simulate rebalancing to your preferred asset
-allocation on January 1 of each yearsimulated . </p>
+<p class=MsoNormal>RPS will simulate rebalancing to preferred asset
+allocation on January 1 of each year simulated . </p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Roth /
 HSA</span></u></b> </p>
 
 <p class=MsoNormal>RPS assumes that HSA and Roth money will be the last accounts
-to be withdrawn - and all money can be used tax free.  For your HSA, the
+to be withdrawn - and all money can be used tax free.  For HSA, the
 assumption is medical expenses incurred will be greater than the amount
-withdrawn from your HSA.</p>
+withdrawn.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Excess
 RMD</span></u></b> </p>
 
-<p class=MsoNormal>Required minimum distribution from your IRA may exceed your
-total need (Budget plus taxes minus social security and pensions).  In this case, RPS
-simulation assumes that excess money will be deposited into your brokerage
+<p class=MsoNormal>Required minimum distribution from IRA may exceed 
+total need (Budget plus taxes minus social security and pensions).  In this case, RPS assumes that excess money will be deposited into the brokerage
 account.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Budget
@@ -189,9 +179,9 @@ at various ages, and benefits of doing a Roth conversation early in retirement.<
 filing joint).  No other options are provided.</p>
 
 <p class=MsoNormal>Tax implications for employment wages is not considered.  RPS
-does not consider itemized deductions, alternative minimum tax, or any credits
-you may receive.  It also does not consider self-employment tax, employment
-taxes or other taxes that may impact your true final federal tax.</p>
+does not consider itemized deductions, alternative minimum tax, or any eligible credits.
+It also does not consider self-employment tax, employment
+taxes or other taxes that may impact the true final federal tax.</p>
 
 <p class=MsoNormal>Federal Taxes are calculated and combined in with the
 following year budget.</p>
@@ -210,7 +200,7 @@ Security Taxable</span></u></b></p>
 
 <p class=MsoNormal>RPS uses the process defined IRS Publication 915 for
 calculating the estimated Social Security Taxable Amount.  Social Security benefit amount
-will be federally taxable up to 85% of the benefit amount.</p>
+is federally taxable up to 85% of the benefit amount.</p>
 
 <p class=MsoNormal>&nbsp;</p>
 
