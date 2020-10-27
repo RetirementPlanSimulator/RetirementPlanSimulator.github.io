@@ -22,6 +22,8 @@ div.b {
 
 <h1 id="myHeader">Retirement Plan Simulator</h1>
 
+<body style="background-color:whitesmoke;"
+
 <div class="w3-bar w3-black">
    <a href="RPS_Disclaimer.html" >Disclaimer</a>
    &nbsp;&nbsp;&nbsp;
@@ -268,10 +270,10 @@ div.b {
         {error_message = error_message + "<p> Your Retire Age must be between 20 and 99. </p>"; }
 
       if (form.you_retire_end_age.value > 99) 
-        {error_message = error_message + "<p> Your Retire End Age must be between 65 and 99. </p> "; }
+        {error_message = error_message + "<p> Your Retire End Age must be between 60 and 99. </p> "; }
   
-      if (form.you_retire_end_age.value < 65) 
-        {error_message = error_message + "<p> Your Retire End Age must be between 65 and 99. </p>"; }
+      if (form.you_retire_end_age.value < 60) 
+        {error_message = error_message + "<p> Your Retire End Age must be between 60 and 99. </p>"; }
 
       if (form.you_socsec_age.value < 62) 
         {error_message = error_message + "<p> Your Social Security Start Age must be between 62 and 70. </p> "; }
@@ -446,10 +448,10 @@ div.b {
         {error_message = error_message + "<p> Spouse Retire Age must be between 20 and 99. </p>"; }
 
       if (form.spo_retire_end_age.value > 99) 
-        {error_message = error_message + "<p> Spouse Retire End Age must be between 70 and 99. </p> "; }
+        {error_message = error_message + "<p> Spouse Retire End Age must be between 60 and 99. </p> "; }
   
-      if (form.spo_retire_end_age.value < 70) 
-        {error_message = error_message + "<p> Spouse Retire End Age must be between 70 and 99. </p>"; }
+      if (form.spo_retire_end_age.value < 60) 
+        {error_message = error_message + "<p> Spouse Retire End Age must be between 60 and 99. </p>"; }
 
       if (form.spo_socsec_age.value < 62) 
          {error_message = error_message + "<p> Spouse Social Security Start Age must be between 62 and 70. </p> "; }
