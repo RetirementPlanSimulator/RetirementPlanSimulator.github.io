@@ -1113,7 +1113,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           if (fInfAdj_Budget_Running_Total > 0) {fScore_Bonus = Math.round((fBonus_Running_Total / fInfAdj_Budget_Running_Total) * 1000000);}
                    
           fScore_Years_Remain = 0;
-          if (fInfAdj_Budget_Amt > 0) {fScore_Years_Remain = Math.round(fEnd_Bal / fInfAdj_Budget_Amt) * 1000;}
+          if (fTotal_Draw_Amt > 0) {fScore_Years_Remain = Math.round(fEnd_Bal / fTotal_Draw_Amt) * 1000;}
                      
           fScenario_Score =  fScore_Age + fScore_Survived + fScore_Bonus + fScore_Years_Remain;   
                             
@@ -1752,7 +1752,11 @@ function closeWin() {
            
            if (fShow == "Y")
             {   
-              fYears_Remain = Math.round(scenario_summary[i].end_bal / scenario_summary[i].infadj_budget_amt); 
+              
+              fYears_Remain = "unknown";  
+              if (scenario_summary[i].total_draw_amt > 0)     
+                  {fYears_Remain = Math.round(scenario_summary[i].end_bal / scenario_summary[i].total_draw_amt);}
+                
               fBackGround = 'style="background-color:#ffffff">'; // default white 
               if (scenario_summary[i].end_bal == 0) 
                {fBackGround = 'style="background-color:#ffff00">'};  // set to yellow "background-color:#FF0000"
@@ -1774,7 +1778,7 @@ function closeWin() {
               '<td align = "center"> '  + Math.round((scenario_summary[i].bonus_running_total /
                                                    scenario_summary[i].infadj_budget_running_total)*100) + "%"      
                                                      + "</td> " +  
-              '<td align = "center"> '  + addcomma(scenario_summary[i].infadj_budget_amt) + "</td> " +
+              '<td align = "center"> '  + addcomma(scenario_summary[i].total_draw_amt) + "</td> " +
               '<td align = "center"> '  + addcomma(scenario_summary[i].end_bal) + "</td> " +
               '<td align = "center"> ' + fYears_Remain  + " </td> " +
               " </tr>" ;
