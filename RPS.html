@@ -27,7 +27,7 @@ div.b {
 <div class="w3-bar w3-black">
    <a href="RPS_Disclaimer.html" >Disclaimer</a>
    &nbsp;&nbsp;&nbsp;
-   <a href="RPS_User_Guide2.html" >User Guide</a> 
+   <a href="RPS_User_Guide.html" >User Guide</a> 
    &nbsp;&nbsp;&nbsp;
    <a href="mailto:home@josephenagy.com" >Contact Me</a> 
   
@@ -598,53 +598,68 @@ div.b {
     var fCurrent_Year = getcurrentyear();
 
     var fRowNbr      = 0;
-    var fStock_Pct    = form.stock_pct.value / 100;
-    var fBonus_Pct   = form.bonus_pct.value / 100;
+    
+    fStock_Pct    = form.stock_pct.value / 100;
+    fBonus_Pct   = form.bonus_pct.value / 100;
 
     fBaseline_Stock_Return_Pct = form.baseline_stock_return_pct.value / 100;
     fBaseline_Bond_Return_Pct = form.baseline_bond_return_pct.value / 100;
 
-    var fYou_Current_Age           = form.you_cur_age.value * 1;
-    var fYou_Retire_Age            = form.you_retire_age.value * 1;
+    fFrm_You_Current_Age           = form.you_cur_age.value * 1;
+    fFrm_You_Retire_Age            = form.you_retire_age.value * 1;
 
-    var fSpo_Current_Age           = form.spo_cur_age.value * 1;
-    var fSpo_Retire_Age            = form.spo_retire_age.value * 1;
+    fFrm_Spo_Current_Age           = form.spo_cur_age.value * 1;
+    fFrm_Spo_Retire_Age            = form.spo_retire_age.value * 1;
 
-    var fFrm_You_Retire_End_Age                  = form.you_retire_end_age.value * 1;
-    var fFrm_Spo_Retire_End_Age               = form.spo_retire_end_age.value * 1;
+    fFrm_You_Retire_End_Age                  = form.you_retire_end_age.value * 1;
+    fFrm_Spo_Retire_End_Age                  = form.spo_retire_end_age.value * 1;
 
-    var fFrm_You_IRA_Start_Bal_Amt           = form.you_ira_start_bal_amt.value * 1;
-    var fFrm_Spo_IRA_Start_Bal_Amt           = form.spo_ira_start_bal_amt.value * 1;
-    var fFrm_Brkrg_Start_Bal_Amt             = form.brkrg_start_bal_amt.value * 1;
-    var fFrm_Brkrg_Cost_Basis_Amt            = form.brkrg_cost_basis_amt.value * 1;
-    var fFrm_Roth_Start_Bal_Amt              = form.roth_start_bal_amt.value * 1;
-    var fFrm_Roth_Conv_Pct                   = form.roth_conv_pct.value;
+    fFrm_You_IRA_Start_Bal_Amt           = form.you_ira_start_bal_amt.value * 1;
+    fFrm_Spo_IRA_Start_Bal_Amt           = form.spo_ira_start_bal_amt.value * 1;
+    fFrm_Brkrg_Start_Bal_Amt             = form.brkrg_start_bal_amt.value * 1;
+    fFrm_Brkrg_Cost_Basis_Amt            = form.brkrg_cost_basis_amt.value * 1;
+    fFrm_Roth_Start_Bal_Amt              = form.roth_start_bal_amt.value * 1;
+    fFrm_Roth_Conv_Pct                   = form.roth_conv_pct.value;
 
     fFrm_You_IRA_Ann_Dep_Amt                 = form.you_ira_ann_dep_amt.value * 1;
     fFrm_Spo_IRA_Ann_Dep_Amt                 = form.spo_ira_ann_dep_amt.value * 1;
     fFrm_Brkrg_Ann_Dep_Amt                   = form.brkrg_ann_dep_amt.value * 1;
     fFrm_Roth_Ann_Dep_Amt                    = form.roth_ann_dep_amt.value * 1;
 
-    var fFrm_You_Pension_Amt                 = form.you_pension_amt.value * 1;
-    var fFrm_You_Pension_Begin_Age           = form.you_pension_begin_age.value * 1;
-    var fFrm_You_Pension_Inf_Pct             = form.you_pension_inf_pct.value / 100;
-    var fFrm_You_Pension_Survivor_Pct        = form.you_pension_survivor_pct.value /100;
+    fFrm_You_Pension_Amt                 = form.you_pension_amt.value * 1;
+    fFrm_You_Pension_Begin_Age           = form.you_pension_begin_age.value * 1;
+    fFrm_You_Pension_Inf_Pct             = form.you_pension_inf_pct.value / 100;
+    fFrm_You_Pension_Survivor_Pct        = form.you_pension_survivor_pct.value /100;
 
-    var fFrm_Spo_Pension_Amt                 = form.spo_pension_amt.value * 1;
-    var fFrm_Spo_Pension_Begin_Age           = form.spo_pension_begin_age.value * 1;
-    var fFrm_Spo_Pension_Inf_Pct             = form.spo_pension_inf_pct.value / 100;
-    var fFrm_Spo_Pension_Survivor_Pct        = form.spo_pension_survivor_pct.value / 100;
+    fFrm_Spo_Pension_Amt                 = form.spo_pension_amt.value * 1;
+    fFrm_Spo_Pension_Begin_Age           = form.spo_pension_begin_age.value * 1;
+    fFrm_Spo_Pension_Inf_Pct             = form.spo_pension_inf_pct.value / 100;
+    fFrm_Spo_Pension_Survivor_Pct        = form.spo_pension_survivor_pct.value / 100;
  	
-    fYou_Nbr_Years = fFrm_You_Retire_End_Age - fYou_Current_Age;
-    fSpouse_Nbr_Years = fFrm_Spo_Retire_End_Age - fSpo_Current_Age;	
+    fFrm_You_SocSec_Amt   = form.you_socsec_amt.value * 1;
+    fFrm_Spo_SocSec_Amt   = form.spo_socsec_amt.value * 1;
+    
+    fFrm_You_SocSec_Age   = form.you_socsec_age.value * 1;
+    fFrm_Spo_SocSec_Age   = form.spo_socsec_age.value * 1; 
+
+    fFrm_GoGo_Budget_Amt = form.gogo_budget_amt.value * 1;
+    fFrm_SlowGo_Budget_Amt = form.slowgo_budget_amt.value * 1;
+    fFrm_NoGo_Budget_Amt = form.nogo_budget_amt.value * 1;
+    fFrm_Last3_Budget_Amt = form.last3_budget_amt.value * 1;
+      
+    fFrm_Mortgage_Budget_Amt = form.mortgage_budget_amt.value * 1;
+    fFrm_Mortgage_End_Age = form.mortgage_end_age.value * 1;
+
+    fYou_Nbr_Years = fFrm_You_Retire_End_Age - fFrm_You_Current_Age;
+    fSpouse_Nbr_Years = fFrm_Spo_Retire_End_Age - fFrm_Spo_Current_Age;	
 
     fNbr_Years = fYou_Nbr_Years;
     
     if (fSpouse_Nbr_Years > fYou_Nbr_Years) 
             {fNbr_Years = fSpouse_Nbr_Years;}   
 
-    fYou_Remain_Years = fFrm_You_Retire_End_Age - fYou_Current_Age;
-    fSpo_Remain_Years = fFrm_Spo_Retire_End_Age - fSpo_Current_Age; 
+    fYou_Remain_Years = fFrm_You_Retire_End_Age - fFrm_You_Current_Age;
+    fSpo_Remain_Years = fFrm_Spo_Retire_End_Age - fFrm_Spo_Current_Age; 
 
     fLast_Alive = "you";
     fLast3_Start_Age = fFrm_You_Retire_End_Age - 2;
@@ -660,16 +675,21 @@ div.b {
     baseline =  {year : 0, age_runout : 000, years_remain: 0, end_bal : 0};   
     sim_summary = {bl : baseline}; 
      
-    fYou_RMD_Age = calc_rmd_age(fCurrent_Year, fYou_Current_Age);
-    fSpo_RMD_Age = calc_rmd_age(fCurrent_Year, fSpo_Current_Age); 
+    fYou_RMD_Age = calc_rmd_age(fCurrent_Year, fFrm_You_Current_Age);
+    fSpo_RMD_Age = calc_rmd_age(fCurrent_Year, fFrm_Spo_Current_Age); 
      
     fMax_Year = (fCurrent_Year - fNbr_Years + 10);
+
+    infadj_std_deduct_married = 0;
+    infadj_std_deduct_single = 0;
+    infadj_senior_deduct_amt = 0;
       
 for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
   {
   
 //******************************************************************************************
 //*** Year 1 simulation will be the baseline plan.  Real simulations will start with year 1871.
+//***
 //*** Reset inflation adjusted variables back to starting for first year in scenario.
 //********************************************************************************************
     if (ratehistory[x].year > 1 && ratehistory[x].year < 1871) {continue;} 
@@ -679,19 +699,19 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //    if (ratehistory[x].year == 1937) {fProcess = "yes";}
 //    if (fProcess == "no") {continue;}
                                                               
-    fInfAdj_You_SocSec_Amt   = form.you_socsec_amt.value * 1;
-    fInfAdj_Spo_SocSec_Amt   = form.spo_socsec_amt.value * 1;
+    fInfAdj_You_SocSec_Amt   = fFrm_You_SocSec_Amt;
+    fInfAdj_Spo_SocSec_Amt   = fFrm_Spo_SocSec_Amt;
 
-    fInfAdj_GoGo_Budget_Amt = form.gogo_budget_amt.value * 1;
-    fInfAdj_SlowGo_Budget_Amt = form.slowgo_budget_amt.value * 1;
-    fInfAdj_NoGo_Budget_Amt = form.nogo_budget_amt.value * 1;
-    fInfAdj_Last3_Budget_Amt = form.last3_budget_amt.value * 1;
+    fInfAdj_GoGo_Budget_Amt = fFrm_GoGo_Budget_Amt;
+    fInfAdj_SlowGo_Budget_Amt = fFrm_SlowGo_Budget_Amt;
+    fInfAdj_NoGo_Budget_Amt = fFrm_NoGo_Budget_Amt;
+    fInfAdj_Last3_Budget_Amt = fFrm_Last3_Budget_Amt;
       
-    fMortgage_Budget_Amt = form.mortgage_budget_amt.value * 1;
-    fMortgage_End_Age = form.mortgage_end_age.value * 1;
+    fMortgage_Budget_Amt = fFrm_Mortgage_Budget_Amt;
+    fMortgage_End_Age = fFrm_Mortgage_End_Age;
 
-    var fInfAdj_You_Pension_Amt     = fFrm_You_Pension_Amt;
-    var fInfAdj_Spo_Pension_Amt     = fFrm_Spo_Pension_Amt;
+    fInfAdj_You_Pension_Amt     = fFrm_You_Pension_Amt;
+    fInfAdj_Spo_Pension_Amt     = fFrm_Spo_Pension_Amt;
 
     fYou_IRA_Beg_Bal_Amt   = fFrm_You_IRA_Start_Bal_Amt;
     fYou_IRA_Stock_Amt = Math.round(fYou_IRA_Beg_Bal_Amt * fStock_Pct);
@@ -701,17 +721,17 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     fSpo_IRA_Stock_Amt = Math.round(fSpo_IRA_Beg_Bal_Amt * fStock_Pct);
     fSpo_IRA_Bond_Amt = fSpo_IRA_Beg_Bal_Amt - fSpo_IRA_Stock_Amt;
     
-    var fBrkrg_Beg_Bal_Amt        = fFrm_Brkrg_Start_Bal_Amt;
-    var fBrkrg_Beg_Cost_Basis_Amt = fFrm_Brkrg_Cost_Basis_Amt;
+    fBrkrg_Beg_Bal_Amt        = fFrm_Brkrg_Start_Bal_Amt;
+    fBrkrg_Beg_Cost_Basis_Amt = fFrm_Brkrg_Cost_Basis_Amt;
     fBrkrg_Stock_Amt = Math.round(fBrkrg_Beg_Bal_Amt * fStock_Pct);
     fBrkrg_Bond_Amt = fBrkrg_Beg_Bal_Amt - fBrkrg_Stock_Amt;
 
-    var fRoth_Beg_Bal_Amt      = fFrm_Roth_Start_Bal_Amt;
+    fRoth_Beg_Bal_Amt      = fFrm_Roth_Start_Bal_Amt;
     fRoth_Stock_Amt = Math.round(fRoth_Beg_Bal_Amt * fStock_Pct);
     fRoth_Bond_Amt = fRoth_Beg_Bal_Amt - fRoth_Stock_Amt;
 
-    fYou_Age  = fYou_Current_Age;
-    fSpo_Age  = fSpo_Current_Age; 
+    fYou_Age  = fFrm_You_Current_Age;
+    fSpo_Age  = fFrm_Spo_Current_Age; 
 
     var fYearCnt        = 0;
     fScenario_Nbr++;
@@ -727,7 +747,6 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
   
    oCapgains_Tax_Results = {taxable_income    : 0,
                             tax_amt           : 0};                 
-
 
    var fIRA_Distribution_Amt = 0;
    var fPension_Amt = 0;
@@ -745,8 +764,6 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
    var fBonus_Amt = 0;
    var fBonus_Running_Total = 0;
    var fInfAdj_Budget_Running_Total = 0;
-
-   
 
 //*************************************************************************************************
 //* reset inflation adjusted variables for first year in a scenario.  
@@ -784,11 +801,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fYou_SocSec_Amt = 0;
           fSpo_SocSec_Amt = 0;
 
-         if (fYou_Age >= form.you_socsec_age.value)     
+         if (fYou_Age >= fFrm_You_SocSec_Age)     
              {fYou_SocSec_Amt = fInfAdj_You_SocSec_Amt;}
           
-         if(fSpo_Current_Age > 0)
-              {if (fSpo_Age >= form.spo_socsec_age.value) 
+         if(fFrm_Spo_Current_Age > 0)
+              {if (fSpo_Age >= fFrm_Spo_SocSec_Age) 
                  {fSpo_SocSec_Amt = fInfAdj_Spo_SocSec_Amt;}}
               
 //****************************************************************************************************
@@ -799,7 +816,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
              {fYou_SocSec_Amt = 0;
               fSpo_SocSec_Amt = Math.max(fInfAdj_You_SocSec_Amt, fInfAdj_Spo_SocSec_Amt);}
 
-          if (fSpo_Current_Age > 0)         
+          if (fFrm_Spo_Current_Age > 0)         
              {if (fSpo_Age > fFrm_Spo_Retire_End_Age) 
                {fSpo_SocSec_Amt = 0;
                 fYou_SocSec_Amt = Math.max(fInfAdj_You_SocSec_Amt, fInfAdj_Spo_SocSec_Amt);}}
@@ -808,7 +825,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //* if simulation includes a spouse and if one has passed away mid scenario, budget will be reduced to 75%
 //*****************************************************************************************************     
           fBudget_Adj_Pct = cBudget_Full * 1;  
-          if (fSpo_Current_Age > 0 && fSpo_Age > fFrm_Spo_Retire_End_Age) {fBudget_Adj_Pct = cBudget_Single_Adj * 1;}
+          if (fFrm_Spo_Current_Age > 0 && fSpo_Age > fFrm_Spo_Retire_End_Age) {fBudget_Adj_Pct = cBudget_Single_Adj * 1;}
           if (fYou_Age > fFrm_You_Retire_End_Age) {fBudget_Adj_Pct = cBudget_Single_Adj * 1;}
 
 //********************************************************************************************************
@@ -840,7 +857,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          fTotal_Need_Amt = 0;
          fUse_Mortgage_Budget_Amt = 0;        
 
-        if (fYou_Age >= fYou_Retire_Age || (fSpo_Current_Age > 0 && fSpo_Age >= fSpo_Retire_Age))
+        if (fYou_Age >= fFrm_You_Retire_Age || (fFrm_Spo_Current_Age > 0 && fSpo_Age >= fFrm_Spo_Retire_Age))
              {
                if (fYou_Age <= fMortgage_End_Age) {fUse_Mortgage_Budget_Amt = fMortgage_Budget_Amt;}
                
@@ -866,7 +883,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fSpo_Years_Deceased = 0;
           if (fSpo_Age > fFrm_Spo_Retire_End_Age) {fSpo_Years_Deceased = fSpo_Age - fFrm_Spo_Retire_End_Age;}
 
-          if (fYou_Years_Deceased < 2 && fSpo_Years_Deceased <2 && fSpo_Current_Age > 0)
+          if (fYou_Years_Deceased < 2 && fSpo_Years_Deceased <2 && fFrm_Spo_Current_Age > 0)
               {fExemptions++;}
                    
           fPension_Amt = fUse_You_Pension_Amt + fUse_Spo_Pension_Amt;
@@ -1018,10 +1035,10 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fBrkrg_Ann_Dep_Amt = 0;
           fRoth_Ann_Dep_Amt = 0;
 
-          if(fYou_Age < fYou_Retire_Age) {fYou_IRA_Ann_Dep_Amt = fFrm_You_IRA_Ann_Dep_Amt;}
-          if(fSpo_Age < fSpo_Retire_Age) {fSpo_IRA_Ann_Dep_Amt = fFrm_Spo_IRA_Ann_Dep_Amt;}
-          if(fYou_Age < fYou_Retire_Age) {fBrkrg_Ann_Dep_Amt = fFrm_Brkrg_Ann_Dep_Amt;}
-          if(fYou_Age < fYou_Retire_Age) {fRoth_Ann_Dep_Amt = fFrm_Roth_Ann_Dep_Amt;}
+          if(fYou_Age < fFrm_You_Retire_Age) {fYou_IRA_Ann_Dep_Amt = fFrm_You_IRA_Ann_Dep_Amt;}
+          if(fSpo_Age < fFrm_Spo_Retire_Age) {fSpo_IRA_Ann_Dep_Amt = fFrm_Spo_IRA_Ann_Dep_Amt;}
+          if(fYou_Age < fFrm_You_Retire_Age) {fBrkrg_Ann_Dep_Amt = fFrm_Brkrg_Ann_Dep_Amt;}
+          if(fYou_Age < fFrm_You_Retire_Age) {fRoth_Ann_Dep_Amt = fFrm_Roth_Ann_Dep_Amt;}
                                   
 //***********************************************************************************************************************    
 //* 1) withdraw from account - done earlier, 2) reallocate 3) calculate gain 4) add deposit and gains 5) reallocate again
@@ -1212,8 +1229,8 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         senior_deduct_nbr  : fSenior_Deduct_Nbr,
                         senior_deduct_amt   : fSenior_Deduct_Amt,                   
                         
-                        stddeductmarried : infadj_std_deduct_married,
-                        stddeductsingle  : infadj_std_deduct_single,
+                        std_deduct_married : infadj_std_deduct_married,
+                        std_deduct_single  : infadj_std_deduct_single,
                         taxtablemarried0 : infadj_taxtable_married[0].thru,
                         taxtablemarried1 : infadj_taxtable_married[1].thru,
                         taxtablemarried2 : infadj_taxtable_married[2].thru,
@@ -1287,10 +1304,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                    
           fRowNbr++;
           fYou_Age++;
-          if (fSpo_Current_Age > 0) {fSpo_Age++};
+          if (fFrm_Spo_Current_Age > 0) {fSpo_Age++};
 
 //***********************************************************************************************
-//* if total ending balance for this scneario is 0, finish this scenario and go to next scenario
+//* if total ending balance for this scneario is <= 0, means scenario failed to reach end of retirement.
+//* finish this scenario and go to next scenario.
 //************************************************************************************************
           if (fEnd_Bal <= 0)
             {
@@ -1301,7 +1319,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
         
       }
 //***********************************************************************************************
-//* if falls out of inside loop, means scenario got to end without running out of money.  
+//* if falls out of inside loop, means scenario got to retirement end age without running out of money.  
 //************************************************************************************************
          fSurvive_Cnt++;
          scenario_summary[fScenario_Nbr-1] = simulation_scenario[fRowNbr-1];   
@@ -1389,8 +1407,6 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     
    if (fDownload_Results == "YES")
         {download_simulation_result_detail(simulation_scenario); }
-     
-   
     
  }
 </script>
@@ -2248,11 +2264,8 @@ var cBudget_Full = 1;
  
 var stddeductmarried = 24800;
 var stddeductsingle = 12400;
-var infadj_std_deduct_married = 0;
-var infadj_std_deduct_single = 0;
 
 var senior_deduct_amt = 1300;
-var infadj_senior_deduct_amt = 0;
 
 var taxtablemarried = new Array( );
 taxtablemarried[0] = {pct:.10, from:0, thru:19750};
