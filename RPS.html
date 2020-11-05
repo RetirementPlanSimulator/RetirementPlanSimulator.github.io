@@ -1343,11 +1343,6 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     TableResults = TableResults + " of which " + fSuccessNbr + " passed for a success rate of ";
     TableResults = TableResults + fSuccessRate + "%.  Scenario test is considered successful if ending balance is greater than zero at the end of the scenario simulation. </p>";   
 
-//    TableResults = TableResults + "<p> For your baseline plan, ";
-//    TableResults = TableResults + "your money would have lasted until your age ";
-//    TableResults = TableResults + scenario_summary[0].you_age + " and you would have had ";
-//    TableResults = TableResults + addcomma(scenario_summary[0].end_bal) + " total remaining balance. </p>";
-
 //*****************************************************************************************
 //* sort scenario summary results worst to best
 //****************************************************************************************    
@@ -1366,26 +1361,12 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     fBest_Year=scenario_summary[fBest_Case_Scenario].scenario_year;
     fMedian_Year=scenario_summary[fMedian_Scenario].scenario_year;
 
-
-//    TableResults = TableResults + "<p> Worst case scenario is if you would have retired in ";
-//    TableResults = TableResults + scenario_summary[fWorst_Case_Scenario].scenario_year + " - your money would have lasted until your age ";
-//    TableResults = TableResults + scenario_summary[fWorst_Case_Scenario].you_age + " and you would have had ";
-//    TableResults = TableResults + addcomma(scenario_summary[fWorst_Case_Scenario].end_bal) + " remaining balance in your accounts. </p>";
-
-//    TableResults = TableResults + "<p> Best case scenario is if you would have retired in ";
-//    TableResults = TableResults + scenario_summary[fBest_Case_Scenario].scenario_year + " - your money would have lasted until your age ";
-//    TableResults = TableResults + scenario_summary[fBest_Case_Scenario].you_age + " and you would have had ";
-//    TableResults = TableResults + addcomma(scenario_summary[fBest_Case_Scenario].end_bal) + " remaining balance in your accounts. </p>";
-
-//   TableResults = TableResults + "<p> Median scenario is if you would have retired in ";
-//    TableResults = TableResults + scenario_summary[fMedian_Scenario].scenario_year + " - your money would have lasted until your age ";
-//    TableResults = TableResults + scenario_summary[fMedian_Scenario].you_age + " and you would have had ";/
-//    TableResults = TableResults + addcomma(scenario_summary[fMedian_Scenario].end_bal) + " remaining balance in your accounts. </p>";
- 
-        
-    fMost_Recent_Year = fCurrent_Year - fNbr_Years - 1;                       
-    TableResults = showscenarioresults(TableResults, scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years,fWorst_Year,fBest_Year,fMedian_Year, fMost_Recent_Year);
-
+    fMost_Recent_Year = fCurrent_Year - fNbr_Years - 1;      
+    
+    TableResults = TableResults + set_table_style();
+    
+    TableResults = show_scenario_summary(TableResults, scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years,fWorst_Year,fBest_Year,fMedian_Year, fMost_Recent_Year);
+    
     if (fDownload_Results == "YES")
          {download_simulation_result_summary(scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years); }
        
@@ -1432,62 +1413,58 @@ function closeWin() {
                    
 <script type="text/javascript"> 
     function showdetails(TableResults, simulation_scenario, fYear) {
- 
 
       var fsimulation_scenarioLen = simulation_scenario.length;
 
-//      TableResults = TableResults + '<table class="center"; style="width:100%">';
-      TableResults = TableResults + '<table class="center">';
-
-      TableResults = TableResults + 
-      "<style> table, th, td {border: 1px solid black; border-collapse: separate; padding: 20x; } </style>";
-
-      fCaption =  '<caption style="text-align:left"> <h3> Simulation using Baseline Rates </h3></caption>';
+      fCaption =  '<caption style="text-align:left"> <h3> Detail simulation results using Baseline Rates </h3></caption>';
       
       if (fYear != 1) 
-	  {fCaption = '<caption style="text-align:left"> <h3> Simulation using rates starting in ' + fYear + '</h3></caption>';}
+	  {fCaption = '<caption style="text-align:left"> <h3> Detail simulation results using rates starting in ' + fYear + '</h3></caption>';}
       
       TableResults = TableResults + fCaption;
         
     
-       TableResults = TableResults + "<tr> " + 
-                          '<th colspan="3" style="background-color:#66ff66">Age</th> ' +
-                          '<th colspan="5" style="background-color:#e6ecff">Spend Plan</th> ' +
+       TableResults = TableResults + '<table id = "Scenario_Results">' + 
+                          '<thead>' +
+                          '<tr>' +
+                          '<th colspan="3" style="background-color:#4d7e80">Age</th> ' +
+                          '<th colspan="5" style="background-color:#4da6ff">Spend Plan</th> ' +
                           '<th colspan="4" style="background-color:#ff66ff">Total Income</th> ' +
                           '<th colspan="1"> </th> ' +
                           '<th colspan="4" style="background-color:#666699">Withdraw Strategy </th> ' +
+                       
                           '<th colspan="5" style="background-color:#E18973">Summary Account Activity</th> ' +
-                          '<th colspan="4"> </th> ' +
+                          '<th colspan="1" style="background-color:#ff33cc"> </th> ' +
+                          '<th colspan="3"> </th> ' +
                           '<th colspan="6" style="background-color:#33C0FF">You IRA Account Activity</th> ' +
                           '<th colspan="6" style="background-color:#D833FF">Spouse IRA Account Activity</th> ' +
-                          '<th colspan="8" style="background-color:#33FF95">Brokerage Account Activity</th> ' +
+                          '<th colspan="8" style="background-color:#000000">Brokerage Account Activity</th> ' +
                           '<th colspan="7" style="background-color:#FF9A33">Roth Account Activity</th> ' +
                           '<th colspan="11" style="background-color:#5F9EA0">Federal Income Tax Calculations</th> ' +
                           '<th colspan="14" style="background-color:#5F9EA0">Federal Tax Brackets</th> ' +
                           '<th colspan="9" style="background-color:#999966">Capital Gains Tax Calculation</th> ' +
                           '<th colspan="6" style="background-color:#999966">Capital Gains Tax Brackets</th> ' +
                           " </tr> " ;
-                         
-      
+ 
       TableResults = TableResults + "<tr> " + 
-                         '<th style="background-color:#66ff66">Year</th> ' +
-                         '<th style="background-color:#66ff66">You</th> ' +
-                         '<th style="background-color:#66ff66">Spouse</th> ' +
-                         '<th style="background-color:#e6ecff">Budget</th> ' +
-                         '<th style="background-color:#e6ecff">Mortgage</th> ' +
-                         '<th style="background-color:#e6ecff">Bonus</th> ' +
+                         '<th style="background-color:#4d7e80">Year</th> ' +
+                         '<th style="background-color:#4d7e80">You</th> ' +
+                         '<th style="background-color:#4d7e80">Sp</th> ' +
+                         '<th style="background-color:#4da6ff">Budget</th> ' +
+                         '<th style="background-color:#4da6ff">Mtge</th> ' +
+                         '<th style="background-color:#4da6ff">Bonus</th> ' +
                          
-                         '<th style="background-color:#e6ecff">Inc Tax</th> ' + 
-                         '<th style="background-color:#e6ecff">Cap Gains Tax</th> ' + 
+                         '<th style="background-color:#4da6ff">Inc Tax</th> ' + 
+                         '<th style="background-color:#4da6ff">Cap Gains Tax</th> ' + 
                          '<th style="background-color:#ff66ff">You Soc Sec</th> ' +
-                         '<th style="background-color:#ff66ff">Spouse Soc Sec</th> ' +
+                         '<th style="background-color:#ff66ff">Sp Soc Sec</th> ' +
                          '<th style="background-color:#ff66ff">You Pension</th> ' +
-                         '<th style="background-color:#ff66ff">Spouse Pension</th> ' +
+                         '<th style="background-color:#ff66ff">Sp Pension</th> ' +
                          '<th>Withdraw From Savings</th> ' +
           
                           '<th style="background-color:#666699">You IRA</th> ' +
-                          '<th style="background-color:#666699">Spouse IRA</th> ' +
-                          '<th style="background-color:#666699">Brokerage</th> ' +
+                          '<th style="background-color:#666699">Sp IRA</th> ' +
+                          '<th style="background-color:#666699">Brkrg</th> ' +
                           '<th style="background-color:#666699">Roth HSA</th> ' +
           
           
@@ -1498,7 +1475,7 @@ function closeWin() {
                          '<th style="background-color:#E18973">Deposit</th> ' +
                          '<th style="background-color:#E18973">End Bal</th> ' +
           
-                         '<th style="background-color:#FFFF99">Baseline</th> ' +
+                         '<th style="background-color:#ff33cc">Baseline</th> ' +
 	                 "<th>Stock Ret</th> " + 
                          "<th>Bond Ret</th> " +      
                          "<th>Inf Rate</th> " +
@@ -1518,23 +1495,23 @@ function closeWin() {
                          '<th style="background-color:#D833FF">Deposit </th> ' +
                          '<th style="background-color:#D833FF">End Bal </th> ' +
 // brokerage account activity          
-                         '<th style="background-color:#33FF95">Beg Bal </th> ' +
-                         '<th style="background-color:#33FF95">Draw / Deposit</th> ' +
-                         '<th style="background-color:#33FF95">Gain / Loss</th> ' +
-                         '<th style="background-color:#33FF95">Deposit </th> ' +
-                         '<th style="background-color:#33FF95">End Bal </th> ' +
+                         '<th style="background-color:#000000">Beg Bal </th> ' +
+                         '<th style="background-color:#000000">Draw / Deposit</th> ' +
+                         '<th style="background-color:#000000">Gain / Loss</th> ' +
+                         '<th style="background-color:#000000">Deposit </th> ' +
+                         '<th style="background-color:#000000">End Bal </th> ' +
 
-                         '<th style="background-color:#E6FFE6">Beg Cost Basis </th> ' +
-                         '<th style="background-color:#E6FFE6">Adj Cost Basis </th> ' +
-                         '<th style="background-color:#E6FFE6">End Cost Basis </th> ' +
+                         '<th style="background-color:#b3b3cc">Beg Cost Basis </th> ' +
+                         '<th style="background-color:#b3b3cc">Adj Cost Basis </th> ' +
+                         '<th style="background-color:#b3b3cc">End Cost Basis </th> ' +
 // Roth account activity                        
                          '<th style="background-color:#FF9A33">Beg Bal </th> ' +
                          '<th style="background-color:#FF9A33">Draw / Deposit </th> ' +
                          '<th style="background-color:#FF9A33">Gain / Loss</th> ' +
                          '<th style="background-color:#FF9A33">Deposit </th> ' +
                          '<th style="background-color:#FF9A33">End Bal </th> ' +
-                         '<th style="background-color:#fff0e6">Conv You </th> ' +
-                         '<th style="background-color:#fff0e6">Conv Spouse </th> ' +
+                         '<th style="background-color:#993300">Conv You </th> ' +
+                         '<th style="background-color:#993300">Conv Spouse </th> ' +
                                      
 // income tax calcultion 
                          '<th style="background-color:#5F9EA0">IRA Draw</th> ' +
@@ -1728,30 +1705,28 @@ function closeWin() {
 </script>
 
 <script type="text/javascript">
- function showscenarioresults(TableResults, scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years,fWorst_Year, fBest_Year, fMedian_Year,fMost_Recent_Year) {
+ function show_scenario_summary(TableResults, scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years,fWorst_Year, fBest_Year, fMedian_Year,fMost_Recent_Year) {
+//***********************************************************************
+//* show scenario summary
+//***********************************************************************
 
       scenario_summary.sort(function(a, b){return a.scenario_year - b.scenario_year});      
 
       fscenario_summary_len = scenario_summary.length;
 
-      TableResults = TableResults + '<table class="center"; style="width:75%">';
-
-      TableResults = TableResults + 
-      "<style> table, th, td {border: 1px solid black; border-collapse: collapse; } </style>";
-
-      TableResults = TableResults + 
-         "<caption><h3>Simulation Hightlights</h3></caption>";
-   
-      TableResults = TableResults + "<tr> " + 
-                    '<th style="background-color:#e0e0eb">Simulated Scenario</th> ' +
-                    '<th style="background-color:#e0e0eb">Scenario Status</th> ' +
-                    '<th style="background-color:#e0e0eb">Simulation Result</th> ' +
-                    '<th style="background-color:#e0e0eb">Budget Spent</th> ' +
-                    '<th style="background-color:#e0e0eb">Bonus Earned</th> ' +
-                    '<th style="background-color:#e0e0eb">Avg Bonus </th> ' +
-                    '<th style="background-color:#e0e0eb">Last Year Withdraw </th> ' +
-                    '<th style="background-color:#e0e0eb">End Bal </th> ' +
-                    '<th style="background-color:#e0e0eb">Years Remain </th> ' +
+      TableResults = TableResults + '<table id = "Scenario_Results">' + 
+                     '<thead>' +
+                     '<tr>' + '<th colspan="9" style="background-color:#000000; text-align:center">Simulation Highlights </th> ' +
+                    '<tr> ' + 
+                    '<th style="background-color:#000000">Simulated Scenario</th> ' +
+                    '<th style="background-color:#000000">Scenario Status</th> ' +
+                    '<th style="background-color:#000000">Simulation Result</th> ' +
+                    '<th style="background-color:#000000">Budget Spent</th> ' +
+                    '<th style="background-color:#000000">Bonus Earned</th> ' +
+                    '<th style="background-color:#000000">Avg Bonus </th> ' +
+                    '<th style="background-color:#000000">Last Year Withdraw </th> ' +
+                    '<th style="background-color:#000000">End Bal </th> ' +
+                    '<th style="background-color:#000000">Years Remain </th> ' +
                     " </tr> " ;
      
       for (var i=0; i<fscenario_summary_len; i++)
@@ -1807,7 +1782,31 @@ function closeWin() {
       return TableResults;
  }	
 </script>
-    
+
+ <script type="text/javascript">
+ function set_table_style() {
+//****************************************************
+//* set table style
+//****************************************************
+
+  fTable_Style = "<style> " +
+               '#Scenario_Results {font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;  font-size: 14px; border-collapse: collapse; width: 100%; }' +
+               '#Scenario_Results td, #Scenario_Results th {border: 1px solid #ddd;padding: 6px; }' +
+               '#Scenario_Results tr:nth-child(even){background-color: #f2f2f2;}' +
+               '#Scenario_Results tr:hover {background-color: #ddd;}' +
+               '#Scenario_Results th {padding-top: 6px;padding-bottom: 6px;text-align: center;background-color: #4CAF50;color: white;}' +
+               'thead tr:nth-child(1) th { position: sticky; top: 0; }' +
+               'thead tr:nth-child(2) th { position: sticky; top: 27px; }' +
+               '</style>';
+  return fTable_Style;
+}
+</script>
+
+    <script type="text/javascript">
+ function download_simulation_result_summary(scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years) {
+ 
+     
+     
 <script type="text/javascript">
  function download_simulation_result_summary(scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years) {
 
