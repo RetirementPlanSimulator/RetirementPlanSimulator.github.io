@@ -74,6 +74,13 @@ years before drawing down from the IRA, it is likely taxes will be
 extremely low (if not zero).  This might be a good time to consider a Roth
 conversion.  RPS will limit the taxes paid to either the 0%, 10% or 12% tax
 bracket in the conversion year - depending on the option selected.  Try each and see what works best. </p>
+    
+<p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Brokerage Taxable Distribution</span></u></b></p>
+
+<p class=MsoNormal>For brokerage accounts, there are dividend and capital gains distributions that are considered 
+income for tax purposes.  RPS can include these in the income tax calculation during the simulation. RPS calculates as 
+ Brokerage Beginning Balance minus Brokerage Draw Amt times specificed percentage.  The default assumption is 2%. </p>
+
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Annual
 Budget</span></u></b></p>
@@ -99,8 +106,8 @@ could cost at least $100,000 per year in today's dollars.  RPS assumes that assi
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Mortgage
 Amount</span></u></b>: </p>
 
-<p class=MsoNormal>Enter the annual mortgage principal and interest RPS tracks this separately because it is not subject to inflation
-adjustments.</p>
+<p class=MsoNormal>Enter the annual mortgage principal and interest. RPS tracks this separately as it is not subject to inflation
+adjustments like the rest of the budget.</p>
 
 <p class=MsoNormal>Enter your age when the last mortgage payment is made.</p>
 
@@ -134,8 +141,8 @@ baseline ending balance.</p>
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Withdrawals</span></u>
 </b></p>
 
-<p class=MsoNormal>RPS will start the withdraw simulation after either you or
-your spouse have retired.</p>
+<p class=MsoNormal>RPS will start the withdraw simulation after both you and
+your spouse have retired.  If one of you is not retired, the simulator will not start the withdraw. </p>
 
 <p class=MsoNormal>RPS will simulate drawing down assets in the following
 sequence: 1) IRA RMD 2) brokerage accounts 3) IRAs non RMD 4) Roth / H.S.A.</p>
@@ -167,10 +174,10 @@ total need (Budget plus taxes minus social security and pensions).  In this case
 account.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Budget
-Adjustments When 1 Dies</span></u></b> </p>
+Adjustments Upon First Passing</span></u></b> </p>
 
-<p class=MsoNormal>When testing a scenario where one person dies before the
-other, RPS will automatically reduce the budget 25%.  It assumed that when one
+<p class=MsoNormal>When testing a scenario for a couple when the first person dies, 
+ RPS will automatically reduce the budget 25%.  It assumed that when one
 person dies, budget needs are 25% lower.</p>
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Taxes</span></u></b>

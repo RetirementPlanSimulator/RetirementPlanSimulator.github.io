@@ -29,8 +29,7 @@ div.b {
    &nbsp;&nbsp;&nbsp;
    <a href="RPS_User_Guide.html" >User Guide</a> 
    &nbsp;&nbsp;&nbsp;
-   <a href="mailto:home@josephenagy.com" >Contact Me</a> 
-  
+   <a href="mailto:home@josephenagy.com" >Contact Me</a>   
 </div>
 
 <form onsubmit=" ">
@@ -128,6 +127,9 @@ div.b {
 
      <label for="brkrg_ann_dep_amt">Annual Deposit:</label> 
      <input type="number" name="brkrg_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
+
+     <label for="brkrg_taxable_dist_pct">Taxable Distribution %:</label>  
+        <input type="number" name="brkrg_taxable_dist_pct" value=2 min="0" max="10" style="width: 50px;">
 </fieldset> 
 <br>
 
@@ -253,6 +255,8 @@ div.b {
    form.spo_ira_ann_dep_amt.value = localStorage.getItem("SimpSim_spo_ira_ann_dep_amt");
    form.brkrg_ann_dep_amt.value = localStorage.getItem("SimpSim_brkrg_ann_dep_amt");
    form.roth_ann_dep_amt.value = localStorage.getItem("SimpSim_roth_ann_dep_amt");
+   
+   form.brkrg_taxable_dist_pct.value = localStorage.getItem("SimpSim_brkrg_taxable_dist_pct");
 
    form.baseline_stock_return_pct.value = localStorage.getItem("SimpSim_baseline_stock_return_pct");
    form.baseline_bond_return_pct.value = localStorage.getItem("SimpSim_baseline_bond_return_pct");
@@ -355,6 +359,12 @@ div.b {
       
        if (form.brkrg_ann_dep_amt.value > 1000000000) 
          {error_message = error_message + "<p> Brokerage Annual Deposit must be between 0 and 1000000000.  </p>"; }
+      
+       if (form.brkrg_taxable_dist_pct.value < 0) 
+         {error_message = error_message + "<p> Brokerage Annual Deposit must be between 0 and 10.  </p>"; }
+      
+       if (form.brkrg_taxable_dist_pct.value > 10) 
+         {error_message = error_message + "<p> Brokerage Annual Deposit must be between 0 and 10.  </p>"; }
       
        if (form.roth_start_bal_amt.value < 0) 
          {error_message = error_message + "<p> Roth Start Balance must be between 0 and 1000000000.  </p>"; }
@@ -597,6 +607,8 @@ div.b {
    localStorage.setItem("SimpSim_brkrg_ann_dep_amt", form.brkrg_ann_dep_amt.value);
    localStorage.setItem("SimpSim_roth_ann_dep_amt", form.roth_ann_dep_amt.value);
 
+   localStorage.setItem("SimpSim_brkrg_taxable_dist_pct", form.brkrg_taxable_dist_pct.value);
+
    localStorage.setItem("SimpSim_baseline_stock_return_pct", form.baseline_stock_return_pct.value);
    localStorage.setItem("SimpSim_baseline_bond_return_pct", form.baseline_bond_return_pct.value);
 
@@ -630,6 +642,8 @@ div.b {
     fFrm_Spo_IRA_Start_Bal_Amt           = form.spo_ira_start_bal_amt.value * 1;
     fFrm_Brkrg_Start_Bal_Amt             = form.brkrg_start_bal_amt.value * 1;
     fFrm_Brkrg_Cost_Basis_Amt            = form.brkrg_cost_basis_amt.value * 1;
+    fFrm_Brkrg_Taxable_Dist_Pct          = form.brkrg_taxable_dist_pct.value / 100;
+    
     fFrm_Roth_Start_Bal_Amt              = form.roth_start_bal_amt.value * 1;
     fFrm_Roth_Conv_Pct                   = form.roth_conv_pct.value;
 
@@ -946,9 +960,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
       
           fRemain_Need_Amt = fRemain_Need_Amt - fYou_RMD_Draw_Amt - fSpo_RMD_Draw_Amt;   
         
-          fBrkrg_Draw_Amt1 = Math.min(fRemain_Need_Amt, fBrkrg_Beg_Bal_Amt);
-          fBrkrg_End_Bal_Amt1 = fBrkrg_Beg_Bal_Amt - fBrkrg_Draw_Amt1;        
-          fRemain_Need_Amt = fRemain_Need_Amt - fBrkrg_Draw_Amt1;
+          fBrkrg_Draw_Amt = Math.min(fRemain_Need_Amt, fBrkrg_Beg_Bal_Amt);
+          fBrkrg_End_Bal_Amt1 = fBrkrg_Beg_Bal_Amt - fBrkrg_Draw_Amt;        
+          fRemain_Need_Amt = fRemain_Need_Amt - fBrkrg_Draw_Amt;
 
           fYou_IRA_Addl_Draw_Amt = Math.min(fRemain_Need_Amt, fYou_IRA_End_Bal_Amt1);
           fYou_IRA_End_Bal_Amt1 = fYou_IRA_End_Bal_Amt1 - fYou_IRA_Addl_Draw_Amt; 
@@ -985,8 +999,10 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //**********************************************************************
                    
           fIRA_Distribution_Amt = fYou_RMD_Draw_Amt + fYou_IRA_Addl_Draw_Amt + fSpo_RMD_Draw_Amt + fSpo_IRA_Addl_Draw_Amt;
+    
+          fBrkrg_Taxable_Dist_Amt = Math.round((fBrkrg_Beg_Bal_Amt - fBrkrg_Draw_Amt) * fFrm_Brkrg_Taxable_Dist_Pct);
                    
-          fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt;
+          fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt + fBrkrg_Taxable_Dist_Amt;
 
           fSocSec_Taxable_Amt = calc_socsec_taxable_func(fIncome_Less_SS, fSocSec_Total_Amt, fExemptions);                 
           fSocSec_Taxable_Pct = 0;
@@ -1023,8 +1039,10 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //**********************************************************************
                    
           fIRA_Distribution_Amt = fYou_RMD_Draw_Amt + fYou_IRA_Addl_Draw_Amt + fSpo_RMD_Draw_Amt + fSpo_IRA_Addl_Draw_Amt;
+    
+          fBrkrg_Taxable_Dist_Amt = Math.round((fBrkrg_Beg_Bal_Amt - fBrkrg_Draw_Amt) * fFrm_Brkrg_Taxable_Dist_Pct);
                    
-          fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt;
+          fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt + fBrkrg_Taxable_Dist_Amt;
 
           fSocSec_Taxable_Amt = calc_socsec_taxable_func(fIncome_Less_SS, fSocSec_Total_Amt, fExemptions);                 
           fSocSec_Taxable_Pct = 0;
@@ -1047,11 +1065,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          
           fBrkrg_Adj_Cost_Basis_Amt = 0;
 
-          if (fBrkrg_Beg_Bal_Amt != 0 && fBrkrg_Draw_Amt1 > 0) 
-             {fBrkrg_Adj_Cost_Basis_Amt = (Math.round((fBrkrg_Draw_Amt1 / fBrkrg_Beg_Bal_Amt) * 
+          if (fBrkrg_Beg_Bal_Amt != 0 && fBrkrg_Draw_Amt > 0) 
+             {fBrkrg_Adj_Cost_Basis_Amt = (Math.round((fBrkrg_Draw_Amt / fBrkrg_Beg_Bal_Amt) * 
                                            fBrkrg_Beg_Cost_Basis_Amt))*-1;}
-          if (fBrkrg_Draw_Amt1 < 0) 
-             {fBrkrg_Adj_Cost_Basis_Amt = fBrkrg_Draw_Amt1 * -1;}
+          if (fBrkrg_Draw_Amt < 0) 
+             {fBrkrg_Adj_Cost_Basis_Amt = fBrkrg_Draw_Amt * -1;}
           
            
 //*************************************************************************************
@@ -1060,8 +1078,8 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           
           fCapgains_Amt = 0;
           fCurYr_CapGains_Tax_Amt = 0;
-          if (fBrkrg_Draw_Amt1 > 0) 
-             {fCapgains_Amt = fBrkrg_Draw_Amt1 + fBrkrg_Adj_Cost_Basis_Amt;    
+          if (fBrkrg_Draw_Amt > 0) 
+             {fCapgains_Amt = fBrkrg_Draw_Amt + fBrkrg_Adj_Cost_Basis_Amt;    
               oCapgains_Tax_Results = calc_capgains_tax(fAdjusted_Gross_Amt, 
                                                         fStd_Deduct_Amt + fSenior_Deduct_Amt, 
                                                         fCapgains_Amt, 
@@ -1140,7 +1158,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fEnd_Bal = fYou_IRA_End_Bal_Amt2 + fSpo_IRA_End_Bal_Amt2 + fBrkrg_End_Bal_Amt2 + fRoth_End_Bal_Amt2;
 
           fTotal_Draw_Amt = fYou_RMD_Draw_Amt + fYou_IRA_Addl_Draw_Amt + fSpo_RMD_Draw_Amt + fSpo_IRA_Addl_Draw_Amt +
-                            fBrkrg_Draw_Amt1 + fRoth_Draw_Amt1;
+                            fBrkrg_Draw_Amt + fRoth_Draw_Amt1;
                                         
           fTotal_Ann_Dep_Amt = fYou_IRA_Ann_Dep_Amt + fSpo_IRA_Ann_Dep_Amt +
                             fBrkrg_Ann_Dep_Amt + fRoth_Ann_Dep_Amt;
@@ -1230,7 +1248,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         spo_ira_end_bal_amt   : fSpo_IRA_End_Bal_Amt2,
 
                         brkrg_beg_bal_amt  : fBrkrg_Beg_Bal_Amt,
-                        brkrg_draw_amt1    : fBrkrg_Draw_Amt1,
+                        brkrg_draw_amt    : fBrkrg_Draw_Amt,
                         brkrg_gain_amt     : fBrkrg_Gain_Stock_Amt + fBrkrg_Gain_Bond_Amt,
                         brkrg_ann_dep_amt   : fBrkrg_Ann_Dep_Amt,
                         brkrg_end_bal_amt  : fBrkrg_End_Bal_Amt2,
@@ -1269,6 +1287,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         socsec_taxable_amt  : fSocSec_Taxable_Amt,
                         socsec_taxable_pct  : fSocSec_Taxable_Pct,            
                         adjusted_gross_amt  : fAdjusted_Gross_Amt,
+                        brkrg_taxable_dist_amt : fBrkrg_Taxable_Dist_Amt,
                         std_deduct_nbr      : fExemptions, 
                         std_deduct_amt      : fStd_Deduct_Amt,
                         senior_deduct_nbr  : fSenior_Deduct_Nbr,
@@ -1485,7 +1504,7 @@ function closeWin() {
                           '<th colspan="6" style="background-color:#D833FF">Spouse IRA Account Activity</th> ' +
                           '<th colspan="8" style="background-color:#000000">Brokerage Account Activity</th> ' +
                           '<th colspan="7" style="background-color:#FF9A33">Roth Account Activity</th> ' +
-                          '<th colspan="11" style="background-color:#5F9EA0">Federal Income Tax Calculations</th> ' +
+                          '<th colspan="12" style="background-color:#5F9EA0">Federal Income Tax Calculations</th> ' +
                           '<th colspan="14" style="background-color:#5F9EA0">Federal Tax Brackets</th> ' +
                           '<th colspan="9" style="background-color:#999966">Capital Gains Tax Calculation</th> ' +
                           '<th colspan="6" style="background-color:#999966">Capital Gains Tax Brackets</th> ' +
@@ -1565,6 +1584,7 @@ function closeWin() {
                          '<th style="background-color:#5F9EA0">Pension</th> ' +
                          '<th style="background-color:#5F9EA0">SS Taxable Amt </th> ' +
                          '<th style="background-color:#5F9EA0">SS Taxable Pct </th> ' +
+                         '<th style="background-color:#5F9EA0">Brkrg Dist Taxable </th> ' +
                          '<th style="background-color:#5F9EA0">Adjusted Gross </th> ' +
                          '<th style="background-color:#5F9EA0">Std Deduct Nbr </th> ' +
                          '<th style="background-color:#5F9EA0">Std Deduct Amt </th> ' +
@@ -1618,7 +1638,7 @@ function closeWin() {
            fStockColor = setcolor(simulation_scenario[i].stockret);
            fGainColor = setcolor(simulation_scenario[i].total_gain_amt);
            fRoth_Background_Color  = setbackgroundcolor(simulation_scenario[i].roth_draw_amt1);  
-           fBrkrg_Background_Color = setbackgroundcolor(simulation_scenario[i].brkrg_draw_amt1);     
+           fBrkrg_Background_Color = setbackgroundcolor(simulation_scenario[i].brkrg_draw_amt);     
            
            fYou_IRA_Draw_Amt = simulation_scenario[i].you_rmd_draw_amt + simulation_scenario[i].you_ira_addl_draw_amt;
            fSpo_IRA_Draw_Amt = simulation_scenario[i].spo_rmd_draw_amt + simulation_scenario[i].spo_ira_addl_draw_amt;
@@ -1650,7 +1670,7 @@ function closeWin() {
 // withdraw strategy               
            '<td align = "right"> ' + addcomma(fYou_IRA_Draw_Amt * -1)+"</td> " +       
            '<td align = "right"> ' + addcomma(fSpo_IRA_Draw_Amt * -1)+"</td> " +       
-           '<td ' + fBrkrg_Background_Color + '>' + addsign(addcomma(simulation_scenario[i].brkrg_draw_amt1 * -1)) + "</td> " +      
+           '<td ' + fBrkrg_Background_Color + '>' + addsign(addcomma(simulation_scenario[i].brkrg_draw_amt * -1)) + "</td> " +      
            '<td ' + fRoth_Background_Color  + '>' + addsign(addcomma(simulation_scenario[i].roth_draw_amt1 * -1))  + "</td> " +      
 
 // summary account activity                  
@@ -1681,7 +1701,7 @@ function closeWin() {
            '<td align = "right"> ' + addcomma(simulation_scenario[i].spo_ira_end_bal_amt) + " </td> " +
 
            '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_beg_bal_amt) + " </]td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_draw_amt1 * -1) + " </td> " +
+           '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_draw_amt * -1) + " </td> " +
            '<td ' + fGainColor + ' align = "right"> ' + addcomma(simulation_scenario[i].brkrg_gain_amt) + " </td> " +
             '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_ann_dep_amt) + " </td> " +
            '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_end_bal_amt) + " </td> " +
@@ -1702,6 +1722,7 @@ function closeWin() {
            '<td align = "right"> ' + simulation_scenario[i].pension_amt  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].socsec_taxable_amt  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].socsec_taxable_pct  + " </td> " +
+           '<td align = "right"> ' + simulation_scenario[i].brkrg_taxable_dist_amt  + " </td> " +       
            '<td align = "right"> ' + simulation_scenario[i].adjusted_gross_amt  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].std_deduct_nbr  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].std_deduct_amt  + " </td> " +
@@ -1730,7 +1751,7 @@ function closeWin() {
            '<td align = "right"> ' + simulation_scenario[i].std_deduct_amt  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].senior_deduct_nbr  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].senior_deduct_amt  + " </td> " +
-           '<td align = "right"> ' + (simulation_scenario[i].brkrg_draw_amt1 * -1) + " </td> " +       
+           '<td align = "right"> ' + (simulation_scenario[i].brkrg_draw_amt * -1) + " </td> " +       
            '<td align = "right"> ' + simulation_scenario[i].brkrg_adj_cost_basis_amt + " </]td> " +
            '<td align = "right"> ' + simulation_scenario[i].curyr_capgains_amt + " </]td> " +
            '<td align = "right"> ' + simulation_scenario[i].curyr_capgains_tax_amt + " </]td> " +
@@ -1923,7 +1944,7 @@ function closeWin() {
                "Beg Bal, Draw / Deposit, Gain / Loss, Deposit, End Bal," +
                "Beg Cost Basis, Adj Cost Basis, End Cost Basis," +
                "Beg Bal , Draw / Deposit, Gain / Loss, Deposit, End Bal, Conv You, Conv Spouse," +
-               "IRA Draw, Pension, SS Taxable Amt, SS Taxable Pct, Adjusted Gross, Std Deduct Nbr, Std Deduct Amt," +
+               "IRA Draw, Pension, SS Taxable Amt, SS Taxable Pct, Brkrg Taxable Dist, Adjusted Gross, Std Deduct Nbr, Std Deduct Amt," +
                "Sr Deduct Nbr, Sr Deduct Amt, Taxable Income, Est Tax," +   
                "Tax Married 10% , Tax Married 12%, Tax Married 22%, Tax Married 24%, " +
                "Tax Married 32%, Tax Married 35% , Tax Married 37% , Tax Single 10%, " +
@@ -1949,7 +1970,7 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
        "," +  simulation_scenario[i].medb_premium_amt +
        "," +  simulation_scenario[i].you_socsec_amt +
        "," + simulation_scenario[i].spo_socsec_amt + "," + simulation_scenario[i].you_pension_amt + "," +  simulation_scenario[i].spo_pension_amt +
-       "," + simulation_scenario[i].total_need_amt + "," + (fYou_IRA_Draw_Amt * -1) + "," + (fSpo_IRA_Draw_Amt * -1) + "," + (simulation_scenario[i].brkrg_draw_amt1 * -1) +  
+       "," + simulation_scenario[i].total_need_amt + "," + (fYou_IRA_Draw_Amt * -1) + "," + (fSpo_IRA_Draw_Amt * -1) + "," + (simulation_scenario[i].brkrg_draw_amt * -1) +  
        "," + (simulation_scenario[i].roth_draw_amt1 * -1) + "," +  simulation_scenario[i].beg_bal + "," +  (simulation_scenario[i].total_draw_amt * -1)  +
        "," + simulation_scenario[i].total_gain_amt + "," +  simulation_scenario[i].total_ann_dep_amt  + "," +  simulation_scenario[i].end_bal  +
        "," + simulation_scenario[i].bas_end_bal  + "," +  (Math.round(simulation_scenario[i].stockret * 10000)/100) + "%" + 
@@ -1958,13 +1979,15 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
        "," + simulation_scenario[i].you_ira_gain_amt + "," +  simulation_scenario[i].you_ira_ann_dep_amt + "," +  simulation_scenario[i].you_ira_end_bal_amt +
        "," + simulation_scenario[i].spo_ira_beg_bal_amt + "," +  (simulation_scenario[i].spo_rmd_draw_amt * -1) + "," +  (simulation_scenario[i].spo_ira_addl_draw_amt * -1) +
        "," + simulation_scenario[i].spo_ira_gain_amt +  "," +  simulation_scenario[i].spo_ira_ann_dep_amt + "," +  simulation_scenario[i].spo_ira_end_bal_amt +
-       "," + simulation_scenario[i].brkrg_beg_bal_amt + "," +  (simulation_scenario[i].brkrg_draw_amt1 * -1) + "," +  simulation_scenario[i].brkrg_gain_amt +
+       "," + simulation_scenario[i].brkrg_beg_bal_amt + "," +  (simulation_scenario[i].brkrg_draw_amt * -1) + "," +  simulation_scenario[i].brkrg_gain_amt +
        "," + simulation_scenario[i].brkrg_ann_dep_amt + "," +  simulation_scenario[i].brkrg_end_bal_amt + "," +  simulation_scenario[i].brkrg_beg_cost_basis_amt + 
        "," +  simulation_scenario[i].brkrg_adj_cost_basis_amt + "," +  simulation_scenario[i].brkrg_end_cost_basis_amt + "," +  simulation_scenario[i].roth_beg_bal_amt  + 
        "," +  (simulation_scenario[i].roth_draw_amt1 * -1)  + "," +  simulation_scenario[i].roth_gain_amt + "," +  simulation_scenario[i].roth_ann_dep_amt +  
        "," +  simulation_scenario[i].roth_end_bal_amt  + "," +  simulation_scenario[i].you_roth_conv_amt + "," +  simulation_scenario[i].spo_roth_conv_amt +
        "," +  simulation_scenario[i].ira_distribution_amt + "," +  simulation_scenario[i].pension_amt + "," +  simulation_scenario[i].socsec_taxable_amt +
-       "," +  simulation_scenario[i].socsec_taxable_pct + "," +  simulation_scenario[i].adjusted_gross_amt + "," +  simulation_scenario[i].std_deduct_nbr +
+       "," +  simulation_scenario[i].socsec_taxable_pct +
+       "," +  simulation_scenario[i].brkrg_taxable_dist_amt +
+       "," +  simulation_scenario[i].adjusted_gross_amt + "," +  simulation_scenario[i].std_deduct_nbr +
        "," +  simulation_scenario[i].std_deduct_amt + "," +  simulation_scenario[i].senior_deduct_nbr + "," +  simulation_scenario[i].senior_deduct_amt +
        "," +  simulation_scenario[i].curyr_taxable_income + "," +  simulation_scenario[i].curyr_inc_tax_amt + "," +  simulation_scenario[i].taxtablemarried0  +
        "," +  simulation_scenario[i].taxtablemarried1  + "," +  simulation_scenario[i].taxtablemarried2 + "," +  simulation_scenario[i].taxtablemarried3  +
@@ -1972,7 +1995,7 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
        "," +  simulation_scenario[i].taxtablesingle0  + "," +  simulation_scenario[i].taxtablesingle1  + "," +  simulation_scenario[i].taxtablesingle2  +
        "," +  simulation_scenario[i].taxtablesingle3  + "," +  simulation_scenario[i].taxtablesingle4  + "," +  simulation_scenario[i].taxtablesingle5  +
        "," +  "unlimited"  + "," +  simulation_scenario[i].adjusted_gross_amt  + "," +  simulation_scenario[i].std_deduct_nbr + "," +  simulation_scenario[i].std_deduct_amt +
-       "," +  simulation_scenario[i].senior_deduct_nbr + "," +  simulation_scenario[i].senior_deduct_amt + "," +  (simulation_scenario[i].brkrg_draw_amt1 * -1) +   
+       "," +  simulation_scenario[i].senior_deduct_nbr + "," +  simulation_scenario[i].senior_deduct_amt + "," +  (simulation_scenario[i].brkrg_draw_amt * -1) +   
        "," +  simulation_scenario[i].brkrg_adj_cost_basis_amt + "," +  simulation_scenario[i].curyr_capgains_amt + "," +  simulation_scenario[i].curyr_capgains_tax_amt + 
        "," +  simulation_scenario[i].captaxtable0_thru  + "," +  simulation_scenario[i].captaxtable1_thru  + "," +  "unlimited"  +
        "," +  simulation_scenario[i].captaxtable3_thru  + "," +  simulation_scenario[i].captaxtable4_thru  + "," +  "unlimited"  +
