@@ -846,18 +846,15 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                  {fSpo_SocSec_Amt = fInfAdj_Spo_SocSec_Amt;}}
               
 //****************************************************************************************************
-//* if you've passed away, spouse gets greater of your social security or spouse social security.
-//* same holds true for spouse
+//* if one pasess away, remaining person gets greater of your social security or spouse social security.
 //*****************************************************************************************************     
-          if (fYou_Age > fFrm_You_Retire_End_Age) 
-             {fSpo_SocSec_Amt = Math.max(fYou_SocSec_Amt, fSpo_SocSec_Amt);
-              fYou_SocSec_Amt = 0;}
-
-          if (fFrm_Spo_Current_Age > 0)         
-             {if (fSpo_Age > fFrm_Spo_Retire_End_Age) 
-               {fYou_SocSec_Amt = Math.max(fYou_SocSec_Amt, fSpo_SocSec_Amt);
-                fSpo_SocSec_Amt = 0;}}
-
+          if ((fYou_Age > fFrm_You_Retire_End_Age) || (fSpo_Age > fFrm_Spo_Retire_End_Age))
+             {if (fYou_SocSec_Amt >= fSpo_SocSec_Amt) 
+                  {fSpo_SocSec_Amt = 0;}
+              else
+                  {fYou_SocSec_Amt = 0;}
+             }
+              
 //****************************************************************************************************
 //* if simulation includes a spouse and if one has passed away mid scenario, budget will be reduced to 75%
 //*****************************************************************************************************     
