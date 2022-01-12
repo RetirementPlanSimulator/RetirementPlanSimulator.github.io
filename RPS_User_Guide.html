@@ -45,10 +45,14 @@ ul
 
 <div class=WordSection1>
 
-<p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Get Your Previously Processed Plan button </span></u></b></p>
+<p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>List Plans button </span></u></b></p>
 
-<p class=MsoNormal>Each time RPS runs a simulation, it will save your input parameters in local storage.  After 
-closing the browser window or shutting down the computer, the input parameters can be retrieved by pressing this button. </p>
+<p class=MsoNormal>RPS will allow saving input parameters under a Plan Name.  This button will allow listing your all of your saved plans. </p>
+
+
+<p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Get Plan button </span></u></b></p>
+
+<p class=MsoNormal>Plan input parameters can be retrieved by entering the Plan Name in the Plan Name field pressing this button. </p>
 
 
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Social
@@ -68,7 +72,7 @@ elimination rules and file / suspend.</p>
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Roth
 Conversion</span></u></b></p>
 
-<p class=MsoNormal>RPS can look for opportunities to do a backdoor Roth
+<p class=MsoNormal>RPS can look for opportunities to do a Roth
 Conversion during the simulation.  If there is enough in the brokerage account to live on for 1-3
 years before drawing down from the IRA, it is likely taxes will be
 extremely low (if not zero).  This might be a good time to consider a Roth
@@ -145,7 +149,14 @@ baseline ending balance.</p>
 your spouse have retired.  If one of you is not retired, the simulator will not start the withdraw. </p>
 
 <p class=MsoNormal>RPS will simulate drawing down assets in the following
-sequence: 1) IRA RMD 2) brokerage accounts 3) IRAs non RMD 4) Roth / H.S.A.</p>
+sequence: 1) IRA RMD 2) Roth / H.S.A pending age 3) brokerage accounts 4) IRA Fill The Tax Bracket 5) IRAs non RMD </p>
+
+<p class=MsoNormal>RPS will draw down Roth / HSA at the age specified in the input form.  </p>
+    
+<p class=MsoNormal>Fill the Bracket Max Tax % allows for increasing IRA withdraw up to a maximum percentage specified in the input form.  For example, 
+    in some years, your taxes may be in the 10% bracket.  You may ask RPS to assume that you want to prioritize additional withdraw amount from your IRA up to the 10% tax
+    bracket limit - in anticipation of potentially being in a higher tax bracket in the future. </p>
+    
 
 <p class=MsoNormal>RPS assumes withdrawals occur each year on January 1st.
 </p>
@@ -183,8 +194,8 @@ person dies, budget needs are 25% lower.</p>
 <p class=MsoNormal><b><u><span style='font-size:14.0pt;line-height:107%'>Taxes</span></u></b>
 </p>
 
-<p class=MsoNormal>RPS calculates estimated federal taxes using simple standard
-deduction assumption. The reason RPS calculates taxes is to help with comparing
+<p class=MsoNormal>RPS calculates estimates federal taxes using simple standard
+deduction assumption. Estimating taxes is essential in comparing
 different retirement scenarios such as the benefits of taking social security
 at various ages, and benefits of doing a Roth conversation early in retirement.</p>
 

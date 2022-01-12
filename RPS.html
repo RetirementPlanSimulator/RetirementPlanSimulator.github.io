@@ -36,8 +36,19 @@ div.b {
 
 <form onsubmit=" ">
 <div align="left">
-<p> If you have used RPS on this computer before: 
-<input type="button" value="Get Your Previously Processed Plan" onclick="getprev(this.form)">
+<p> 
+
+<input type="button" value="List Plans" onclick="listplans(this.form)">
+
+<label for="plan_id">Plan Name:</label> 
+   <input type="text" name="plan_id" value="" style="width: 200;">
+
+<input type="button" value="Get Plan" onclick="getprev(this.form)">
+
+<label for="plan_dsc">Plan Desc:</label> 
+    <input type="text" name="plan_dsc" value="" style="width: 750;">
+
+
 </p>
 
 <p>
@@ -144,14 +155,29 @@ div.b {
      <label for="roth_ann_dep_amt">Annual Deposit:</label> 
      <input type="number" name="roth_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-    <label for="roth_conv_pct">Backdoor Conversion Max Tax Bracket:</label>
+    <label for="roth_conv_pct">Roth Conversion Max Tax Bracket:</label>
          <select name="roth_conv_pct" id="roth_conv_pct">
            <option value="none">None</option>
            <option value="0">0%</option>
            <option value="10">10%</option>
            <option value="12">12%</option>
+           <option value="22">22%</option>
+           <option value="24">24%</option>
           </select>
 
+    <label for="roth_draw_begin_age">Roth Draw Begin Age:</label> 
+     <input type="number" name="roth_draw_begin_age" value=75 min="20" max="99" style="width: 50px;"> 
+
+    <label for="pre_roth_ftb_pct">Fill the Bracket Max Tax %:</label>
+         <select name="pre_roth_ftb_pct" id="pre_roth_ftb_pct">
+           <option value="0">0%</option>
+           <option value="10">10%</option>
+           <option value="12">12%</option>
+           <option value="22">22%</option>
+           <option value="24">24%</option>
+          </select>
+
+   
 </fieldset> 
 <br>
 <fieldset>
@@ -178,11 +204,27 @@ div.b {
 </fieldset> 
 <br>
 <fieldset>
+  <legend><b> Asset Allocation </b> </legend>
+    
+    <label for="gogo_stock_pct">GoGo Stock Allocation %:</label> 
+    <input type="number" name="gogo_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
+
+    <label for="slogo_stock_pct">SloGo Stock Allocation %:</label> 
+    <input type="number" name="slogo_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
+
+    <label for="nogo_stock_pct">NoGo Stock Allocation %:</label> 
+    <input type="number" name="nogo_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
+
+    <label for="last3_stock_pct">Assisted Living Stock Allocation %:</label> 
+    <input type="number" name="last3_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
+
+</fieldset> 
+<br>
+
+
+<fieldset>
   <legend><b> Other Information </b> </legend>
     
-    <label for="stock_pct">Stock Allocation %:</label> 
-    <input type="number" name="stock_pct" value=60 min="0" max="100" style="width: 50px;" >
-
     <label for="bonus_pct">Retirement Bonus %:</label>
     <input type="number" name="bonus_pct" value=0 min="0" max="100" style="width: 50px;">
 
@@ -191,6 +233,9 @@ div.b {
 
     <label for="baseline_bond_return_pct">Baseline Bond Return %:</label>
     <input type="number" name="baseline_bond_return_pct" value=3 min="0" max="10" style="width: 50px;">
+
+     <label for="baseline_inf_pct">Baseline Inf %:</label>
+    <input type="number" name="baseline_inf_pct" value=2.25 min="0" max="10" style="width: 50px;">
 
     <label for="medb_flag">Enroll Medicare B:</label>
          <select name="medb_flag" id="medb_flag">
@@ -204,6 +249,10 @@ div.b {
 
 <input type="button" value="Download Detail Results" onclick="calcdraw(this.form,'YES')">
 
+<input type="button" value="Save Plan" onclick="save_plan(this.form)">
+
+<input type="button" value="Delete Plan" onclick="delete_plan(this.form)">
+
 <p id="showresults">
 
 
@@ -213,55 +262,112 @@ div.b {
 <script type="text/javascript">
  function getprev(form) 
   { 
-   form.spo_cur_age.value = localStorage.getItem("SimpSim_spo_cur_age");
-   form.spo_cur_age.value = localStorage.getItem("SimpSim_spo_cur_age");
-   form.you_cur_age.value = localStorage.getItem("SimpSim_you_cur_age");
-   form.spo_pension_begin_age.value = localStorage.getItem("SimpSim_spo_pension_begin_age");
-   form.spo_pension_inf_pct.value = localStorage.getItem("SimpSim_spo_pension_inf_pct");
-   form.spo_pension_survivor_pct.value = localStorage.getItem("SimpSim_spo_pension_survivor_pct");
-   form.spo_retire_age.value = localStorage.getItem("SimpSim_spo_retire_age");
-   form.spo_socsec_age.value = localStorage.getItem("SimpSim_spo_socsec_age");
-   form.you_pension_begin_age.value = localStorage.getItem("SimpSim_you_pension_begin_age");
-   form.you_pension_inf_pct.value = localStorage.getItem("SimpSim_you_pension_inf_pct");
-   form.you_pension_survivor_pct.value = localStorage.getItem("SimpSim_you_pension_survivor_pct");
-   form.you_retire_age.value = localStorage.getItem("SimpSim_you_retire_age");
-   form.you_socsec_age.value = localStorage.getItem("SimpSim_you_socsec_age");
-   form.brkrg_start_bal_amt.value = localStorage.getItem("SimpSim_brkrg_start_bal_amt");
-   form.brkrg_cost_basis_amt.value = localStorage.getItem("SimpSim_brkrg_cost_basis_amt");
 
-   form.gogo_budget_amt.value = localStorage.getItem("SimpSim_gogo_budget_amt");
-   form.slowgo_budget_amt.value = localStorage.getItem("SimpSim_slowgo_budget_amt");
-   form.nogo_budget_amt.value = localStorage.getItem("SimpSim_nogo_budget_amt");
-   form.last3_budget_amt.value = localStorage.getItem("SimpSim_last3_budget_amt");
-   form.mortgage_budget_amt.value = localStorage.getItem("SimpSim_mortgage_budget_amt");
-   form.mortgage_end_age.value = localStorage.getItem("SimpSim_mortgage_end_age");
+   fFrm_Plan_Id = form.plan_id.value;
 
-   form.spo_ira_start_bal_amt.value = localStorage.getItem("SimpSim_spo_ira_start_bal_amt");
-   form.spo_pension_amt.value = localStorage.getItem("SimpSim_spo_pension_amt");
-   form.spo_socsec_amt.value = localStorage.getItem("SimpSim_spo_socsec_amt");
-   form.you_ira_start_bal_amt.value = localStorage.getItem("SimpSim_you_ira_start_bal_amt");
-   form.you_pension_amt.value = localStorage.getItem("SimpSim_you_pension_amt");
-   form.you_socsec_amt.value = localStorage.getItem("SimpSim_you_socsec_amt");
-   form.stock_pct.value = localStorage.getItem("SimpSim_stock_pct");
-  
-   form.bonus_pct.value = localStorage.getItem("SimpSim_bonus_pct");
-   form.medb_flag.value = localStorage.getItem("SimpSim_medb_flag");
+   form.plan_dsc.value     = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"));
+   form.you_cur_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"));
+   form.spo_cur_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"));
+
+   form.roth_draw_begin_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"));
+
+   form.spo_pension_begin_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_begin_age"));
+   form.spo_pension_inf_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_inf_pct"));
+   form.spo_pension_survivor_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_survivor_pct"));
+   form.spo_retire_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_age"));
+   form.spo_socsec_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_age"));
+   form.you_pension_begin_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_pension_begin_age"));
+   form.you_pension_inf_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_pension_inf_pct"));
+   form.you_pension_survivor_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_pension_survivor_pct"));
+   form.you_retire_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_retire_age"));
+   form.you_socsec_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_age"));
+   form.brkrg_start_bal_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_brkrg_start_bal_amt"));
+   form.brkrg_cost_basis_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"));
+//
+   form.gogo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"));
+   form.slowgo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"));
+   form.nogo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"));
+   form.last3_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"));
+   form.mortgage_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"));
+   form.mortgage_end_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"));
+
+   form.spo_ira_start_bal_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"));
+   form.spo_pension_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"));
+   form.spo_socsec_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_amt"));
+   form.you_ira_start_bal_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_ira_start_bal_amt"));
+   form.you_pension_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_pension_amt"));
+   form.you_socsec_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_amt"));
+   form.gogo_stock_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_stock_pct"));
+   form.slogo_stock_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_slogo_stock_pct"));
+   form.nogo_stock_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_nogo_stock_pct"));
+   form.last3_stock_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_last3_stock_pct"));
+
+   if (form.slogo_stock_pct.value == "") {form.slogo_stock_pct.value = form.gogo_stock_pct.value;}
+   if (form.nogo_stock_pct.value == "") {form.nogo_stock_pct.value = form.gogo_stock_pct.value;}
+   if (form.last3_stock_pct.value == "") {form.last3_stock_pct.value = form.gogo_stock_pct.value;}
+
+   form.bonus_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_bonus_pct"));
+   form.medb_flag.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_medb_flag"));
    if (form.medb_flag.value == "") {form.medb_flag.value = "YES";}
 
-   form.spo_retire_end_age.value = localStorage.getItem("SimpSim_spo_retire_end_age");
-   form.you_retire_end_age.value = localStorage.getItem("SimpSim_you_retire_end_age");
-   form.roth_start_bal_amt.value = localStorage.getItem("SimpSim_roth_start_bal_amt");
-   form.roth_conv_pct.value = localStorage.getItem("SimpSim_roth_conv_pct");
+   form.spo_retire_end_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_end_age"));
+   form.you_retire_end_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_retire_end_age"));
+   form.roth_start_bal_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_roth_start_bal_amt"));
+   form.roth_conv_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_roth_conv_pct"));
+   form.pre_roth_ftb_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_pre_roth_ftb_pct"));
+   if(form.pre_roth_ftb_pct.value == "") {form.pre_roth_ftb_pct.value = "0";}
 
-   form.you_ira_ann_dep_amt.value = localStorage.getItem("SimpSim_you_ira_ann_dep_amt");
-   form.spo_ira_ann_dep_amt.value = localStorage.getItem("SimpSim_spo_ira_ann_dep_amt");
-   form.brkrg_ann_dep_amt.value = localStorage.getItem("SimpSim_brkrg_ann_dep_amt");
-   form.roth_ann_dep_amt.value = localStorage.getItem("SimpSim_roth_ann_dep_amt");
+   form.you_ira_ann_dep_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_ira_ann_dep_amt"));
+   form.spo_ira_ann_dep_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_ann_dep_amt"));
+   form.brkrg_ann_dep_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_brkrg_ann_dep_amt"));
+   form.roth_ann_dep_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_roth_ann_dep_amt"));
    
-   form.brkrg_taxable_dist_pct.value = localStorage.getItem("SimpSim_brkrg_taxable_dist_pct");
+   form.brkrg_taxable_dist_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_brkrg_taxable_dist_pct"));
 
-   form.baseline_stock_return_pct.value = localStorage.getItem("SimpSim_baseline_stock_return_pct");
-   form.baseline_bond_return_pct.value = localStorage.getItem("SimpSim_baseline_bond_return_pct");
+   form.baseline_stock_return_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_baseline_stock_return_pct"));
+   form.baseline_bond_return_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_baseline_bond_return_pct"));
+   form.baseline_inf_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_baseline_inf_pct"));
+   if (form.baseline_inf_pct.value == "") {form.baseline_inf_pct.value = 2.25;}
+
+  }  
+</script>
+
+<script type="text/javascript">
+ function listplans(form) 
+  {   
+
+      Table_Results = ' <style> table, th, td {border: 1px solid black; } </style>';
+      
+      TableResults = Table_Results + '<table id = "Scenario_Results">' + 
+                          '<thead>' +
+                          '<tr>' +
+                          '<th colspan="1" style="background-color:#4d7e80">____Plan Name____</th> ' +
+                          '<th colspan="1" style="background-color:#4d7e80">____Plan Description____</th> ' +
+                          ' </tr> ' ;
+
+     storedPlans = localStorage.getItem("SimpSim_stored_plans");
+     storedPlans = JSON.parse(storedPlans);
+
+     for (var i = 0; i < storedPlans.length; i++)
+       {
+        
+          Plan_Id = storedPlans[i];
+          Plan_Dsc  = localStorage.getItem(Plan_Id.concat("SimpSim_plan_dsc"));
+          TableResults = TableResults +  '<tr>' +        
+            '<td align = "left"> ' + storedPlans[i] + " </td> " +
+             '<td align = "left"> ' + Plan_Dsc    + " </td> " +
+            " </tr>" ;
+       }      
+
+    openWin2(TableResults); 
+
+  }
+</script>
+
+<script type="text/javascript">
+ function clearplans(form) 
+  { 
+  localStorage.clear();      
 
   }  
 </script>
@@ -277,6 +383,12 @@ div.b {
   
       if (form.you_cur_age.value < 20) 
         {error_message = error_message + "<p> Your Current Age must be between 20 and 99. </p> "; }
+
+      if (form.roth_draw_begin_age.value > 99) 
+          {error_message = error_message + "<p> Roth Draw Begin Age must be between 20 and 99. </p> ";  }
+  
+      if (form.roth_draw_begin_age.value < 20) 
+        {error_message = error_message + "<p> Roth Draw Begin Age must be between 20 and 99. </p> "; }
 
       if (form.you_retire_age.value > 99) 
         {error_message = error_message + "<p> Your Retire Age must be between 20 and 99. </p>"; }
@@ -416,10 +528,28 @@ div.b {
        if (form.mortgage_end_age.value > 99) 
          {error_message = error_message + "<p> Mortgage End Age must be between 0 and 99.  </p>"; }
       
-       if (form.stock_pct.value < 0) 
+       if (form.gogo_stock_pct.value < 0) 
          {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
       
-       if (form.stock_pct.value > 100) 
+       if (form.gogo_stock_pct.value > 100) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.slogo_stock_pct.value < 0) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.slogo_stock_pct.value > 100) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.nogo_stock_pct.value < 0) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.nogo_stock_pct.value > 100) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.last3_stock_pct.value < 0) 
+         {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
+      
+       if (form.last3_stock_pct.value > 100) 
          {error_message = error_message + "<p> Stock Pct must be between 0 and 100.  </p>"; }
       
        if (form.bonus_pct.value < 0) 
@@ -433,12 +563,18 @@ div.b {
       
        if (form.baseline_stock_return_pct.value > 10) 
          {error_message = error_message + "<p> Baseline Stock Return Pct must be between 0 and 10.  </p>"; }
-      
+
        if (form.baseline_bond_return_pct.value < 0) 
          {error_message = error_message + "<p> Baseline Bond Return Pct must be between 0 and 10.  </p>"; }
       
        if (form.baseline_bond_return_pct.value > 10) 
          {error_message = error_message + "<p> Baseline Bond Return Pct must be between 0 and 10.  </p>"; }
+      
+       if (form.baseline_inf_pct.value < 1) 
+         {error_message = error_message + "<p> Baseline Inflation Pct must be between 1 and 10.  </p>"; }
+      
+       if (form.baseline_inf_pct.value > 10) 
+         {error_message = error_message + "<p> Baseline Inflation Pct must be between 1 and 10.  </p>"; }
       
       if (error_message == '')
          {process_form(form,fDownload_Results)};
@@ -566,53 +702,223 @@ div.b {
 </script>
 
 <script type="text/javascript">
+ function save_plan(form) {
+
+    if (confirm("Press OK to save.  Cancel to quit.")) {
+        save_plan_confirmed(form);
+     } else {
+       
+     }
+
+ }
+</script>
+
+<script type="text/javascript">
+ function save_plan_confirmed(form) {
+
+     
+     var storedPlans = JSON.parse(localStorage.getItem("SimpSim_stored_plans")); 
+    
+     numberofPlans = 0;
+     if (Array.isArray(storedPlans))
+         {numberofPlans = storedPlans.length;}
+      else
+         {storedPlans = [""];}
+
+     fFrm_Plan_Id = form.plan_id.value;
+  
+     bNewPlan = "YES";
+     for (var i=0; i <= numberofPlans ; i++)
+        {if (fFrm_Plan_Id == storedPlans[i]) {bNewPlan = "NO"};}
+
+     if (bNewPlan == "YES") 
+        { 
+         storedPlans[numberofPlans] = fFrm_Plan_Id;
+         storedPlans.sort();
+         localStorage.setItem("SimpSim_stored_plans", JSON.stringify(storedPlans));       
+        }   
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_plan_id"), form.plan_id.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"), form.plan_dsc.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"), form.you_cur_age.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"), form.roth_draw_begin_age.value);
+   
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"), form.spo_cur_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_begin_age"), form.spo_pension_begin_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_inf_pct"), form.spo_pension_inf_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_survivor_pct"), form.spo_pension_survivor_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_age"), form.spo_retire_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_age"), form.spo_socsec_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_pension_begin_age"), form.you_pension_begin_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_pension_inf_pct"), form.you_pension_inf_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_pension_survivor_pct"), form.you_pension_survivor_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_retire_age"), form.you_retire_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_age"), form.you_socsec_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_brkrg_start_bal_amt"), form.brkrg_start_bal_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"), form.brkrg_cost_basis_amt.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"), form.gogo_budget_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"), form.slowgo_budget_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"), form.nogo_budget_amt.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"), form.last3_budget_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"), form.mortgage_budget_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"), form.mortgage_end_age.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"), form.spo_ira_start_bal_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"), form.spo_pension_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_amt"), form.spo_socsec_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_ira_start_bal_amt"), form.you_ira_start_bal_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_pension_amt"), form.you_pension_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_amt"), form.you_socsec_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_bonus_pct"), form.bonus_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_medb_flag"), form.medb_flag.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_stock_pct"), form.gogo_stock_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_slogo_stock_pct"), form.slogo_stock_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_nogo_stock_pct"), form.nogo_stock_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_last3_stock_pct"), form.last3_stock_pct.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_end_age"), form.spo_retire_end_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_retire_end_age"), form.you_retire_end_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_roth_start_bal_amt"), form.roth_start_bal_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_roth_conv_pct"), form.roth_conv_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_pre_roth_ftb_pct"), form.pre_roth_ftb_pct.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_ira_ann_dep_amt"), form.you_ira_ann_dep_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_ann_dep_amt"), form.spo_ira_ann_dep_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_brkrg_ann_dep_amt"), form.brkrg_ann_dep_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_roth_ann_dep_amt"), form.roth_ann_dep_amt.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_brkrg_taxable_dist_pct"), form.brkrg_taxable_dist_pct.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_baseline_stock_return_pct"), form.baseline_stock_return_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_baseline_bond_return_pct"), form.baseline_bond_return_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_baseline_inf_pct"), form.baseline_inf_pct.value);
+
+   display_message1 = fFrm_Plan_Id;
+   display_message2 = " Plan Saved!";
+   display_message_final = display_message1.concat(display_message2);
+
+   window.alert(display_message_final);
+ }
+
+</script>
+
+<script type="text/javascript">
+ function delete_plan(form) {
+
+    if (confirm("Press OK to delete.  Cancel to quit.")) {
+        delete_plan_confirmed(form);
+     } else {
+       
+     }
+
+ }
+
+</script>
+
+<script type="text/javascript">
+ function delete_plan_confirmed(form) {
+     
+     var storedPlans = JSON.parse(localStorage.getItem("SimpSim_stored_plans")); 
+    
+     numberofPlans = 0;
+     if (Array.isArray(storedPlans))
+         {numberofPlans = storedPlans.length;}
+      else
+         {storedPlans = [""];};
+
+     fFrm_Plan_Id = form.plan_id.value;
+  
+     for (var i=0; i <= numberofPlans ; i++)
+        {if (fFrm_Plan_Id == storedPlans[i]) 
+          {
+           storedPlans[i] = "";
+           break;
+          };
+        };
+   
+   storedPlans.sort();    
+   storedPlans.shift();
+
+   localStorage.setItem("SimpSim_stored_plans", JSON.stringify(storedPlans));  
+   
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_plan_id"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"));
+   
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_begin_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_inf_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_survivor_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_pension_begin_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_pension_inf_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_pension_survivor_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_retire_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_brkrg_start_bal_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_ira_start_bal_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_pension_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_socsec_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_bonus_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_medb_flag"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_stock_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_slogo_stock_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_nogo_stock_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_last3_stock_pct"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_end_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_retire_end_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_roth_start_bal_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_roth_conv_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_pre_roth_ftb_pct"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_ira_ann_dep_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_ann_dep_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_brkrg_ann_dep_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_roth_ann_dep_amt"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_brkrg_taxable_dist_pct"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_baseline_stock_return_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_baseline_bond_return_pct"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_baseline_inf_pct"));
+
+   display_message1 = fFrm_Plan_Id;
+   display_message2 = " Plan Deleted!";
+   display_message_final = display_message1.concat(display_message2);
+
+   window.alert(display_message_final);
+
+ }
+
+</script>
+
+<script type="text/javascript">
  function process_form(form, fDownload_Results) {
 
-   localStorage.setItem("SimpSim_spo_cur_age", form.spo_cur_age.value);
-   localStorage.setItem("SimpSim_you_cur_age", form.you_cur_age.value);
-   localStorage.setItem("SimpSim_spo_pension_begin_age", form.spo_pension_begin_age.value);
-   localStorage.setItem("SimpSim_spo_pension_inf_pct", form.spo_pension_inf_pct.value);
-   localStorage.setItem("SimpSim_spo_pension_survivor_pct", form.spo_pension_survivor_pct.value);
-   localStorage.setItem("SimpSim_spo_retire_age", form.spo_retire_age.value);
-   localStorage.setItem("SimpSim_spo_socsec_age", form.spo_socsec_age.value);
-   localStorage.setItem("SimpSim_you_pension_begin_age", form.you_pension_begin_age.value);
-   localStorage.setItem("SimpSim_you_pension_inf_pct", form.you_pension_inf_pct.value);
-   localStorage.setItem("SimpSim_you_pension_survivor_pct", form.you_pension_survivor_pct.value);
-   localStorage.setItem("SimpSim_you_retire_age", form.you_retire_age.value);
-   localStorage.setItem("SimpSim_you_socsec_age", form.you_socsec_age.value);
-   localStorage.setItem("SimpSim_brkrg_start_bal_amt", form.brkrg_start_bal_amt.value);
-   localStorage.setItem("SimpSim_brkrg_cost_basis_amt", form.brkrg_cost_basis_amt.value);
-   localStorage.setItem("SimpSim_gogo_budget_amt", form.gogo_budget_amt.value);
-   localStorage.setItem("SimpSim_slowgo_budget_amt", form.slowgo_budget_amt.value);
-   localStorage.setItem("SimpSim_nogo_budget_amt", form.nogo_budget_amt.value);
-
-   localStorage.setItem("SimpSim_last3_budget_amt", form.last3_budget_amt.value);
-   localStorage.setItem("SimpSim_mortgage_budget_amt", form.mortgage_budget_amt.value);
-   localStorage.setItem("SimpSim_mortgage_end_age", form.mortgage_end_age.value);
-
-   localStorage.setItem("SimpSim_spo_ira_start_bal_amt", form.spo_ira_start_bal_amt.value);
-   localStorage.setItem("SimpSim_spo_pension_amt", form.spo_pension_amt.value);
-   localStorage.setItem("SimpSim_spo_socsec_amt", form.spo_socsec_amt.value);
-   localStorage.setItem("SimpSim_you_ira_start_bal_amt", form.you_ira_start_bal_amt.value);
-   localStorage.setItem("SimpSim_you_pension_amt", form.you_pension_amt.value);
-   localStorage.setItem("SimpSim_you_socsec_amt", form.you_socsec_amt.value);
-   localStorage.setItem("SimpSim_bonus_pct", form.bonus_pct.value);
-   localStorage.setItem("SimpSim_medb_flag", form.medb_flag.value);
-   localStorage.setItem("SimpSim_stock_pct", form.stock_pct.value);
-   localStorage.setItem("SimpSim_spo_retire_end_age", form.spo_retire_end_age.value);
-   localStorage.setItem("SimpSim_you_retire_end_age", form.you_retire_end_age.value);
-   localStorage.setItem("SimpSim_roth_start_bal_amt", form.roth_start_bal_amt.value);
-   localStorage.setItem("SimpSim_roth_conv_pct", form.roth_conv_pct.value);
-
-   localStorage.setItem("SimpSim_you_ira_ann_dep_amt", form.you_ira_ann_dep_amt.value);
-   localStorage.setItem("SimpSim_spo_ira_ann_dep_amt", form.spo_ira_ann_dep_amt.value);
-   localStorage.setItem("SimpSim_brkrg_ann_dep_amt", form.brkrg_ann_dep_amt.value);
-   localStorage.setItem("SimpSim_roth_ann_dep_amt", form.roth_ann_dep_amt.value);
-
-   localStorage.setItem("SimpSim_brkrg_taxable_dist_pct", form.brkrg_taxable_dist_pct.value);
-
-   localStorage.setItem("SimpSim_baseline_stock_return_pct", form.baseline_stock_return_pct.value);
-   localStorage.setItem("SimpSim_baseline_bond_return_pct", form.baseline_bond_return_pct.value);
+     
 
     var fRateLen     = ratehistory.length;    
 
@@ -623,13 +929,13 @@ div.b {
 
     var fRowNbr      = 0;
     
-    fStock_Pct    = form.stock_pct.value / 100;
     fFrm_Bonus_Pct   = form.bonus_pct.value / 100;
 
     fFrm_Medb_Flag = form.medb_flag.value;
 
     fBaseline_Stock_Return_Pct = form.baseline_stock_return_pct.value / 100;
     fBaseline_Bond_Return_Pct = form.baseline_bond_return_pct.value / 100;
+    fBaseline_Inf_Pct = form.baseline_inf_pct.value / 100;
 
     fFrm_You_Current_Age           = form.you_cur_age.value * 1;
     fFrm_You_Retire_Age            = form.you_retire_age.value * 1;
@@ -640,6 +946,8 @@ div.b {
     fFrm_You_Retire_End_Age                  = form.you_retire_end_age.value * 1;
     fFrm_Spo_Retire_End_Age                  = form.spo_retire_end_age.value * 1;
 
+    fFrm_Roth_Draw_Begin_Age             = form.roth_draw_begin_age.value * 1;
+
     fFrm_You_IRA_Start_Bal_Amt           = form.you_ira_start_bal_amt.value * 1;
     fFrm_Spo_IRA_Start_Bal_Amt           = form.spo_ira_start_bal_amt.value * 1;
     fFrm_Brkrg_Start_Bal_Amt             = form.brkrg_start_bal_amt.value * 1;
@@ -648,6 +956,7 @@ div.b {
     
     fFrm_Roth_Start_Bal_Amt              = form.roth_start_bal_amt.value * 1;
     fFrm_Roth_Conv_Pct                   = form.roth_conv_pct.value;
+    fFrm_Pre_Roth_FTB_Pct                = form.pre_roth_ftb_pct.value;
 
     fFrm_You_IRA_Ann_Dep_Amt                 = form.you_ira_ann_dep_amt.value * 1;
     fFrm_Spo_IRA_Ann_Dep_Amt                 = form.spo_ira_ann_dep_amt.value * 1;
@@ -741,6 +1050,15 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     fInfAdj_You_Pension_Amt     = fFrm_You_Pension_Amt;
     fInfAdj_Spo_Pension_Amt     = fFrm_Spo_Pension_Amt;
 
+    fYou_Age  = fFrm_You_Current_Age;
+    fSpo_Age  = fFrm_Spo_Current_Age; 
+
+    fStock_Pct    = form.gogo_stock_pct.value / 100;  
+    if (fYou_Age >= 75) {fStock_Pct = form.slogo_stock_pct.value / 100;}
+    if (fYou_Age >= 85) {fStock_Pct = form.nogo_stock_pct.value / 100;}
+    if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fStock_Pct = form.last3_stock_pct.value / 100;}
+    if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fStock_Pct = form.last3_stock_pct.value / 100;}
+ 
     fYou_IRA_Beg_Bal_Amt   = fFrm_You_IRA_Start_Bal_Amt;
     fYou_IRA_Stock_Amt = Math.round(fYou_IRA_Beg_Bal_Amt * fStock_Pct);
     fYou_IRA_Bond_Amt = fYou_IRA_Beg_Bal_Amt - fYou_IRA_Stock_Amt;
@@ -757,10 +1075,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     fRoth_Beg_Bal_Amt      = fFrm_Roth_Start_Bal_Amt;
     fRoth_Stock_Amt = Math.round(fRoth_Beg_Bal_Amt * fStock_Pct);
     fRoth_Bond_Amt = fRoth_Beg_Bal_Amt - fRoth_Stock_Amt;
-
-    fYou_Age  = fFrm_You_Current_Age;
-    fSpo_Age  = fFrm_Spo_Current_Age; 
-
+    
     var fYear_Cnt        = 0;
     fScenario_Nbr++;
 
@@ -791,6 +1106,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
    var fBas_End_Bal = 0;
    var fBonus_Amt = 0;
    var fBonus_Running_Total = 0;
+   var fFed_Tax_Running_Total = 0;
    var fInfAdj_Budget_Running_Total = 0;
 
 //*************************************************************************************************
@@ -928,6 +1244,17 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                                  - fYou_SocSec_Amt - fSpo_SocSec_Amt 
                                  - fUse_You_Pension_Amt - fUse_Spo_Pension_Amt;
             }
+
+//***********************************************************
+//* set asset allocation based on age.
+//***********************************************************
+               
+        fStock_Pct    = form.gogo_stock_pct.value / 100;  
+        if (fYou_Age >= 75) {fStock_Pct = form.slogo_stock_pct.value / 100;}
+        if (fYou_Age >= 85) {fStock_Pct = form.nogo_stock_pct.value / 100;}
+        if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fStock_Pct = form.last3_stock_pct.value / 100;}
+        if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fStock_Pct = form.last3_stock_pct.value / 100;}
+  
 //***********************************************************
 //* determine # exemptions for tax purposes
 //***********************************************************
@@ -957,7 +1284,32 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fSpo_RMD_Draw_Amt = calc_rmd(fSpo_Age, fSpo_IRA_Beg_Bal_Amt, fSpo_RMD_Age);  // spouse RMD
           fSpo_IRA_End_Bal_Amt1 = fSpo_IRA_Beg_Bal_Amt - fSpo_RMD_Draw_Amt;
       
-          fRemain_Need_Amt = fRemain_Need_Amt - fYou_RMD_Draw_Amt - fSpo_RMD_Draw_Amt;   
+          fRemain_Need_Amt = fRemain_Need_Amt - fYou_RMD_Draw_Amt - fSpo_RMD_Draw_Amt;  
+        
+//***************************************************************************
+//* after drawing RMD, perform fill the tax bracket logic. 
+//****************************************************************************
+    
+        fFTB_Amt = 0;
+        
+        if (fRemain_Need_Amt > 0 && fFrm_Pre_Roth_FTB_Pct != 0 && fYou_Age >= fFrm_Roth_Draw_Begin_Age)
+           {fFTB_Amt = calc_ftb_amt(fExemptions, fFrm_Pre_Roth_FTB_Pct, fYou_RMD_Draw_Amt, fSpo_RMD_Draw_Amt, fPension_Amt, fYou_Age, fSpo_Age, fSocSec_Total_Amt);}
+        
+        
+//***************************************************************************
+//* after filling the tax bracket, see how much is neded from roth. 
+//****************************************************************************
+                   
+          fRoth_Draw_Amt0 = 0;
+                                                   
+          if (fYou_Age >= fFrm_Roth_Draw_Begin_Age && fRemain_Need_Amt > 0 && fInfAdj_Budget_Amt != fInfAdj_Last3_Budget_Amt)
+            {
+             fRoth_Draw_Amtx = Math.min(fRemain_Need_Amt, fRoth_Beg_Bal_Amt);
+             fRoth_Draw_Amt0 = Math.max(fRoth_Draw_Amtx - fFTB_Amt,0);
+            }
+        
+          fRoth_End_Bal_Amt0 = fRoth_Beg_Bal_Amt - fRoth_Draw_Amt0;           
+          fRemain_Need_Amt = fRemain_Need_Amt - fRoth_Draw_Amt0;    
         
           fBrkrg_Draw_Amt = Math.min(fRemain_Need_Amt, fBrkrg_Beg_Bal_Amt);
           fBrkrg_End_Bal_Amt1 = fBrkrg_Beg_Bal_Amt - fBrkrg_Draw_Amt;        
@@ -971,9 +1323,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fSpo_IRA_End_Bal_Amt1 = fSpo_IRA_End_Bal_Amt1 - fSpo_IRA_Addl_Draw_Amt;
           fRemain_Need_Amt = fRemain_Need_Amt - fSpo_IRA_Addl_Draw_Amt;
                    
-          fRoth_Draw_Amt1 = Math.min(fRemain_Need_Amt, fRoth_Beg_Bal_Amt);
-          fRoth_End_Bal_Amt1 = fRoth_Beg_Bal_Amt - fRoth_Draw_Amt1;           
+          fRoth_Draw_Amt1 = Math.min(fRemain_Need_Amt, fRoth_End_Bal_Amt0);
+          fRoth_End_Bal_Amt1 = fRoth_End_Bal_Amt0 - fRoth_Draw_Amt1;           
           fRemain_Need_Amt = fRemain_Need_Amt - fRoth_Draw_Amt1;    
+                   
+          fRoth_Draw_Amt = fRoth_Draw_Amt0 + fRoth_Draw_Amt1;
                    
 //***************************************************************************
 //* see if roth conversion viable.  
@@ -984,12 +1338,16 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
              {      
               if (fFrm_Roth_Conv_Pct == 10) fMax_Taxable_Income = infadj_taxtable_married[0].thru;   
               if (fFrm_Roth_Conv_Pct == 12) fMax_Taxable_Income = infadj_taxtable_married[1].thru;
+              if (fFrm_Roth_Conv_Pct == 22) fMax_Taxable_Income = infadj_taxtable_married[2].thru;
+              if (fFrm_Roth_Conv_Pct == 24) fMax_Taxable_Income = infadj_taxtable_married[3].thru;       
              }
         
            if (fExemptions ==1)
              {      
               if (fFrm_Roth_Conv_Pct == 10) fMax_Taxable_Income = infadj_taxtable_single[0].thru;   
               if (fFrm_Roth_Conv_Pct == 12) fMax_Taxable_Income = infadj_taxtable_single[1].thru;
+              if (fFrm_Roth_Conv_Pct == 22) fMax_Taxable_Income = infadj_taxtable_single[2].thru;       
+              if (fFrm_Roth_Conv_Pct == 24) fMax_Taxable_Income = infadj_taxtable_single[3].thru;              
              }
         
                    
@@ -1016,12 +1374,13 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fYou_Roth_Conv_Amt = 0;
           fSpo_Roth_Conv_Amt = 0;
                    
-          if (fFrm_Roth_Conv_Pct != 'none' && fRemain_Need_Amt == 0 && fRoth_Conv_Amt > 0 && fInfAdj_Budget_Amt > 0)
+          if (fFrm_Roth_Conv_Pct != 'none' && fRemain_Need_Amt == 0 && fRoth_Conv_Amt > 0 && fInfAdj_Budget_Amt > 0
+                   && fSocSec_Total_Amt == 0)
              {
               fYou_Roth_Conv_Amt = Math.min(fRoth_Conv_Amt, fYou_IRA_End_Bal_Amt1);
               fYou_IRA_Addl_Draw_Amt = fYou_IRA_Addl_Draw_Amt + fYou_Roth_Conv_Amt;
               fYou_IRA_End_Bal_Amt1 = fYou_IRA_End_Bal_Amt1 - fYou_Roth_Conv_Amt;       
-              fRoth_Draw_Amt1 = fRoth_Draw_Amt1 - fYou_Roth_Conv_Amt;       
+              fRoth_Draw_Amt = fRoth_Draw_Amt - fYou_Roth_Conv_Amt;       
               fRoth_End_Bal_Amt1 = fRoth_End_Bal_Amt1 + fYou_Roth_Conv_Amt;
                    
               fRoth_Conv_Amt = fRoth_Conv_Amt - fYou_Roth_Conv_Amt;
@@ -1029,7 +1388,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
               fSpo_Roth_Conv_Amt = Math.min(fRoth_Conv_Amt, fSpo_IRA_End_Bal_Amt1);
               fSpo_IRA_Addl_Draw_Amt = fSpo_IRA_Addl_Draw_Amt + fSpo_Roth_Conv_Amt;
               fSpo_IRA_End_Bal_Amt1 = fSpo_IRA_End_Bal_Amt1 - fSpo_Roth_Conv_Amt;
-              fRoth_Draw_Amt1 = fRoth_Draw_Amt1 - fSpo_Roth_Conv_Amt;       
+              fRoth_Draw_Amt = fRoth_Draw_Amt - fSpo_Roth_Conv_Amt;       
               fRoth_End_Bal_Amt1 = fRoth_End_Bal_Amt1 + fSpo_Roth_Conv_Amt;
             }
 
@@ -1057,7 +1416,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fSenior_Deduct_Nbr = oTax_Results.senior_deduct_nbr; 
           fSenior_Deduct_Amt = oTax_Results.senior_deduct_amt;
           fStd_Deduct_Amt    = oTax_Results.std_deduct_amt;
-
+                   
+                  
+          
 //**************************************************************************************************************************************             
 //*   adjust cost basis if updating brokerage balance       
 //************************************************************************************************************************************       
@@ -1086,7 +1447,8 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
               fCurYr_CapGains_Tax_Amt = oCapgains_Tax_Results.tax_amt
              }
                
-
+         fFed_Tax_Running_Total = fFed_Tax_Running_Total + fCurYr_Inc_Tax_Amt + fCurYr_CapGains_Tax_Amt;
+                   
 //**************************************************************************************************************************************             
 //* calculate gains, add deposits, and rebalance
 //************************************************************************************************************************************       
@@ -1110,6 +1472,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                {
                 ratehistory[i].stockret = fBaseline_Stock_Return_Pct;
                 ratehistory[i].bondret = fBaseline_Bond_Return_Pct;
+                ratehistory[i].infrate = fBaseline_Inf_Pct;   
                }
 
 // rebalance at beginning of each year 
@@ -1157,7 +1520,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fEnd_Bal = fYou_IRA_End_Bal_Amt2 + fSpo_IRA_End_Bal_Amt2 + fBrkrg_End_Bal_Amt2 + fRoth_End_Bal_Amt2;
 
           fTotal_Draw_Amt = fYou_RMD_Draw_Amt + fYou_IRA_Addl_Draw_Amt + fSpo_RMD_Draw_Amt + fSpo_IRA_Addl_Draw_Amt +
-                            fBrkrg_Draw_Amt + fRoth_Draw_Amt1;
+                            fBrkrg_Draw_Amt + fRoth_Draw_Amt;
                                         
           fTotal_Ann_Dep_Amt = fYou_IRA_Ann_Dep_Amt + fSpo_IRA_Ann_Dep_Amt +
                             fBrkrg_Ann_Dep_Amt + fRoth_Ann_Dep_Amt;
@@ -1218,8 +1581,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         capgains_tax_amt : fCapGains_Tax_Amt,
                         
                         curyr_inc_tax_amt : fCurYr_Inc_Tax_Amt,
+                        fed_tax_running_total : fFed_Tax_Running_Total,
+                   
                         curyr_taxable_income : fCurYr_Taxable_Income, 
                         
+                   
                         curyr_capgains_amt : fCapgains_Amt,
     
                         curyr_capgains_tax_amt : fCurYr_CapGains_Tax_Amt,
@@ -1257,7 +1623,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         brkrg_end_cost_basis_amt : fBrkrg_End_Cost_Basis_Amt,
           
                         roth_beg_bal_amt  : fRoth_Beg_Bal_Amt,
-                        roth_draw_amt1    : fRoth_Draw_Amt1,
+                        roth_draw_amt   : fRoth_Draw_Amt,
                         roth_gain_amt     : fRoth_Gain_Stock_Amt + fRoth_Gain_Bond_Amt,
                         roth_ann_dep_amt   : fRoth_Ann_Dep_Amt,
                         roth_end_bal_amt  : fRoth_End_Bal_Amt2,
@@ -1290,7 +1656,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                         std_deduct_nbr      : fExemptions, 
                         std_deduct_amt      : fStd_Deduct_Amt,
                         senior_deduct_nbr  : fSenior_Deduct_Nbr,
-                        senior_deduct_amt   : fSenior_Deduct_Amt,                   
+                        senior_deduct_amt   : fSenior_Deduct_Amt,  
+                   
+                        top_tax_pct             : oTax_Results.top_pct,
                         
                         std_deduct_married : infadj_std_deduct_married,
                         std_deduct_single  : infadj_std_deduct_single,
@@ -1433,15 +1801,15 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     if (fDownload_Results == "YES")
          {download_simulation_result_summary(scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years); }
        
-    TableResults = showdetails(TableResults,simulation_scenario, 1);
+    TableResults = showdetails(TableResults,simulation_scenario, 1, "Baseline");
 
-    TableResults = showdetails(TableResults,simulation_scenario, fWorst_Year);
+    TableResults = showdetails(TableResults,simulation_scenario, fWorst_Year, " - Worst Case");
  
-    TableResults = showdetails(TableResults,simulation_scenario, fMedian_Year);
+    TableResults = showdetails(TableResults,simulation_scenario, fMedian_Year, " - Median Case");
   
-    TableResults = showdetails(TableResults,simulation_scenario, fBest_Year);
+    TableResults = showdetails(TableResults,simulation_scenario, fBest_Year, " - Best Case");
      
-    TableResults = showdetails(TableResults,simulation_scenario, fMost_Recent_Year);
+    TableResults = showdetails(TableResults,simulation_scenario, fMost_Recent_Year, " - Recent Case");
 
     openWin(TableResults);   
    
@@ -1471,43 +1839,93 @@ function closeWin() {
   myWindow.close();
 }
 </script>          
+
+<script>
+function openWin2(TableResults) {
+try {
+  myWindow.close();
+ }
+  catch (err)
+      {   }
+  myWindow = window.open("", "myWindow", "scrollbars=yes,width=750,height=300");
+  myWindow.document.write(TableResults);
+}
+
+function closeWin() {
+  myWindow.close();
+}
+</script>          
           
           
                    
 <script type="text/javascript"> 
-    function showdetails(TableResults, simulation_scenario, fYear) {
+    function showdetails(TableResults, simulation_scenario, fYear, fCase) {
 
       var fsimulation_scenarioLen = simulation_scenario.length;
 
       fCaption =  '<caption style="text-align:left"> <h3> Detail simulation results using Baseline Rates </h3></caption>';
       
       if (fYear != 1) 
-	  {fCaption = '<caption style="text-align:left"> <h3> Detail simulation results using rates starting in ' + fYear + '</h3></caption>';}
+	  {fCaption = '<caption style="text-align:left"> <h3> Detail simulation results using rates starting in ' + fYear + fCase + '</h3></caption>';}
       
       TableResults = TableResults + fCaption;
+
+//**********************************************************************************
+//* first row of column headers        
+//**********************************************************************************        
         
-    
        TableResults = TableResults + '<table id = "Scenario_Results">' + 
                           '<thead>' +
                           '<tr>' +
-                          '<th colspan="3" style="background-color:#4d7e80">Age</th> ' +
-                          '<th colspan="6" style="background-color:#4da6ff">Spend Plan</th> ' +
-                          '<th colspan="4" style="background-color:#ff66ff">Total Income</th> ' +
+                          '<th colspan="3" style="background-color:#4d7e80">Age</th> ';
+           
+        if (fFrm_Medb_Flag == "YES")
+             {TableResults = TableResults +       
+                          '<th colspan="6" style="background-color:#4da6ff">Spend Plan</th> ';}
+        else
+             {TableResults = TableResults +       
+                          '<th colspan="5" style="background-color:#4da6ff">Spend Plan</th> ';}
+        
+        fPension_Cnt = 0;
+        if (fFrm_You_Pension_Amt > 0)
+           {fPension_Cnt++};
+        
+        if (fFrm_Spo_Pension_Amt > 0)
+           {fPension_Cnt++};
+        
+        if (fPension_Cnt == 2)
+           {TableResults = TableResults +      
+                          '<th colspan="4" style="background-color:#ff66ff">Total Income</th> ';}
+        if (fPension_Cnt == 1)
+           {TableResults = TableResults +      
+                          '<th colspan="3" style="background-color:#ff66ff">Total Income</th> ';}
+        if (fPension_Cnt == 0)
+           {TableResults = TableResults +      
+                          '<th colspan="2" style="background-color:#ff66ff">Total Income</th> ';}
+                     
+        TableResults = TableResults +
                           '<th colspan="1"> </th> ' +
                           '<th colspan="4" style="background-color:#666699">Withdraw Strategy </th> ' +
                        
                           '<th colspan="5" style="background-color:#E18973">Summary Account Activity</th> ' +
                           '<th colspan="1" style="background-color:#ff33cc"> </th> ' +
+                          '<th colspan="2" style="background-color:#000000"> </th> ' +
                           '<th colspan="3"> </th> ' +
                           '<th colspan="6" style="background-color:#33C0FF">You IRA Account Activity</th> ' +
                           '<th colspan="6" style="background-color:#D833FF">Spouse IRA Account Activity</th> ' +
                           '<th colspan="8" style="background-color:#000000">Brokerage Account Activity</th> ' +
                           '<th colspan="7" style="background-color:#FF9A33">Roth Account Activity</th> ' +
-                          '<th colspan="12" style="background-color:#5F9EA0">Federal Income Tax Calculations</th> ' +
+                          '<th colspan="13" style="background-color:#5F9EA0">Federal Income Tax Calculations</th> ' +
                           '<th colspan="14" style="background-color:#5F9EA0">Federal Tax Brackets</th> ' +
                           '<th colspan="9" style="background-color:#999966">Capital Gains Tax Calculation</th> ' +
                           '<th colspan="6" style="background-color:#999966">Capital Gains Tax Brackets</th> ' +
                           " </tr> " ;
+        
+        
+//**********************************************************************************
+//* 2nd row of column headers        
+//**********************************************************************************        
+        
  
       TableResults = TableResults + "<tr> " + 
                          '<th style="background-color:#4d7e80">Year</th> ' +
@@ -1518,14 +1936,25 @@ function closeWin() {
                          '<th style="background-color:#4da6ff">Bonus</th> ' +
                          
                          '<th style="background-color:#4da6ff">Inc Tax</th> ' + 
-                         '<th style="background-color:#4da6ff">Cap Gains Tax</th> ' +
-                         '<th style="background-color:#4da6ff">Med B Prem</th> ' +
-          
-                         '<th style="background-color:#ff66ff">You Soc Sec</th> ' +
-                         '<th style="background-color:#ff66ff">Sp Soc Sec</th> ' +
-                         '<th style="background-color:#ff66ff">You Pension</th> ' +
-                         '<th style="background-color:#ff66ff">Sp Pension</th> ' +
-                         '<th>Withdraw From Savings</th> ' +
+                         '<th style="background-color:#4da6ff">Cap Gains Tax</th> '; 
+        
+    if (fFrm_Medb_Flag == "YES")
+        {TableResults = TableResults + 
+                         '<th style="background-color:#4da6ff">Med B Prem</th> ';}
+    
+    TableResults = TableResults +     
+                         '<th style="background-color:#ff66ff">You SocSec</th> ' +
+                         '<th style="background-color:#ff66ff">Spo SocSec</th> ';
+        
+    if (fFrm_You_Pension_Amt > 0)
+         {TableResults = TableResults +     
+                             '<th style="background-color:#ff66ff">You Pension</th> ';} 
+    if (fFrm_Spo_Pension_Amt > 0)
+        {TableResults = TableResults +     
+                             '<th style="background-color:#ff66ff">Spo Pension</th> ';}
+    
+    TableResults = TableResults +     
+                              '<th>Withdraw From Savings</th> ' +
           
                           '<th style="background-color:#666699">You IRA</th> ' +
                           '<th style="background-color:#666699">Sp IRA</th> ' +
@@ -1540,8 +1969,14 @@ function closeWin() {
                          '<th style="background-color:#E18973">Deposit</th> ' +
                          '<th style="background-color:#E18973">End Bal</th> ' +
           
-                         '<th style="background-color:#ff33cc">Baseline</th> ' +
-	                 "<th>Stock Ret</th> " + 
+                         '<th style="background-color:#ff33cc">Baseline</th> ';
+	                
+                 TableResults = TableResults +    
+                     '<th style="background-color:#000000">SS Taxable</th> ' +
+                     '<th style="background-color:#000000">Top Tax</th> ';
+                          
+                 TableResults = TableResults +       
+                         "<th>Stock Ret</th> " + 
                          "<th>Bond Ret</th> " +      
                          "<th>Inf Rate</th> " +
 
@@ -1591,6 +2026,8 @@ function closeWin() {
                          '<th style="background-color:#5F9EA0">Sr Deduct Amt </th> ' +
                          '<th style="background-color:#5F9EA0">Taxable Income</th> ' +
                          '<th style="background-color:#5F9EA0">Est Tax</th> ' +   
+                         '<th style="background-color:#5F9EA0">Top Tax</th> ' +   
+
 
   
                          "<th>Tax Married 10%</th> " +
@@ -1629,6 +2066,9 @@ function closeWin() {
           
                          " </tr> " ;
      
+      
+      fBaseline_Year = getcurrentyear();  
+      
       for (var i=0; i<fsimulation_scenarioLen; i++)
        
       {
@@ -1636,15 +2076,20 @@ function closeWin() {
           {
            fStockColor = setcolor(simulation_scenario[i].stockret);
            fGainColor = setcolor(simulation_scenario[i].total_gain_amt);
-           fRoth_Background_Color  = setbackgroundcolor(simulation_scenario[i].roth_draw_amt1);  
+           fRoth_Background_Color  = setbackgroundcolor(simulation_scenario[i].roth_draw_amt);  
            fBrkrg_Background_Color = setbackgroundcolor(simulation_scenario[i].brkrg_draw_amt);     
            
            fYou_IRA_Draw_Amt = simulation_scenario[i].you_rmd_draw_amt + simulation_scenario[i].you_ira_addl_draw_amt;
            fSpo_IRA_Draw_Amt = simulation_scenario[i].spo_rmd_draw_amt + simulation_scenario[i].spo_ira_addl_draw_amt;
-              
-                         
+        
+           fDisplay_Year = simulation_scenario[i].year;   
+           if (fYear == 1) 
+              {fDisplay_Year = fBaseline_Year;
+               fBaseline_Year +=1;
+              };
+               
            TableResults = TableResults + "<tr>" +  
-           '<td align = "right"> ' + simulation_scenario[i].year  + " </td> " +
+           '<td align = "right"> ' + fDisplay_Year  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].you_age  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].spouse_age  + " </td> " +
 
@@ -1653,24 +2098,35 @@ function closeWin() {
            '<td align = "right"> ' + addcomma(simulation_scenario[i].mortgage_budget_amt)  + " </td> " +
            '<td align = "right"> ' + addcomma(simulation_scenario[i].bonus_amt)  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].inc_tax_amt  + " </td> " +
-           '<td align = "right"> ' + simulation_scenario[i].capgains_tax_amt  + " </td> " +      
-           '<td align = "right"> ' + simulation_scenario[i].medb_premium_amt  + " </td> " +      
-               
+           '<td align = "right"> ' + simulation_scenario[i].capgains_tax_amt  + " </td> ";
+              
+            if (fFrm_Medb_Flag == "YES")
+               {TableResults = TableResults +      
+                  '<td align = "right"> ' + simulation_scenario[i].medb_premium_amt  + " </td> ";}      
                      
 
 // income
+           TableResults = TableResults +      
            '<td align = "right"> ' + addcomma(simulation_scenario[i].you_socsec_amt)  + " </td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].spo_socsec_amt)  + " </td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].you_pension_amt)  + " </td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].spo_pension_amt)  + " </td> " +
+           '<td align = "right"> ' + addcomma(simulation_scenario[i].spo_socsec_amt)  + " </td> ";
+          
+           if (fFrm_You_Pension_Amt > 0)
+               {TableResults = TableResults +      
+               '<td align = "right"> ' + addcomma(simulation_scenario[i].you_pension_amt)  + " </td> ";}
+
+           if (fFrm_Spo_Pension_Amt > 0)
+              {TableResults = TableResults +      
+               '<td align = "right"> ' + addcomma(simulation_scenario[i].spo_pension_amt)  + " </td> ";}
+
 // withdraw need
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].total_need_amt)   + " </td> " +
+           TableResults = TableResults +
+            '<td align = "right"> ' + addcomma(simulation_scenario[i].total_need_amt)   + " </td> " +
 
 // withdraw strategy               
            '<td align = "right"> ' + addcomma(fYou_IRA_Draw_Amt * -1)+"</td> " +       
            '<td align = "right"> ' + addcomma(fSpo_IRA_Draw_Amt * -1)+"</td> " +       
            '<td ' + fBrkrg_Background_Color + '>' + addsign(addcomma(simulation_scenario[i].brkrg_draw_amt * -1)) + "</td> " +      
-           '<td ' + fRoth_Background_Color  + '>' + addsign(addcomma(simulation_scenario[i].roth_draw_amt1 * -1))  + "</td> " +      
+           '<td ' + fRoth_Background_Color  + '>' + addsign(addcomma(simulation_scenario[i].roth_draw_amt * -1))  + "</td> " +      
 
 // summary account activity                  
            '<td align = "right"> ' + addcomma(simulation_scenario[i].beg_bal)   + " </td> " +
@@ -1678,8 +2134,13 @@ function closeWin() {
            '<td ' + fGainColor + ' align = "right"> ' + addcomma(simulation_scenario[i].total_gain_amt) + " </td> " +
            '<td align = "right"> ' + addcomma(simulation_scenario[i].total_ann_dep_amt)   + " </td> " +    
            '<td align = "right"> ' + addcomma(simulation_scenario[i].end_bal)   + " </td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].bas_end_bal)   + " </td> " +
-             
+           '<td align = "right"> ' + addcomma(simulation_scenario[i].bas_end_bal)   + " </td> ";
+              
+        TableResults = TableResults +
+              '<td align = "right"> ' + simulation_scenario[i].socsec_taxable_pct  + "%" + " </td> " +
+              '<td align = "right"> ' + (simulation_scenario[i].top_tax_pct * 100) + "%" + " </td> "; 
+        
+        TableResults = TableResults +       
            '<td ' + fStockColor + ' align = "right"> ' + (Math.round(simulation_scenario[i].stockret * 10000)/100) + "%"+ " </td> " +
            '<td align = "right"> ' + (Math.round(simulation_scenario[i].bondret * 10000)/100)  + "%"+ " </td> " +
            '<td align = "right"> ' + (Math.round(simulation_scenario[i].infrate * 10000)/100)  + "%"+ " </td> " +
@@ -1710,7 +2171,7 @@ function closeWin() {
            '<td align = "right"> ' + addcomma(simulation_scenario[i].brkrg_end_cost_basis_amt) + " </]td> " +
 
            '<td align = "right"> ' + addcomma(simulation_scenario[i].roth_beg_bal_amt)    + " </]td> " +
-           '<td align = "right"> ' + addcomma(simulation_scenario[i].roth_draw_amt1 * -1)      + " </td> " +
+           '<td align = "right"> ' + addcomma(simulation_scenario[i].roth_draw_amt * -1)      + " </td> " +
            '<td ' + fGainColor + ' align = "right"> ' + addcomma(simulation_scenario[i].roth_gain_amt)       + " </td> " +
             '<td align = "right"> ' + addcomma(simulation_scenario[i].roth_ann_dep_amt) + " </td> " +   
            '<td align = "right"> ' + addcomma(simulation_scenario[i].roth_end_bal_amt)    + " </td> " +
@@ -1729,6 +2190,8 @@ function closeWin() {
            '<td align = "right"> ' + simulation_scenario[i].senior_deduct_amt  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].curyr_taxable_income  + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].curyr_inc_tax_amt  + " </td> " +
+               
+            '<td align = "right"> ' + simulation_scenario[i].top_tax_pct  + " </td> " +   
 
            '<td align = "right"> ' + simulation_scenario[i].taxtablemarried0    + " </td> " +
            '<td align = "right"> ' + simulation_scenario[i].taxtablemarried1    + " </td> " +
@@ -1786,7 +2249,7 @@ function closeWin() {
 
       TableResults = TableResults + '<table id = "Scenario_Results">' + 
                      '<thead>' +
-                     '<tr>' + '<th colspan="9" style="background-color:#000000; text-align:center">Simulation Highlights </th> ' +
+                     '<tr>' + '<th colspan="10" style="background-color:#000000; text-align:center">Simulation Highlights </th> ' +
                     '<tr> ' + 
                     '<th style="background-color:#000000">Simulated Scenario</th> ' +
                     '<th style="background-color:#000000">Scenario Status</th> ' +
@@ -1797,6 +2260,7 @@ function closeWin() {
                     '<th style="background-color:#000000">Last Year Withdraw </th> ' +
                     '<th style="background-color:#000000">End Bal </th> ' +
                     '<th style="background-color:#000000">Years Remain </th> ' +
+                    '<th style="background-color:#000000">Fed Tax </th> ' +
                     " </tr> " ;
      
       for (var i=0; i<fscenario_summary_len; i++)
@@ -1842,7 +2306,9 @@ function closeWin() {
               '<td align = "center"> '  + addcomma(scenario_summary[i].total_draw_amt) + "</td> " +
               '<td align = "center"> '  + addcomma(scenario_summary[i].end_bal) + "</td> " +
               '<td align = "center"> ' + fYears_Remain  + " </td> " +
-              " </tr>" ;
+              '<td align = "center"> ' + addcomma(scenario_summary[i].fed_tax_running_total)  + " </td> " +
+              
+                  " </tr>" ;
             }
 
        }      
@@ -1881,7 +2347,7 @@ function closeWin() {
 
      fscenario_summary_len = scenario_summary.length;
 
-     csv = "Scenario Year, Simulation Result, Budget Spent, Bonus Earned, Avg Bonus, Last Year Budget, End Bal, Years Remain, Score \r\n";   
+     csv = "Scenario Year, Simulation Result, Budget Spent, Bonus Earned, Avg Bonus, Last Year Budget, End Bal, Years Remain, Fed Tax, Score \r\n";   
      
      for (var i=0; i<fscenario_summary_len; i++)
        
@@ -1904,12 +2370,14 @@ function closeWin() {
                   "," + scenario_summary[i].infadj_budget_amt + 
                   "," + scenario_summary[i].end_bal + 
                   "," + fYears_Remain  +
+                  "," + scenario_summary[i].fed_tax_running_total + 
                   "," + scenario_summary[i].scenario_score + 
                   " \r\n" ;
     
        } 
      
-     fileName = "RPS_sim_result_smry";
+     fileName1 = fFrm_Plan_Id.concat("_");
+     fileName = fileName1.concat("RPS_sim_result_smry");
      let csvData = new Blob([csv], { type: 'text/csv' });  
      let csvUrl = URL.createObjectURL(csvData);
  
@@ -1970,7 +2438,7 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
        "," +  simulation_scenario[i].you_socsec_amt +
        "," + simulation_scenario[i].spo_socsec_amt + "," + simulation_scenario[i].you_pension_amt + "," +  simulation_scenario[i].spo_pension_amt +
        "," + simulation_scenario[i].total_need_amt + "," + (fYou_IRA_Draw_Amt * -1) + "," + (fSpo_IRA_Draw_Amt * -1) + "," + (simulation_scenario[i].brkrg_draw_amt * -1) +  
-       "," + (simulation_scenario[i].roth_draw_amt1 * -1) + "," +  simulation_scenario[i].beg_bal + "," +  (simulation_scenario[i].total_draw_amt * -1)  +
+       "," + (simulation_scenario[i].roth_draw_amt * -1) + "," +  simulation_scenario[i].beg_bal + "," +  (simulation_scenario[i].total_draw_amt * -1)  +
        "," + simulation_scenario[i].total_gain_amt + "," +  simulation_scenario[i].total_ann_dep_amt  + "," +  simulation_scenario[i].end_bal  +
        "," + simulation_scenario[i].bas_end_bal  + "," +  (Math.round(simulation_scenario[i].stockret * 10000)/100) + "%" + 
        "," + (Math.round(simulation_scenario[i].bondret * 10000)/100) + "%" + "," +  (Math.round(simulation_scenario[i].infrate * 10000)/100) + "%" +
@@ -1981,7 +2449,7 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
        "," + simulation_scenario[i].brkrg_beg_bal_amt + "," +  (simulation_scenario[i].brkrg_draw_amt * -1) + "," +  simulation_scenario[i].brkrg_gain_amt +
        "," + simulation_scenario[i].brkrg_ann_dep_amt + "," +  simulation_scenario[i].brkrg_end_bal_amt + "," +  simulation_scenario[i].brkrg_beg_cost_basis_amt + 
        "," +  simulation_scenario[i].brkrg_adj_cost_basis_amt + "," +  simulation_scenario[i].brkrg_end_cost_basis_amt + "," +  simulation_scenario[i].roth_beg_bal_amt  + 
-       "," +  (simulation_scenario[i].roth_draw_amt1 * -1)  + "," +  simulation_scenario[i].roth_gain_amt + "," +  simulation_scenario[i].roth_ann_dep_amt +  
+       "," +  (simulation_scenario[i].roth_draw_amt * -1)  + "," +  simulation_scenario[i].roth_gain_amt + "," +  simulation_scenario[i].roth_ann_dep_amt +  
        "," +  simulation_scenario[i].roth_end_bal_amt  + "," +  simulation_scenario[i].you_roth_conv_amt + "," +  simulation_scenario[i].spo_roth_conv_amt +
        "," +  simulation_scenario[i].ira_distribution_amt + "," +  simulation_scenario[i].pension_amt + "," +  simulation_scenario[i].socsec_taxable_amt +
        "," +  simulation_scenario[i].socsec_taxable_pct +
@@ -2003,7 +2471,9 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
    }
         
         
-     fileName = "RPS_sim_result_dtl";
+     fileName1 = fFrm_Plan_Id.concat("_");
+     fileName = fileName1.concat("RPS_sim_result_dtl");
+     
      let csvData = new Blob([csv], { type: 'text/csv' });  
      let csvUrl = URL.createObjectURL(csvData);
  
@@ -2251,6 +2721,9 @@ function calc_income_tax(fAdjusted_Gross_Amt, fExemptions, fYou_Age, fSpo_Age) {
 
    if (fYou_Age >= 65) {fSenior_Deduct_Nbr++;}
    if (fSpo_Age >=65) {fSenior_Deduct_Nbr++};
+    
+   if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}
+   if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}    
    
    fSenior_Deduct_Nbr = Math.min(fSenior_Deduct_Nbr, fExemptions);
   
@@ -2316,6 +2789,9 @@ function calc_capgains_tax(fAdjusted_Gross_Amt, fDeductions_Amt, fCapgains_Amt, 
    fFile_Status = "married";
    if (fExemptions == 1) {lFile_Status = "single";}
 
+   if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}
+   if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}    
+       
    fTaxable_Income = fAdjusted_Gross_Amt -fDeductions_Amt + fCapgains_Amt;       
   
    if (fTaxable_Income < 0)  {fTaxable_Income = 0;}
@@ -2336,6 +2812,70 @@ function calc_capgains_tax(fAdjusted_Gross_Amt, fDeductions_Amt, fCapgains_Amt, 
     return oCapgains_Tax_Results;  
   
 }
+</script>
+
+<script>
+function calc_ftb_amt (fExemptions, fFrm_Pre_Roth_FTB_Pct, fYou_RMD_Draw_Amt, fSpo_RMD_Draw_Amt, fPension_Amt, fYou_Age, fSpo_Age, fSocSec_Total_Amt) {
+
+//****************************************************************
+//* calculate fill the bucket amount 
+//****************************************************************
+
+          fFTB_Taxable_Income = 0;
+          
+          if (fExemptions ==2)
+             {      
+              if (fFrm_Pre_Roth_FTB_Pct == 10) fFTB_Taxable_Income = infadj_taxtable_married[0].thru;   
+              if (fFrm_Pre_Roth_FTB_Pct == 12) fFTB_Taxable_Income = infadj_taxtable_married[1].thru;
+              if (fFrm_Pre_Roth_FTB_Pct == 22) fFTB_Taxable_Income = infadj_taxtable_married[2].thru;
+              if (fFrm_Pre_Roth_FTB_Pct == 24) fFTB_Taxable_Income = infadj_taxtable_married[3].thru;       
+             }
+        
+           if (fExemptions ==1)
+             {      
+              if (fFrm_Pre_Roth_FTB_Pct == 10) fFTB_Taxable_Income = infadj_taxtable_single[0].thru;   
+              if (fFrm_Pre_Roth_FTB_Pct == 12) fFTB_Taxable_Income = infadj_taxtable_single[1].thru;
+              if (fFrm_Pre_Roth_FTB_Pct == 22) fFTB_Taxable_Income = infadj_taxtable_single[2].thru;       
+              if (fFrm_Pre_Roth_FTB_Pct == 24) fFTB_Taxable_Income = infadj_taxtable_single[3].thru;              
+             }
+        
+          fIRA_Distribution_Amt = fYou_RMD_Draw_Amt + fSpo_RMD_Draw_Amt;
+    
+          fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt;
+
+          fSocSec_Taxable_Amt = calc_socsec_taxable_func(fIncome_Less_SS, fSocSec_Total_Amt, fExemptions);                 
+          
+          fAdjusted_Gross_Amt = fIncome_Less_SS + fSocSec_Taxable_Amt;
+
+          oTax_Results =          calc_income_tax(fAdjusted_Gross_Amt, fExemptions, fYou_Age, fSpo_Age);
+          
+          fFTB_Amt = Math.max(fFTB_Taxable_Income - oTax_Results.taxable_income_pre,0);
+
+//****************************************************************
+//* loop reduce FTB_Amt until get to the right tax bracket 
+//****************************************************************
+    
+          fIRA_Distribution_Amt += fFTB_Amt;
+
+          do {
+              fIncome_Less_SS = fIRA_Distribution_Amt + fPension_Amt;
+
+              fSocSec_Taxable_Amt = calc_socsec_taxable_func(fIncome_Less_SS, fSocSec_Total_Amt, fExemptions);                 
+          
+              fAdjusted_Gross_Amt = fIncome_Less_SS + fSocSec_Taxable_Amt;
+
+              oTax_Results =          calc_income_tax(fAdjusted_Gross_Amt, fExemptions, fYou_Age, fSpo_Age);
+    
+              if (oTax_Results.taxable_income_pre >= fFTB_Taxable_Income)
+                 {fFTB_Amt -= 1000;
+                  fIRA_Distribution_Amt -= 1000;
+                 }
+            } while (fFTB_Amt > 0 && oTax_Results.taxable_income_pre >= fFTB_Taxable_Income);
+    
+            fFTB_Amt = Math.max(fFTB_Amt,0);
+            return fFTB_Amt;
+}
+    
 </script>
 
 <script>
@@ -2377,6 +2917,7 @@ function calc_medb_premium (fAdjusted_Gross_Amt, fExemptions, fYou_Age, fYou_Ret
 <! ********************************* -- >
 <script type="text/javascript">
 
+    
 //********************
 //* constants
 //********************
@@ -2387,57 +2928,57 @@ var myWindow;
 var cBudget_Single_Adj = .75;
 var cBudget_Full = 1;
  
-var stddeductmarried = 25100;
-var stddeductsingle = 12550;
+var stddeductmarried = 25900;
+var stddeductsingle = 12950;
 
-var senior_deduct_amt = 1350;
+var senior_deduct_amt = 1400;
 
 var taxtablemarried = new Array( );
-taxtablemarried[0] = {pct:.10, from:0, thru:19900};
-taxtablemarried[1] = {pct:.12, from:19901, thru:81050};
-taxtablemarried[2] = {pct:.22, from:81051, thru:172750};
-taxtablemarried[3] = {pct:.24, from:172751, thru:329850};
-taxtablemarried[4] = {pct:.32, from:329851, thru:418850};
-taxtablemarried[5] = {pct:.35, from:418851, thru:628300};
-taxtablemarried[6] = {pct:.37, from:628301, thru:9999999999};
+taxtablemarried[0] = {pct:.10, from:0, thru:20550};
+taxtablemarried[1] = {pct:.12, from:20551, thru:83550};
+taxtablemarried[2] = {pct:.22, from:83551, thru:178150};
+taxtablemarried[3] = {pct:.24, from:178151, thru:340100};
+taxtablemarried[4] = {pct:.32, from:340101, thru:431900};
+taxtablemarried[5] = {pct:.35, from:431901, thru:647850};
+taxtablemarried[6] = {pct:.37, from:647851, thru:9999999999};
 var TaxTableMarriedLen = taxtablemarried.length;
 
 var taxtablesingle = new Array( );
-taxtablesingle[0] = {pct:.10, from:0, thru:9950};
-taxtablesingle[1] = {pct:.12, from:9951, thru:40525};
-taxtablesingle[2] = {pct:.22, from:40526, thru:86375};
-taxtablesingle[3] = {pct:.24, from:86376, thru:164925};
-taxtablesingle[4] = {pct:.32, from:164926, thru:209425};
-taxtablesingle[5] = {pct:.35, from:209426, thru:523600};
-taxtablesingle[6] = {pct:.37, from:523601, thru:9999999999};
+taxtablesingle[0] = {pct:.10, from:0, thru:10275};
+taxtablesingle[1] = {pct:.12, from:10276, thru:41775};
+taxtablesingle[2] = {pct:.22, from:41776, thru:89075};
+taxtablesingle[3] = {pct:.24, from:89076, thru:170050};
+taxtablesingle[4] = {pct:.32, from:170051, thru:215950};
+taxtablesingle[5] = {pct:.35, from:215951, thru:539900};
+taxtablesingle[6] = {pct:.37, from:539901, thru:9999999999};
 var TaxTableSingleLen = taxtablesingle.length;
 
 var infadj_taxtable_married = new Array();
 var infadj_taxtable_single = new Array();
 
 var capgains_taxtable = new Array( );
-capgains_taxtable[0] = {file_status: "married", pct:.0,  from:0, thru: 80800};
-capgains_taxtable[1] = {file_status: "married", pct:.15, from:80801, thru: 501600};
-capgains_taxtable[2] = {file_status: "married", pct:.20, from:501601, thru: 999999999};
-capgains_taxtable[3] = {file_status: "single", pct:.0, from:0, thru: 40400};
-capgains_taxtable[4] = {file_status: "single", pct:.15, from:40401, thru: 445850};
-capgains_taxtable[5] = {file_status: "single", pct:.20, from:445851, thru: 999999999};
+capgains_taxtable[0] = {file_status: "married", pct:.0,  from:0, thru: 83350};
+capgains_taxtable[1] = {file_status: "married", pct:.15, from:83351, thru: 517200};
+capgains_taxtable[2] = {file_status: "married", pct:.20, from:517201, thru: 999999999};
+capgains_taxtable[3] = {file_status: "single", pct:.0, from:0, thru: 41675};
+capgains_taxtable[4] = {file_status: "single", pct:.15, from:41676, thru: 459750};
+capgains_taxtable[5] = {file_status: "single", pct:.20, from:459751, thru: 999999999};
 var infadj_capgains_taxtable = new Array();
 var capgains_taxtable_len = capgains_taxtable.length;
 
 var medb_premium_table = new Array( );
-medb_premium_table[0] = {file_status: "married", adj_gross_from:0,      adj_gross_thru:176000,    mthly_rate:144.60};
-medb_premium_table[1] = {file_status: "married", adj_gross_from:176001, adj_gross_thru:222000,    mthly_rate:202.40};
-medb_premium_table[2] = {file_status: "married", adj_gross_from:222001, adj_gross_thru:276000,    mthly_rate:289.20};
-medb_premium_table[3] = {file_status: "married", adj_gross_from:276001, adj_gross_thru:330000,    mthly_rate:376.00};
-medb_premium_table[4] = {file_status: "married", adj_gross_from:330001, adj_gross_thru:749999,    mthly_rate:462.70};
-medb_premium_table[5] = {file_status: "married", adj_gross_from:750000, adj_gross_thru:999999999, mthly_rate:491.60};
-medb_premium_table[6] =  {file_status: "single", adj_gross_from:0,      adj_gross_thru:88000,     mthly_rate:144.60};
-medb_premium_table[7] =  {file_status: "single", adj_gross_from:88001,  adj_gross_thru:111000,    mthly_rate:202.40};
-medb_premium_table[8] =  {file_status: "single", adj_gross_from:111001, adj_gross_thru:138000,    mthly_rate:289.20};
-medb_premium_table[9] =  {file_status: "single", adj_gross_from:138001, adj_gross_thru:165000,    mthly_rate:376.00};
-medb_premium_table[10] = {file_status: "single", adj_gross_from:165001, adj_gross_thru:499999,    mthly_rate:462.70};
-medb_premium_table[11] = {file_status: "single", adj_gross_from:500000, adj_gross_thru:999999999, mthly_rate:491.60};
+medb_premium_table[0] = {file_status: "married", adj_gross_from:0,      adj_gross_thru:182000,    mthly_rate:170.10};
+medb_premium_table[1] = {file_status: "married", adj_gross_from:182001, adj_gross_thru:228000,    mthly_rate:238.10};
+medb_premium_table[2] = {file_status: "married", adj_gross_from:228001, adj_gross_thru:284000,    mthly_rate:340.20};
+medb_premium_table[3] = {file_status: "married", adj_gross_from:284001, adj_gross_thru:340000,    mthly_rate:442.30};
+medb_premium_table[4] = {file_status: "married", adj_gross_from:340001, adj_gross_thru:750000,    mthly_rate:544.30};
+medb_premium_table[5] = {file_status: "married", adj_gross_from:750001, adj_gross_thru:999999999, mthly_rate:578.30};
+medb_premium_table[6] =  {file_status: "single", adj_gross_from:0,      adj_gross_thru:91000,     mthly_rate:170.10};
+medb_premium_table[7] =  {file_status: "single", adj_gross_from:91001,  adj_gross_thru:114000,    mthly_rate:238.10};
+medb_premium_table[8] =  {file_status: "single", adj_gross_from:114001, adj_gross_thru:142000,    mthly_rate:340.20};
+medb_premium_table[9] =  {file_status: "single", adj_gross_from:142001, adj_gross_thru:170000,    mthly_rate:442.30};
+medb_premium_table[10] = {file_status: "single", adj_gross_from:170001, adj_gross_thru:499999,    mthly_rate:544.30};
+medb_premium_table[11] = {file_status: "single", adj_gross_from:500000, adj_gross_thru:999999999, mthly_rate:578.30};
 var infadj_medb_premium_table = new Array();
 var medb_premium_table_len = medb_premium_table.length;
     
@@ -2737,8 +3278,8 @@ ratehistory[244]={year:2016,stockret:0.125333112125257,bondret:0.011866502871658
 ratehistory[245]={year:2017,stockret:0.210515319460834,bondret:0.0157377447702158,stret:0.001,infrate:0.021};
 ratehistory[246]={year:2018,stockret:-0.0528,bondret:0.0100286505951323,stret:0.001,infrate:0.019};
 ratehistory[247]={year:2019,stockret:0.3092,bondret:0.0628798680072757,stret:0.001,infrate:0.0171};
-ratehistory[248]={year:2020,stockret:0.08,bondret:0.0820617115200492,stret:0.001,infrate:0.0125};
-ratehistory[249]={year:2021,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
+ratehistory[248]={year:2020,stockret:0.2078,bondret:0.0820617115200492,stret:0.001,infrate:0.0125};
+ratehistory[249]={year:2021,stockret:0.2565,bondret:-0.0179,stret:0.01,infrate:0.068};
 ratehistory[250]={year:2022,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[251]={year:2023,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[252]={year:2024,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
