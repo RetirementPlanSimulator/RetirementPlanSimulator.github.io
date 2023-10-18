@@ -41,12 +41,12 @@ div.b {
 <input type="button" value="List Plans" onclick="listplans(this.form)">
 
 <label for="plan_id">Plan Name:</label> 
-   <input type="text" name="plan_id" value="" style="width: 200;">
+   <input type="text" name="plan_id" value="Demo Plan" style="width: 200;">
 
 <input type="button" value="Get Plan" onclick="getprev(this.form)">
 
 <label for="plan_dsc">Plan Desc:</label> 
-    <input type="text" name="plan_dsc" value="" style="width: 750;">
+    <input type="text" name="plan_dsc" value="Default Name for Demonstration.  Scroll down and press Run Simulation button." style="width: 750;">
 
 
 </p>
@@ -54,23 +54,28 @@ div.b {
 <p>
 <fieldset>
   <legend> <b> Your Information </b> </legend>
-     <label for="you_cur_age">Age: </label> 
-     <input id='youcurage' type="number" name="you_cur_age" min="20" max="99" style="width: 50px;"> 
+     <label for="you_birth_yr">Birth Year: </label> 
+     <input id='you_birth_yr' type="number" name="you_birth_yr" value=1961 min="1900" max="2100" style="width: 50px;"> 
+
+     <label for="you_birth_mth">Birth Month: </label> 
+     <input id='you_birth_mth' type="number" name="you_birth_mth" value=01 min="01" max="12" style="width: 50px;"> 
 
      <label for="you_retire_age">Retire Begin Age:</label> 
-     <input type="number" name="you_retire_age" value="65" min="20" max="99" style="width: 50px;"> 
+     <input type="number" name="you_retire_age" value=62 min="20" max="99" style="width: 50px;"> 
 
      <label for="you_retire_end_age">Retire End Age:</label>  
-     <input type="number" name="you_retire_end_age" value="94" min="20" max="99" style="width: 50px;">
+     <input type="number" name="you_retire_end_age" value="91" min="20" max="99" style="width: 50px;">
+
+     <div class="b"><br> </div>
 
      <label for="you_socsec_age">Soc Sec Start Age:</label> 	
      <input type="number" name="you_socsec_age" value="70" min="62" max="70" style="width: 50px;">
 
-     <label for="you_socsec_amt">Annual Soc Sec:</label> 	
-     <input type="number" name="you_socsec_amt" value=0 min="0" max="100000" style="width: 75px;"     >
+     <label for="you_socsec_amt">Annual Social Security Amt:</label> 	
+     <input type="number" name="you_socsec_amt" value=40000 min="0" max="100000" style="width: 75px;"     >
     
      <label for="you_ira_start_bal_amt">IRA/401K Balance:</label>
-     <input type="number" name="you_ira_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
+     <input type="number" name="you_ira_start_bal_amt" value=500000 min="0" max="999999999" style="width: 100px;">
 
      <label for="you_ira_ann_dep_amt">IRA/401K Annual Deposit:</label>
      <input type="number" name="you_ira_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
@@ -92,23 +97,29 @@ div.b {
 <br>
 <fieldset>
   <legend><b> Spouse Information </b> </legend>
-     <label for="spo_cur_age">Age: </label>
-     <input type="number" name="spo_cur_age" value=0 min="20" max="99" style="width: 50px;"> 
+     
+     <label for="spo_birth_yr">Birth Year: </label> 
+     <input id='spo_birth_yr' type="number" name="spo_birth_yr" value=1961 min="1900" max="2100" style="width: 50px;"> 
+
+     <label for="spo_birth_mth">Birth Month: </label> 
+     <input id='spo_birth_mth' type="number" name="spo_birth_mth" value=01 min="01" max="12" style="width: 50px;"> 
 
      <label for="spo_retire_age">Retire Begin Age:</label> 
-     <input type="number" name="spo_retire_age" value=0 min="20" max="99" style="width: 50px;"> 
+     <input type="number" name="spo_retire_age" value=62 min="20" max="99" style="width: 50px;"> 
 
      <label for="spo_retire_end_age">Retire End Age:</label> 
-     <input type="number" name="spo_retire_end_age" value=0 min="20" max="99" style="width: 50px;">
-     
+     <input type="number" name="spo_retire_end_age" value=94 min="20" max="99" style="width: 50px;">
+   
+     <div class="b"><br> </div>
+
      <label for="spo_socsec_age">Soc Sec Start Age:</label>  	
-     <input type="number" name="spo_socsec_age" value=0 min="62" max="70" style="width: 50px;">
+     <input type="number" name="spo_socsec_age" value=62 min="62" max="70" style="width: 50px;">
      
-     <label for="spo_socsec_amt">Annual Soc Sec:</label>
-     <input type="number" name="spo_socsec_amt" value=0 min="0" max="100000" style="width: 75px;">       
+     <label for="spo_socsec_amt">Annual Social Security Amt:</label>
+     <input type="number" name="spo_socsec_amt" value=20000 min="0" max="100000" style="width: 75px;">       
 
      <label for="spo_ira_start_bal_amt">IRA/401k Balance:</label> 
-     <input type="number" name="spo_ira_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
+     <input type="number" name="spo_ira_start_bal_amt" value=300000 min="0" max="999999999" style="width: 100px;">
 
      <label for="spo_ira_ann_dep_amt">IRA/401k Annual Deposit:</label> 
      <input type="number" name="spo_ira_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
@@ -133,10 +144,10 @@ div.b {
   <legend><b> Brokerage / Home Information </b> </legend>
 
     <label for="brkrg_start_bal_amt">Current Balance:</label>
-    <input type="number" name="brkrg_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
+    <input type="number" name="brkrg_start_bal_amt" value=100000 min="0" max="999999999" style="width: 100px;">
 
     <label for="brkrg_cost_basis_amt">Cost Basis:</label>
-    <input type="number" name="brkrg_cost_basis_amt" value=0 min="0" max="999999999" style="width: 100px;">
+    <input type="number" name="brkrg_cost_basis_amt" value=50000 min="0" max="999999999" style="width: 100px;">
 
      <label for="brkrg_ann_dep_amt">Annual Deposit:</label> 
      <input type="number" name="brkrg_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
@@ -145,15 +156,15 @@ div.b {
         <input type="number" name="brkrg_taxable_dist_pct" value=2 min="0" max="10" style="width: 50px;">
 
     <label for="home_equity_amt">Home Equity:</label>
-      <input type="number" name="home_equity_amt" value=0 min="0" max="999999999" style="width: 100px;">
+      <input type="number" name="home_equity_amt" value=200000 min="0" max="999999999" style="width: 100px;">
 </fieldset> 
 <br>
 
 <fieldset>
-  <legend><b> Roth / HSA Account Information </b> </legend>
+  <legend><b> Roth Account Information </b> </legend>
 
     <label for="roth_start_bal_amt">Roth Current Balance:</label> 
-    <input type="number" name="roth_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
+    <input type="number" name="roth_start_bal_amt" value=200000 min="0" max="999999999" style="width: 100px;">
 
      <label for="roth_ann_dep_amt">Roth Annual Deposit:</label> 
      <input type="number" name="roth_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
@@ -166,10 +177,11 @@ div.b {
            <option value="12">12%</option>
            <option value="22">22%</option>
            <option value="24">24%</option>
+          value="none"
           </select>
 
     <label for="roth_draw_begin_age">Roth Draw Begin Age:</label> 
-     <input type="number" name="roth_draw_begin_age" value=75 min="20" max="99" style="width: 50px;"> 
+     <input type="number" name="roth_draw_begin_age" value="62" min="20" max="99" style="width: 50px;"> 
 
     <label for="pre_roth_ftb_pct">Fill the Bracket Max Tax %:</label>
          <select name="pre_roth_ftb_pct" id="pre_roth_ftb_pct">
@@ -178,20 +190,20 @@ div.b {
            <option value="12">12%</option>
            <option value="22">22%</option>
            <option value="24">24%</option>
+          value=0
           </select>
-   
-   <div class="b"><br> </div>
+  </fieldset> 
+  <br>
+  <fieldset>
+  <legend><b> HSA Account Information </b> </legend>
+ 
    <label for="hsa_start_bal_amt">HSA Current Balance:</label> 
     <input type="number" name="hsa_start_bal_amt" value=0 min="0" max="999999999" style="width: 100px;">
 
    <label for="hsa_ann_dep_amt">HSA Annual Deposit:</label> 
      <input type="number" name="hsa_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-   <label for="hsa_use_flag">HSA MedB Prem Use:</label>
-         <select name="hsa_use_flag" id="hsa_use_flag">
-           <option value="none">None</option>
-           <option value="medb">MedB</option>
-         </select>
+   
 
   <label for="hsa_flat_draw_amt">HSA Flat Draw Amt:</label> 
      <input type="number" name="hsa_flat_draw_amt" value=0 min="0" max="999999" style="width: 75px;">
@@ -202,29 +214,47 @@ div.b {
   <label for="hsa_draw_end_age">HSA Draw End Age:</label> 
      <input type="number" name="hsa_draw_end_age" value=65 min="20" max="99" style="width: 50px;"> 
 
+  <label for="hsa_use_flag">HSA MedB Prem Use:</label>
+         <select name="hsa_use_flag" id="hsa_use_flag">
+           <option value="none">None</option>
+           <option value="medb">MedB</option>
+         </select>
   
 </fieldset> 
 <br>
 <fieldset>
   <legend><b> Annual Budget </b> </legend>
+
+    <label for="trans_budget_amt">Transition Budget Amt:</label> 
+    <input type="number" name="trans_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
     
-    <label for="gogo_budget_amt">Go Go Years (< 75):</label> 
-    <input type="number" name="gogo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
+    <label for="full_budget_amt">Full Initial Budget Amt:</label> 
+    <input type="number" name="full_budget_amt" value=85000 min="0" max="999999" style="width: 75px;">
 
-    <label for="slowgo_budget_amt">Slow Go Years (< 85):</label> 
-    <input type="number" name="slowgo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
+    
+    <label for="last3_budget_amt">Asstd Living Amt (Last 3 Yrs):</label> 
+    <input type="number" name="last3_budget_amt" value=200000 min="0" max="9999999" style="width: 75px;">
 
-    <label for="nogo_budget_amt">No Go Years (> 85):</label> 
-    <input type="number" name="nogo_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
-
-    <label for="last3_budget_amt">Assisted Living Years (Last 3):</label> 
-    <input type="number" name="last3_budget_amt" value=0 min="0" max="9999999" style="width: 75px;">
-
-    <label for="mortgage_budget_amt">Mortgage Amount:</label> 
-    <input type="number" name="mortgage_budget_amt" value=0 min="0" max="999999" style="width: 75px;">
+    <label for="mortgage_budget_amt">Mortgage Amt:</label> 
+    <input type="number" name="mortgage_budget_amt" value=12000 min="0" max="999999" style="width: 75px;">
 
     <label for="mortgage_end_age">Age Mortgage Ends:</label> 
-    <input type="number" name="mortgage_end_age" value=0 min="0" max="99" style="width: 50px;">
+    <input type="number" name="mortgage_end_age" value=65 min="0" max="99" style="width: 50px;">
+
+</fieldset> 
+
+<br>
+<fieldset>
+  <legend><b> Annual Budget % Reductions </b> </legend>
+
+    <label for="gogo_reduce_pct">Go Go % (age < 75):</label> 
+       <input type="number" name="gogo_reduce_pct" value=0 min="0" max="100" style="width: 50px;" >
+
+    <label for="slogo_reduce_pct">Slow Go % (age < 85):</label> 
+       <input type="number" name="slogo_reduce_pct" value=0 min="0" max="100" style="width: 50px;" >
+
+    <label for="nogo_reduce_pct">No Go % (age > 85):</label> 
+       <input type="number" name="nogo_reduce_pct" value=0 min="0" max="100" style="width: 50px;" >
 
 </fieldset> 
 <br>
@@ -241,20 +271,20 @@ div.b {
     <input type="number" name="nogo_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
 
     <label for="last3_stock_pct">Assisted Living Stock Allocation %:</label> 
-    <input type="number" name="last3_stock_pct" value=60 min="0" max="100" style="width: 50px;" >
+    <input type="number" name="last3_stock_pct" value=0 min="0" max="100" style="width: 50px;" >
 
 </fieldset> 
 <br>
 
 
 <fieldset>
-  <legend><b> Other Information </b> </legend>
+  <legend><b> Variable Withdraw / Baseline Plan Parameters </b> </legend>
     
-    <label for="bonus_pct">Retirement Bonus %:</label>
-    <input type="number" name="bonus_pct" value=0 min="0" max="100" style="width: 50px;">
+    <label for="bonus_pct">Variable Withdraw %:</label>
+    <input type="number" name="bonus_pct" value=10 min="0" max="100" style="width: 50px;">
 
     <label for="baseline_stock_return_pct">Baseline Stock Return %:</label>
-    <input type="number" name="baseline_stock_return_pct" value=6 min="0" max="10" style="width: 50px;">
+    <input type="number" name="baseline_stock_return_pct" value=7 min="0" max="10" style="width: 50px;">
 
     <label for="baseline_bond_return_pct">Baseline Bond Return %:</label>
     <input type="number" name="baseline_bond_return_pct" value=3 min="0" max="10" style="width: 50px;">
@@ -262,6 +292,13 @@ div.b {
      <label for="baseline_inf_pct">Baseline Inf %:</label>
     <input type="number" name="baseline_inf_pct" value=2.25 min="0" max="10" style="width: 50px;">
 
+</fieldset> 
+<br>
+
+
+<fieldset>
+  <legend><b> Misc Parameters </b> </legend>
+    
     <label for="medb_flag">Enroll Medicare B:</label>
          <select name="medb_flag" id="medb_flag">
            <option value="NO">No</option>
@@ -269,7 +306,10 @@ div.b {
          </select>
 
    <label for="qcd_pct">QCD %:</label>
-       <input type="number" name="qcd_pct" value=3 min="0" max="10" style="width: 50px;">
+       <input type="number" name="qcd_pct" value=0 min="0" max="10" style="width: 50px;">
+
+   <label for="early_death_pct">Early Death Budget %:</label>
+       <input type="number" name="early_death_pct" value=75 min="50" max="100" style="width: 50px;">
 
    <label for="rpt_fmt_flag">Report Format:</label>
          <select name="rpt_fmt_flag" id="rpt_fmt_flag">
@@ -301,8 +341,11 @@ div.b {
    fFrm_Plan_Id = form.plan_id.value;
 
    form.plan_dsc.value     = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"));
-   form.you_cur_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"));
-   form.spo_cur_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"));
+   form.you_birth_yr.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_birth_yr"));
+   form.you_birth_mth.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_you_birth_mth"));
+
+   form.spo_birth_yr.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_yr"));
+   form.spo_birth_mth.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_mth"));
 
    form.roth_draw_begin_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"));
 
@@ -320,12 +363,16 @@ div.b {
    form.brkrg_cost_basis_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"));
    form.home_equity_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_home_equity_amt"));
 //
-   form.gogo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"));
-   form.slowgo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"));
-   form.nogo_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"));
+   form.trans_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_trans_budget_amt"));
+   form.full_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_full_budget_amt"));
+   
    form.last3_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"));
    form.mortgage_budget_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"));
    form.mortgage_end_age.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"));
+
+   form.gogo_reduce_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_gogo_reduce_pct"));
+   form.nogo_reduce_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_nogo_reduce_pct"));
+   form.slogo_reduce_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_slogo_reduce_pct"));
 
    form.spo_ira_start_bal_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"));
    form.spo_pension_amt.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"));
@@ -375,6 +422,9 @@ div.b {
 
    form.qcd_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_qcd_pct"));
    if (form.qcd_pct.value == "") {form.qcd_pct.value = 0;}
+
+   form.early_death_pct.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_early_death_pct"));
+   if (form.early_death_pct.value == "") {form.early_death_pct.value = 75;}
 
    form.rpt_fmt_flag.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"));
   }  
@@ -426,11 +476,29 @@ div.b {
       error_message = '';
       error_message1 = '<p> Ooops.  Errors found on input</p>';
 
-      if (form.you_cur_age.value > 99) 
-          {error_message = error_message + "<p> Your Current Age must be between 20 and 99. </p> ";  }
+      if (form.you_birth_yr.value > 2100) 
+          {error_message = error_message + "<p> Your Birth Year Invalid. </p> ";  }
   
-      if (form.you_cur_age.value < 20) 
-        {error_message = error_message + "<p> Your Current Age must be between 20 and 99. </p> "; }
+      if (form.you_birth_yr.value < 1900) 
+        {error_message = error_message + "<p> Your Birth Year Invalid. </p> "; }
+      
+      if (form.you_birth_mth.value > 12) 
+          {error_message = error_message + "<p> Your Birth Month Invalid. </p> ";  }
+  
+      if (form.you_birth_mth.value < 01) 
+        {error_message = error_message + "<p> Your Birth Month Invalid </p> "; }
+
+//      if (form.spo_birth_yr.value > 2100) 
+//          {error_message = error_message + "<p> Spouse Birth Year Invalid. </p> ";  }
+  
+//      if (form.spo_birth_yr.value < 1900) 
+//        {error_message = error_message + "<p> Spouse Birth Year Invalid. </p> "; }
+      
+//      if (form.spo_birth_mth.value > 12) 
+//          {error_message = error_message + "<p> Spouse Birth Month Invalid. </p> ";  }
+  
+//      if (form.spo_birth_mth.value < 01) 
+//        {error_message = error_message + "<p> Spouse Birth Month Invalid </p> "; }
 
       if (form.roth_draw_begin_age.value > 99) 
           {error_message = error_message + "<p> Roth Draw Begin Age must be between 20 and 99. </p> ";  }
@@ -498,12 +566,6 @@ div.b {
       if (form.you_pension_survivor_pct.value > 100) 
          {error_message = error_message + "<p> Your Pension Survivor Percent must be between 0 and 100.  </p>"; }
 
-      if (form.spo_cur_age.value > 0)
-          {error_message = edit_spouse_form(form, error_message);}
-
-        if (form.spo_cur_age.value == 0)
-             {error_message = edit_spouse_form2(form, error_message);}
-
        if (form.brkrg_start_bal_amt.value < 0) 
          {error_message = error_message + "<p> Brokerage Balance must be between 0 and 1000000000.  </p>"; }
       
@@ -552,23 +614,20 @@ div.b {
        if (form.hsa_ann_dep_amt.value > 1000000000) 
          {error_message = error_message + "<p> HSA Annual Deposit must be between 0 and 1000000000.  </p>"; }
       
-       if (form.gogo_budget_amt.value < 0) 
+       if (form.trans_budget_amt.value < 0) 
+         {error_message = error_message + "<p> Trans Budget must be between 0 and 1000000000.  </p>"; }
+      
+       if (form.trans_budget_amt.value > 1000000000) 
+         {error_message = error_message + "<p> Trans Budget must be between 0 and 1000000000.  </p>"; }
+
+       if (form.full_budget_amt.value < 0) 
          {error_message = error_message + "<p> Go Go Budget must be between 0 and 1000000000.  </p>"; }
       
-       if (form.gogo_budget_amt.value > 1000000000) 
+       if (form.full_budget_amt.value > 1000000000) 
          {error_message = error_message + "<p> Go Go Budget must be between 0 and 1000000000.  </p>"; }
-      
-       if (form.slowgo_budget_amt.value < 0) 
-         {error_message = error_message + "<p> Slow Go Budget must be between 0 and 1000000000.  </p>"; }
-      
-       if (form.slowgo_budget_amt.value > 1000000000) 
-         {error_message = error_message + "<p> Slow Go Budget must be between 0 and 1000000000.  </p>"; }
-      
-       if (form.nogo_budget_amt.value < 0) 
-         {error_message = error_message + "<p> No Go Budget must be between 0 and 1000000000.  </p>"; }
-      
-       if (form.nogo_budget_amt.value > 1000000000) 
-         {error_message = error_message + "<p> No Go Budget must be between 0 and 1000000000.  </p>"; }
+
+       
+       
       
        if (form.last3_budget_amt.value < 0) 
          {error_message = error_message + "<p> Last 3 Budget must be between 0 and 1000000000.  </p>"; }
@@ -658,12 +717,7 @@ div.b {
 <script type="text/javascript">
  function edit_spouse_form (form, error_message) {
 
-      if (form.spo_cur_age.value > 99) 
-          {error_message = error_message + "<p> Spouse Current Age must be between 20 and 99. </p> ";  }
-  
-      if (form.spo_cur_age.value < 20) 
-        {error_message = error_message + "<p> Spouse Current Age must be between 20 and 99. </p> "; }
-      
+            
       if (form.spo_retire_age.value > 99) 
         {error_message = error_message + "<p> Spouse Retire Age must be between 20 and 99. </p>"; }
   
@@ -806,11 +860,14 @@ div.b {
 
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_plan_id"), form.plan_id.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"), form.plan_dsc.value);
-   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"), form.you_cur_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_birth_yr"), form.you_birth_yr.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_you_birth_mth"), form.you_birth_mth.value);
 
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"), form.roth_draw_begin_age.value);
    
-   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"), form.spo_cur_age.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_yr"), form.spo_birth_yr.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_mth"), form.spo_birth_mth.value);
+
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_begin_age"), form.spo_pension_begin_age.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_inf_pct"), form.spo_pension_inf_pct.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_survivor_pct"), form.spo_pension_survivor_pct.value);
@@ -825,14 +882,17 @@ div.b {
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"), form.brkrg_cost_basis_amt.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_home_equity_amt"), form.home_equity_amt.value);
 
-   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"), form.gogo_budget_amt.value);
-   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"), form.slowgo_budget_amt.value);
-   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"), form.nogo_budget_amt.value);
-
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_trans_budget_amt"), form.trans_budget_amt.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_full_budget_amt"), form.full_budget_amt.value);
+   
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"), form.last3_budget_amt.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"), form.mortgage_budget_amt.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"), form.mortgage_end_age.value);
 
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_gogo_reduce_pct"), form.gogo_reduce_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_nogo_reduce_pct"), form.nogo_reduce_pct.value);
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_slogo_reduce_pct"), form.slogo_reduce_pct.value);
+   
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"), form.spo_ira_start_bal_amt.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"), form.spo_pension_amt.value);
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_spo_socsec_amt"), form.spo_socsec_amt.value);
@@ -873,6 +933,8 @@ div.b {
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_baseline_inf_pct"), form.baseline_inf_pct.value);
 
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_qcd_pct"), form.qcd_pct.value);
+
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_early_death_pct"), form.early_death_pct.value);
 
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"), form.rpt_fmt_flag.value);
 
@@ -927,11 +989,16 @@ div.b {
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_plan_id"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_plan_dsc"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_cur_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_birth_yr"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_you_birth_mth"))
 
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_roth_draw_begin_age"));
    
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_cur_age"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_begin_age"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_yr"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_birth_mth"))
+
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_inf_pct"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_survivor_pct"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_retire_age"));
@@ -945,13 +1012,18 @@ div.b {
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_brkrg_cost_basis_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_home_equity_amt"));
 
-   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_gogo_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_trans_budget_amt"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_full_budget_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_slowgo_budget_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_nogo_budget_amt"));
 
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_last3_budget_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_mortgage_budget_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_mortgage_end_age"));
+
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_gogo_reduce_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_slogo_reduce_pct"));
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_nogo_reduce_pct"));
 
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_ira_start_bal_amt"));
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_spo_pension_amt"));
@@ -995,6 +1067,8 @@ div.b {
 
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_qcd_pct"));
 
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_early_death_pct"));
+
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"));
 
 
@@ -1032,12 +1106,25 @@ div.b {
 
     fFrm_QCD_Pct = form.qcd_pct.value / 100;
 
+    fFrm_Early_Death_Pct = form.early_death_pct.value / 100;
+
     fFrm_Rpt_Fmt_Flg = form.rpt_fmt_flag.value;
 
-    fFrm_You_Current_Age           = form.you_cur_age.value * 1;
+    fFrm_You_Birth_Yr              = form.you_birth_yr.value * 1;   
+    fFrm_You_Current_Age           = fCurrent_Year - fFrm_You_Birth_Yr;
+    fFrm_You_Birth_Mth              = form.you_birth_mth.value * 1;  
+
+
     fFrm_You_Retire_Age            = form.you_retire_age.value * 1;
 
-    fFrm_Spo_Current_Age           = form.spo_cur_age.value * 1;
+    fFrm_Spo_Birth_Yr              = form.spo_birth_yr.value * 1;   
+    
+    fFrm_Spo_Current_Age = 0;
+    if (fFrm_Spo_Birth_Yr > 0)
+        {fFrm_Spo_Current_Age           = fCurrent_Year - fFrm_Spo_Birth_Yr;}
+
+    fFrm_Spo_Birth_Mth              = form.spo_birth_mth.value * 1;  
+
     fFrm_Spo_Retire_Age            = form.spo_retire_age.value * 1;
 
     fFrm_You_Retire_End_Age                  = form.you_retire_end_age.value * 1;
@@ -1085,13 +1172,16 @@ div.b {
     fFrm_You_SocSec_Age   = form.you_socsec_age.value * 1;
     fFrm_Spo_SocSec_Age   = form.spo_socsec_age.value * 1; 
 
-    fFrm_GoGo_Budget_Amt = form.gogo_budget_amt.value * 1;
-    fFrm_SlowGo_Budget_Amt = form.slowgo_budget_amt.value * 1;
-    fFrm_NoGo_Budget_Amt = form.nogo_budget_amt.value * 1;
+    fFrm_Trans_Budget_Amt = form.trans_budget_amt.value * 1;
+    fFrm_Full_Budget_Amt = form.full_budget_amt.value * 1;
     fFrm_Last3_Budget_Amt = form.last3_budget_amt.value * 1;
       
     fFrm_Mortgage_Budget_Amt = form.mortgage_budget_amt.value * 1;
     fFrm_Mortgage_End_Age = form.mortgage_end_age.value * 1;
+
+    fFrm_GoGo_Reduce_Pct = form.gogo_reduce_pct.value / 100;
+    fFrm_SloGo_Reduce_Pct = form.slogo_reduce_pct.value / 100;
+    fFrm_NoGo_Reduce_Pct = form.nogo_reduce_pct.value / 100;
 
     fYou_Nbr_Years = fFrm_You_Retire_End_Age - fFrm_You_Current_Age;
     fSpouse_Nbr_Years = fFrm_Spo_Retire_End_Age - fFrm_Spo_Current_Age;	
@@ -1146,9 +1236,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     fInfAdj_You_SocSec_Amt   = fFrm_You_SocSec_Amt;
     fInfAdj_Spo_SocSec_Amt   = fFrm_Spo_SocSec_Amt;
 
-    fInfAdj_GoGo_Budget_Amt = fFrm_GoGo_Budget_Amt;
-    fInfAdj_SlowGo_Budget_Amt = fFrm_SlowGo_Budget_Amt;
-    fInfAdj_NoGo_Budget_Amt = fFrm_NoGo_Budget_Amt;
+    fInfAdj_Trans_Budget_Amt = fFrm_Trans_Budget_Amt;
+    fInfAdj_Full_Budget_Amt = fFrm_Full_Budget_Amt;
+    
     fInfAdj_Last3_Budget_Amt = fFrm_Last3_Budget_Amt;
 
     fInfAdj_Home_Equity_Amt = fFrm_Home_Equity_Amt;
@@ -1258,12 +1348,18 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //*********************************************************************************************
 //* if still alive and greater than social security start age, include social security benefit
 //*********************************************************************************************
-          if (fYou_Age >= fFrm_You_SocSec_Age)
+          if (fYou_Age > fFrm_You_SocSec_Age)
                 {fYou_SocSec_Amt = fInfAdj_You_SocSec_Amt;}
           
+          if (fYou_Age == fFrm_You_SocSec_Age)
+                {fYou_SocSec_Amt = Math.round(fInfAdj_You_SocSec_Amt * ((13 - fFrm_You_Birth_Mth) / 12));}
+                 
           if(fFrm_Spo_Current_Age > 0)
-             {if (fSpo_Age >= fFrm_Spo_SocSec_Age) 
-                 {fSpo_SocSec_Amt = fInfAdj_Spo_SocSec_Amt;}}
+             {if (fSpo_Age > fFrm_Spo_SocSec_Age) 
+                 {fSpo_SocSec_Amt = fInfAdj_Spo_SocSec_Amt;}
+              if (fSpo_Age == fFrm_Spo_SocSec_Age)
+                {fSpo_SocSec_Amt = Math.round(fInfAdj_Spo_SocSec_Amt * ((13 - fFrm_Spo_Birth_Mth) / 12));}
+             }
               
 //****************************************************************************************************
 //* if one pasess away, remaining person gets greater of your social security or spouse social security.
@@ -1278,9 +1374,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //****************************************************************************************************
 //* if simulation includes a spouse and if one has passed away mid scenario, budget will be reduced to 75%
 //*****************************************************************************************************     
-          fBudget_Adj_Pct = cBudget_Full * 1;  
-          if (fFrm_Spo_Current_Age > 0 && fSpo_Age > fFrm_Spo_Retire_End_Age) {fBudget_Adj_Pct = cBudget_Single_Adj * 1;}
-          if (fYou_Age > fFrm_You_Retire_End_Age) {fBudget_Adj_Pct = cBudget_Single_Adj * 1;}
+          fBudget_Adj_Pct = 1;  
+          if (fFrm_Spo_Current_Age > 0 && fSpo_Age > fFrm_Spo_Retire_End_Age) {fBudget_Adj_Pct = fFrm_Early_Death_Pct * 1;}
+          if (fYou_Age > fFrm_You_Retire_End_Age) {fBudget_Adj_Pct = fFrm_Early_Death_Pct * 1;}
 
 //*******************************************************************************************
 //* calculate medb premium.  cannot do for year 1 of scenario because need previous year adjusted gross
@@ -1322,6 +1418,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          fTotal_Need_Amt = 0;
          fUse_Mortgage_Budget_Amt = 0;
          fRetired_Flag = "NO";
+         fTrans_Flag = "NO";
     
          if (fFrm_Spo_Current_Age > 0)
               {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
@@ -1330,25 +1427,41 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          if (fFrm_Spo_Current_Age == 0)
               {if (fYou_Age >= fFrm_You_Retire_Age) 
                  {fRetired_Flag = "YES";}}
-             
-         if (fRetired_Flag == "YES")
+
+        if (fFrm_Spo_Current_Age > 0)
+              {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age < fFrm_Spo_Retire_Age) 
+                 {fTrans_Flag = "YES";}}
+        
+        if (fFrm_Spo_Current_Age > 0)
+              {if (fYou_Age < fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
+                 {fTrans_Flag = "YES";}}
+
+//        fVPW_Lookup = Math.max(fYou_Age, fSpo_Age) - 40;    
+//        fVPW_Factor = vpwtable[fVPW_Lookup].factor;
+//        fVPW_Draw_Amt = 
+//           Math.round((fYou_IRA_Beg_Bal_Amt + fSpo_IRA_Beg_Bal_Amt + fBrkrg_Beg_Bal_Amt + fRoth_Beg_Bal_Amt + fHSA_Beg_Bal_Amt) * fVPW_Factor);
+              
+        
+        if (fRetired_Flag == "YES")
              {
+              
                if (fYou_Age <= fMortgage_End_Age) {fUse_Mortgage_Budget_Amt = fMortgage_Budget_Amt;}
                
-               fInfAdj_Budget_Amt = fInfAdj_GoGo_Budget_Amt;
-               if (fYou_Age >= 75) {fInfAdj_Budget_Amt = fInfAdj_SlowGo_Budget_Amt;}
-               if (fYou_Age >= 85) {fInfAdj_Budget_Amt = fInfAdj_NoGo_Budget_Amt;}
+               fInfAdj_Budget_Amt = fInfAdj_Full_Budget_Amt;
+
                if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fInfAdj_Budget_Amt = fInfAdj_Last3_Budget_Amt;}
                if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fInfAdj_Budget_Amt = fInfAdj_Last3_Budget_Amt;}
                
                fInfAdj_Budget_Amt = Math.round(fInfAdj_Budget_Amt * fBudget_Adj_Pct);  // make adjustment if one if deceased
+        
+               
                fTotal_Need_Amt = fInfAdj_Budget_Amt + fUse_Mortgage_Budget_Amt + fBonus_Amt + fInc_Tax_Amt + fCapGains_Tax_Amt + fMedb_Premium_Amt 
                                  - fYou_SocSec_Amt - fSpo_SocSec_Amt 
                                  - fUse_You_Pension_Amt - fUse_Spo_Pension_Amt;
             }
 
 
-        
+        if (fTrans_Flag == "YES") {fTotal_Need_Amt = fInfAdj_Trans_Budget_Amt;}
 //***********************************************************
 //* calculate qualified charitable distribution deduction
 //***********************************************************
@@ -1437,11 +1550,16 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //****************************************************************************
     
         fFTB_Amt = 0;
+        fYou_IRA_FTB_Draw_Amt = 0;                                                                                                        
         
-        if (fRemain_Need_Amt > 0 && fFrm_Pre_Roth_FTB_Pct != 0 && fYou_Age >= fFrm_Roth_Draw_Begin_Age)
-           {fFTB_Amt = calc_ftb_amt(fExemptions, fFrm_Pre_Roth_FTB_Pct, fYou_RMD_Draw_Amt, fSpo_RMD_Draw_Amt, fPension_Amt, fYou_Age, fSpo_Age, fSocSec_Total_Amt,fPotential_QCD_Amt);}
-        
-        
+//      if (fRemain_Need_Amt > 0 && fFrm_Pre_Roth_FTB_Pct != 0 && fYou_Age >= fFrm_Roth_Draw_Begin_Age)
+         if (fRemain_Need_Amt > 0 && fRetired_Flag == "YES")
+           {
+            fFTB_Amt = calc_ftb_amt(fExemptions, fFrm_Pre_Roth_FTB_Pct, fYou_RMD_Draw_Amt, fSpo_RMD_Draw_Amt, fPension_Amt, fYou_Age, fSpo_Age, fSocSec_Total_Amt,fPotential_QCD_Amt);
+            fYou_IRA_FTB_Draw_Amt = Math.min(fFTB_Amt, fYou_IRA_End_Bal_Amt1);
+            fYou_IRA_End_Bal_Amt1 -=  fYou_IRA_FTB_Draw_Amt;
+            fRemain_Need_Amt -= fYou_IRA_FTB_Draw_Amt; 
+          }
 //***************************************************************************
 //* after filling the tax bracket, see how much is neded from roth. 
 //****************************************************************************
@@ -1450,10 +1568,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
                                                    
           if (fYou_Age >= fFrm_Roth_Draw_Begin_Age && fRemain_Need_Amt > 0) 
             {
-             fRoth_Draw_Amtx = Math.min(fRemain_Need_Amt, fRoth_Beg_Bal_Amt);
-             fRoth_Draw_Amt0 = Math.max(fRoth_Draw_Amtx - fFTB_Amt,0);
+               fRoth_Draw_Amt0 = Math.min(fRemain_Need_Amt - fFTB_Amt, fRoth_Beg_Bal_Amt);
+               if(fRoth_Draw_Amt0 < 0) {fRoth_Draw_Amt0 = 0;};
             }
-        
+
+                                            
           fRoth_End_Bal_Amt0 = fRoth_Beg_Bal_Amt - fRoth_Draw_Amt0;           
           fRemain_Need_Amt = fRemain_Need_Amt - fRoth_Draw_Amt0;    
         
@@ -1463,7 +1582,9 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 
           fYou_IRA_Addl_Draw_Amt = Math.min(fRemain_Need_Amt, fYou_IRA_End_Bal_Amt1);
           fYou_IRA_End_Bal_Amt1 = fYou_IRA_End_Bal_Amt1 - fYou_IRA_Addl_Draw_Amt; 
-          fRemain_Need_Amt = fRemain_Need_Amt - fYou_IRA_Addl_Draw_Amt;    
+          fRemain_Need_Amt = fRemain_Need_Amt - fYou_IRA_Addl_Draw_Amt;  
+                                      
+          fYou_IRA_Addl_Draw_Amt += fYou_IRA_FTB_Draw_Amt;
                    
           fSpo_IRA_Addl_Draw_Amt = Math.min(fRemain_Need_Amt, fSpo_IRA_End_Bal_Amt1);
           fSpo_IRA_End_Bal_Amt1 = fSpo_IRA_End_Bal_Amt1 - fSpo_IRA_Addl_Draw_Amt;
@@ -1846,10 +1967,11 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          fCapGains_Tax_Amt = fCurYr_CapGains_Tax_Amt;                   
                    
 //*************************************************************************************
-//* calculate bonus amount
+//* calculate bonus amount.  terminate bonus if early death.
 //************************************************************************************
            fBonus_Amt = 0;
-           if (fTotal_Need_Amt > 0) {fBonus_Amt = Math.round(fBas_Diff * fFrm_Bonus_Pct);}
+           if (fTotal_Need_Amt > 0 && fBudget_Adj_Pct == 1) 
+               {fBonus_Amt = Math.round(fBas_Diff * fFrm_Bonus_Pct);}
    
 //************************************************************************
 //* inflation adjustments : social security, budget, pension, tax tables 
@@ -1859,9 +1981,22 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fInfAdj_Spo_SocSec_Amt  = Math.round(fInfAdj_Spo_SocSec_Amt * (1+ratehistory[i].infrate));
           fInfAdj_Home_Equity_Amt  = Math.round(fInfAdj_Home_Equity_Amt * (1+ratehistory[i].infrate));
 
-          fInfAdj_GoGo_Budget_Amt = Math.round(fInfAdj_GoGo_Budget_Amt  * (1+ratehistory[i].infrate));
-          fInfAdj_SlowGo_Budget_Amt = Math.round(fInfAdj_SlowGo_Budget_Amt  * (1+ratehistory[i].infrate));
-          fInfAdj_NoGo_Budget_Amt = Math.round(fInfAdj_NoGo_Budget_Amt  * (1+ratehistory[i].infrate));
+          fReduce_Pct = 0.00;
+          if (fRetired_Flag == "YES")
+             {
+              fReduce_Pct = fFrm_GoGo_Reduce_Pct;
+              if (fYou_Age >= 75) {fReduce_Pct = fFrm_SloGo_Reduce_Pct;}
+              if (fYou_Age >= 85) {fReduce_Pct = fFrm_NoGo_Reduce_Pct;}
+             }
+           
+          
+          fInfAdj_Trans_Budget_Amt = Math.round(fInfAdj_Trans_Budget_Amt  * (1+ratehistory[i].infrate));
+        
+//          fInfAdj_Full_Budget_Amt = Math.round(fInfAdj_Full_Budget_Amt - (fInfAdj_Full_Budget_Amt * fReduce_Pct));
+          
+          fAdjust_Pct = 1+ratehistory[i].infrate - fReduce_Pct;
+          fInfAdj_Full_Budget_Amt = Math.round(fInfAdj_Full_Budget_Amt  * fAdjust_Pct);
+          
           fInfAdj_Last3_Budget_Amt = Math.round(fInfAdj_Last3_Budget_Amt  * (1+ratehistory[i].infrate));
 
           if (fFrm_You_Pension_Begin_Age > 0 && fYou_Age >= fFrm_You_Pension_Begin_Age)  
@@ -2088,7 +2223,7 @@ function closeWin() {
                          '<th style="background-color:#4d7e80">Sp</th> ' +
                          '<th style="background-color:#4da6ff">Budget</th> ' +
                          '<th style="background-color:#4da6ff">Mtge</th> ' +
-                         '<th style="background-color:#4da6ff">Bonus</th> ' +
+                         '<th style="background-color:#4da6ff">Variable</th> ' +
                          
                          '<th style="background-color:#4da6ff">Inc Tax</th> ' + 
                          '<th style="background-color:#4da6ff">Cap Gains Tax</th> '; 
@@ -2115,7 +2250,7 @@ function closeWin() {
                           '<th style="background-color:#666699">Brkrg</th> ' +
                           '<th style="background-color:#666699">Roth</th> ' +
                           '<th style="background-color:#666699">HSA</th> ' +
-                          '<th style="background-color:#666699">Home</th> ' +
+                          '<th style="background-color:#666699">Home Equity</th> ' +
           
           
 // summary account info          
@@ -2423,8 +2558,8 @@ function closeWin() {
                     '<th style="background-color:#000000">Scenario Status</th> ' +
                     '<th style="background-color:#000000">Simulation Result</th> ' +
                     '<th style="background-color:#000000">Budget Spent</th> ' +
-                    '<th style="background-color:#000000">Bonus Earned</th> ' +
-                    '<th style="background-color:#000000">Avg Bonus </th> ' +
+                    '<th style="background-color:#000000">Variable Draw</th> ' +
+                    '<th style="background-color:#000000">Avg Variable </th> ' +
                     '<th style="background-color:#000000">Last Year Withdraw </th> ' +
                     '<th style="background-color:#000000">End Bal </th> ' +
                     '<th style="background-color:#000000">End Home Equity </th> ' +
@@ -2540,7 +2675,7 @@ function closeWin() {
 
      fscenario_summary_len = scenario_summary.length;
 
-     csv = "Scenario Year, Simulation Result, Budget Spent, Bonus Earned, Avg Bonus, Last Year Budget, End Bal, Home Equity, First Year Home Equity Years, Years Remain, Fed Tax, Score \r\n";   
+     csv = "Scenario Year, Simulation Result, Budget Spent, Variable Draw, Avg Variable Draw, Last Year Budget, End Bal, Home Equity, First Year Home Equity Years, Years Remain, Fed Tax, Score \r\n";   
      
      for (var i=0; i<fscenario_summary_len; i++)
        
@@ -2604,9 +2739,9 @@ function closeWin() {
                " \r\n" ;
                          
       csv = csv +  
-               "Scenario, Year, You, Spouse, Budget, Mortgage,Bonus, Inc Tax, Cap Gains Tax, Med B Prem, You Soc Sec, " +
+               "Scenario, Year, You, Spouse, Budget, Mortgage,Variable, Inc Tax, Cap Gains Tax, Med B Prem, You Soc Sec, " +
                "Spouse Soc Sec, You Pension, Spouse Pension, Withdraw From Savings, You IRA, Spouse IRA," +
-               "Brokerage, Roth, HSA, Home, Beg Bal, Withdraw, Gain(Loss), Deposit, End Bal, Home Equity," +
+               "Brokerage, Roth, HSA, Home Equity, Beg Bal, Withdraw, Gain(Loss), Deposit, End Bal, Home Equity," +
                "Baseline, Stock Ret, Bond Ret, Inf Rate," +
                "Beg Bal, Draw RMD ,Draw Addl, Gain / Loss, Deposit, End Bal," +
                "Beg Bal, Draw RMD, Draw Addl, Gain / Loss, Deposit, End Bal," +
@@ -2844,14 +2979,13 @@ function calc_rmd_age(fCurrent_Year, fCurrent_Age) {
 // Otherwise, must start taking RMD age 72
 //********************************************************          
           
-    fRMD_Age = 72;
     fYear_Born = fCurrent_Year - fCurrent_Age;
-    fAge_2022 = 2022 - fYear_Born;
-    fAge_2032 = 2032 - fYear_Born;
+    fRMD_Age = 75;
     
-    if (fAge_2022 <= 71) {fRMD_Age = 73;}
-    if (fAge_2032 <= 73) {fRMD_Age = 75;}
-    
+    if (fYear_Born <= 1949) {fRMD_Age = 70};
+    if (fYear_Born >= 1950 && fYear_Born <= 1950) {fRMD_Age = 72};
+    if (fYear_Born >= 1951 && fYear_Born <= 1959) {fRMD_Age = 73};
+
     return fRMD_Age;
 }
 </script>
@@ -3155,10 +3289,6 @@ function calc_medb_premium (fAdjusted_Gross_Amt, fExemptions, fYou_Age, fYou_Ret
 
 var myWindow;
 
-// var socsec_taxable_pct = .85;
-var cBudget_Single_Adj = .75;
-var cBudget_Full = 1;
- 
 var stddeductmarried = 27700;
 var stddeductsingle = 13850;
 
@@ -3261,6 +3391,68 @@ rmdtable[43]={age:115,factor:2.6};
 rmdtable[44]={age:116,factor:2.4};
 rmdtable[45]={age:117,factor:2.1};
 
+var vpwtable = new Array( );    
+vpwtable[0]={age:40, factor:0.036};
+vpwtable[1]={age:41, factor:0.036};
+vpwtable[2]={age:42, factor:0.037};
+vpwtable[3]={age:43, factor:0.037};
+vpwtable[4]={age:44, factor:0.037};
+vpwtable[5]={age:45, factor:0.037};
+vpwtable[6]={age:46, factor:0.038};
+vpwtable[7]={age:47, factor:0.038};
+vpwtable[8]={age:48, factor:0.038};
+vpwtable[9]={age:49, factor:0.038};
+vpwtable[10]={age:50, factor:0.039};
+vpwtable[11]={age:51, factor:0.039};
+vpwtable[12]={age:52, factor:0.039};
+vpwtable[13]={age:53, factor:0.04};
+vpwtable[14]={age:54, factor:0.04};
+vpwtable[15]={age:55, factor:0.041};
+vpwtable[16]={age:56, factor:0.041};
+vpwtable[17]={age:57, factor:0.041};
+vpwtable[18]={age:58, factor:0.042};
+vpwtable[19]={age:59, factor:0.042};
+vpwtable[20]={age:60, factor:0.043};
+vpwtable[21]={age:61, factor:0.043};
+vpwtable[22]={age:62, factor:0.044};
+vpwtable[23]={age:63, factor:0.045};
+vpwtable[24]={age:64, factor:0.045};
+vpwtable[25]={age:65, factor:0.046};
+vpwtable[26]={age:66, factor:0.047};
+vpwtable[27]={age:67, factor:0.048};
+vpwtable[28]={age:68, factor:0.048};
+vpwtable[29]={age:69, factor:0.049};
+vpwtable[30]={age:70, factor:0.05};
+vpwtable[31]={age:71, factor:0.051};
+vpwtable[32]={age:72, factor:0.053};
+vpwtable[33]={age:73, factor:0.054};
+vpwtable[34]={age:74, factor:0.055};
+vpwtable[35]={age:75, factor:0.057};
+vpwtable[36]={age:76, factor:0.058};
+vpwtable[37]={age:77, factor:0.06};
+vpwtable[38]={age:78, factor:0.062};
+vpwtable[39]={age:79, factor:0.064};
+vpwtable[40]={age:80, factor:0.066};
+vpwtable[41]={age:81, factor:0.069};
+vpwtable[42]={age:82, factor:0.071};
+vpwtable[43]={age:83, factor:0.074};
+vpwtable[44]={age:84, factor:0.078};
+vpwtable[45]={age:85, factor:0.082};
+vpwtable[46]={age:86, factor:0.087};
+vpwtable[47]={age:87, factor:0.092};
+vpwtable[48]={age:88, factor:0.098};
+vpwtable[49]={age:89, factor:0.106};
+vpwtable[50]={age:90, factor:0.114};
+vpwtable[51]={age:91, factor:0.125};
+vpwtable[52]={age:92, factor:0.139};
+vpwtable[53]={age:93, factor:0.156};
+vpwtable[54]={age:94, factor:0.18};
+vpwtable[55]={age:95, factor:0.213};
+vpwtable[56]={age:96, factor:0.262};
+vpwtable[57]={age:97, factor:0.344};
+vpwtable[58]={age:98, factor:0.508};
+vpwtable[59]={age:99, factor:1};
+
 var ratehistory = new Array( );
 ratehistory[0]={year:1,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[1]={year:2,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
@@ -3361,158 +3553,158 @@ ratehistory[95]={year:96,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[96]={year:97,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[97]={year:98,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[98]={year:99,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
-ratehistory[99]={year:1871,stockret:0.153153153153153,bondret:0.0212553637532494,stret:0.001,infrate:0.0152703841869837};
-ratehistory[100]={year:1872,stockret:0.113168724279835,bondret:0.0288240237798081,stret:0.001,infrate:0.0225546197715387};
-ratehistory[101]={year:1873,stockret:-0.0234833659491194,bondret:0.0774599629857013,stret:0.001,infrate:-0.0441205189536444};
-ratehistory[102]={year:1874,stockret:0.0450643776824033,bondret:0.0976598620842785,stret:0.001,infrate:-0.0692256608835582};
-ratehistory[103]={year:1875,stockret:0.0484581497797356,bondret:0.057911632751384,stret:0.001,infrate:-0.0578560055368655};
-ratehistory[104]={year:1876,stockret:-0.136771300448431,bondret:0.052027106248068,stret:0.001,infrate:0.00877373733183062};
-ratehistory[105]={year:1877,stockret:-0.0309859154929577,bondret:0.0469414400350844,stret:0.001,infrate:-0.156524529005441};
-ratehistory[106]={year:1878,stockret:0.156923076923077,bondret:0.0560331725343479,stret:0.001,infrate:-0.103088177941891};
-ratehistory[107]={year:1879,stockret:0.483240223463687,bondret:0.0308435241791622,stret:0.001,infrate:0.20689993389814};
-ratehistory[108]={year:1880,stockret:0.262230919765166,bondret:0.0518793123318672,stret:0.001,infrate:-0.0571463370791754};
-ratehistory[109]={year:1881,stockret:0.00807754442649422,bondret:0.0258369069071908,stret:0.001,infrate:0.0808075461293276};
-ratehistory[110]={year:1882,stockret:0.035472972972973,bondret:0.0276424291862264,stret:0.001,infrate:-0.018687481459799};
-ratehistory[111]={year:1883,stockret:-0.0516351118760757,bondret:0.0242199228168512,stret:0.001,infrate:-0.0761978087091533};
-ratehistory[112]={year:1884,stockret:-0.121621621621622,bondret:0.0596426626493975,stret:0.001,infrate:-0.103088177941891};
-ratehistory[113]={year:1885,stockret:0.283018867924528,bondret:0.0355393139973929,stret:0.001,infrate:-0.0344839646058768};
-ratehistory[114]={year:1886,stockret:0.115384615384615,bondret:-0.0105932769191623,stret:0.001,infrate:0};
-ratehistory[115]={year:1887,stockret:-0.00358422939068104,bondret:0.0419715580110716,stret:0.001,infrate:0.0476228036470563};
-ratehistory[116]={year:1888,stockret:0.0301318267419963,bondret:0.0450218572208278,stret:0.001,infrate:-0.0454579677735809};
-ratehistory[117]={year:1889,stockret:0.0687022900763357,bondret:0.0160906761096121,stret:0.001,infrate:-0.0476187622228839};
-ratehistory[118]={year:1890,stockret:-0.0594795539033458,bondret:0.00934040970430049,stret:0.001,infrate:0.0249998426754119};
-ratehistory[119]={year:1891,stockret:0.183884297520661,bondret:0.0684203519776777,stret:0.001,infrate:-0.0609757544980468};
-ratehistory[120]={year:1892,stockret:0.0617059891107079,bondret:-0.0555225949378768,stret:0.001,infrate:0.0779227171496126};
-ratehistory[121]={year:1893,stockret:-0.185383244206774,bondret:0.127731066308756,stret:0.001,infrate:-0.132530774527851};
-ratehistory[122]={year:1894,stockret:0.0324074074074074,bondret:0.0487013618150021,stret:0.001,infrate:-0.0416658327839196};
-ratehistory[123]={year:1895,stockret:0.0494117647058823,bondret:-0.0212513346702084,stret:0.001,infrate:0.014492039697962};
-ratehistory[124]={year:1896,stockret:0.0304449648711944,bondret:0.080550180116677,stret:0.001,infrate:-0.0285712574052278};
-ratehistory[125]={year:1897,stockret:0.199052132701422,bondret:0.0313949136081484,stret:0.001,infrate:0.0294115833230459};
-ratehistory[126]={year:1898,stockret:0.286885245901639,bondret:0.0432300601737456,stret:0.001,infrate:0.0142862367930638};
-ratehistory[127]={year:1899,stockret:0.037828947368421,bondret:0.00196844731895423,stret:0.001,infrate:0.169014169155746};
-ratehistory[128]={year:1900,stockret:0.208196721311475,bondret:0.033652131443141,stret:0.001,infrate:-0.0240972527213217};
-ratehistory[129]={year:1901,stockret:0.193776520509194,bondret:0.0147542876441459,stret:0.001,infrate:0.0246922685570026};
-ratehistory[130]={year:1902,stockret:0.0825123152709362,bondret:0.00638161543530338,stret:0.001,infrate:0.0963859211400004};
-ratehistory[131]={year:1903,stockret:-0.16903073286052,bondret:0.0441541152816623,stret:0.001,infrate:-0.0439557396033233};
-ratehistory[132]={year:1904,stockret:0.308383233532934,bondret:0.029912497920552,stret:0.001,infrate:0.0229834465802512};
-ratehistory[133]={year:1905,stockret:0.209964412811388,bondret:0.00753068514054997,stret:0.001,infrate:0};
-ratehistory[134]={year:1906,stockret:0.0091185410334349,bondret:0.00395887972979252,stret:0.001,infrate:0.0449437169931834};
-ratehistory[135]={year:1907,stockret:-0.23744769874477,bondret:0.0385349869455703,stret:0.001,infrate:-0.0215007520306443};
-ratehistory[136]={year:1908,stockret:0.381021897810219,bondret:0.069420543354555,stret:0.001,infrate:0.0329644658952528};
-ratehistory[137]={year:1909,stockret:0.161147902869757,bondret:0.000268116170742674,stret:0.001,infrate:0.106387023659985};
-ratehistory[138]={year:1910,stockret:-0.0337301587301587,bondret:0.0554753207443843,stret:0.001,infrate:-0.0673132767170651};
-ratehistory[139]={year:1911,stockret:0.034519956850054,bondret:0.0299457845122516,stret:0.001,infrate:-0.0103026741760966};
-ratehistory[140]={year:1912,stockret:0.0723684210526319,bondret:-0.00173769976795725,stret:0.001,infrate:0.0729137984925561};
-ratehistory[141]={year:1913,stockret:-0.0483870967741936,bondret:0.0684629514768394,stret:0.001,infrate:0.0204081632653061};
-ratehistory[142]={year:1914,stockret:-0.0561529271206689,bondret:0.0547145092558399,stret:0.001,infrate:0.01};
-ratehistory[143]={year:1915,stockret:0.304812834224599,bondret:0.0484786661951609,stret:0.001,infrate:0.0297029702970297};
-ratehistory[144]={year:1916,stockret:0.0857449088960345,bondret:0.0219855810711883,stret:0.001,infrate:0.125};
-ratehistory[145]={year:1917,stockret:-0.174503657262278,bondret:-0.00294963838637064,stret:0.001,infrate:0.196581196581197};
-ratehistory[146]={year:1918,stockret:0.167822468793343,bondret:0.0500912472502583,stret:0.001,infrate:0.178571428571429};
-ratehistory[147]={year:1919,stockret:0.192356687898089,bondret:-0.00668849798107463,stret:0.001,infrate:0.16969696969697};
-ratehistory[148]={year:1920,stockret:-0.137032842582106,bondret:0.0350329699241148,stret:0.001,infrate:-0.0155440414507773};
-ratehistory[149]={year:1921,stockret:0.091420534458509,bondret:0.124977016899033,stret:0.001,infrate:-0.110526315789474};
-ratehistory[150]={year:1922,stockret:0.289041095890411,bondret:0.0311212550977657,stret:0.001,infrate:-0.00591715976331353};
-ratehistory[151]={year:1923,stockret:0.0516853932584269,bondret:0.0617622484462111,stret:0.001,infrate:0.0297619047619047};
-ratehistory[152]={year:1924,stockret:0.260475651189128,bondret:0.0534598219466315,stret:0.001,infrate:0};
-ratehistory[153]={year:1925,stockret:0.252362948960303,bondret:0.0348557429858359,stret:0.001,infrate:0.0346820809248554};
-ratehistory[154]={year:1926,stockret:0.113833992094862,bondret:0.0451022875953433,stret:0.001,infrate:-0.0223463687150838};
-ratehistory[155]={year:1927,stockret:0.350689008325525,bondret:0.0218907129770603,stret:0.001,infrate:-0.0114285714285713};
-ratehistory[156]={year:1928,stockret:0.394276447844722,bondret:-0.00692794319205517,stret:0.001,infrate:-0.0115606936416185};
-ratehistory[157]={year:1929,stockret:-0.103731294283247,bondret:0.0745419978589835,stret:0.001,infrate:0};
-ratehistory[158]={year:1930,stockret:-0.274119363527636,bondret:0.0607005906548342,stret:0.001,infrate:-0.0701754385964913};
-ratehistory[159]={year:1931,stockret:-0.427719428788206,bondret:0.00440719285251874,stret:0.001,infrate:-0.10062893081761};
-ratehistory[160]={year:1932,stockret:-0.0638348708922421,bondret:0.0870618678173011,stret:0.001,infrate:-0.0979020979020979};
-ratehistory[161]={year:1933,stockret:0.585308556856514,bondret:0.0521809033951037,stret:0.001,infrate:0.0232558139534882};
-ratehistory[162]={year:1934,stockret:0.0327061598003463,bondret:0.0523179528625882,stret:0.001,infrate:0.0303030303030303};
-ratehistory[163]={year:1935,stockret:0.463713877385725,bondret:0.0366419519331466,stret:0.001,infrate:0.0147058823529413};
-ratehistory[164]={year:1936,stockret:0.331322091714451,bondret:0.0262233658815844,stret:0.001,infrate:0.0217391304347825};
-ratehistory[165]={year:1937,stockret:-0.341506631683092,bondret:0.0341906748607561,stret:0.001,infrate:0.0285714285714287};
-ratehistory[166]={year:1938,stockret:0.309261563938269,bondret:0.0421561540270421,stret:0.001,infrate:-0.0277777777777778};
-ratehistory[167]={year:1939,stockret:0.00406567339769562,bondret:0.0322804344179993,stret:0.001,infrate:0};
-ratehistory[168]={year:1940,stockret:-0.0781291072263155,bondret:0.0351036162080177,stret:0.001,infrate:0.00714285714285712};
-ratehistory[169]={year:1941,stockret:-0.10833010600515,bondret:0.00165366653835666,stret:0.001,infrate:0.0992907801418439};
-ratehistory[170]={year:1942,stockret:0.168734984385113,bondret:0.0263620239556437,stret:0.001,infrate:0.0903225806451613};
-ratehistory[171]={year:1943,stockret:0.279422196671501,bondret:0.026911648218254,stret:0.001,infrate:0.029585798816568};
-ratehistory[172]={year:1944,stockret:0.224463323156854,bondret:0.0312739459004057,stret:0.001,infrate:0.0229885057471266};
-ratehistory[173]={year:1945,stockret:0.393110437071433,bondret:0.0327490491133885,stret:0.001,infrate:0.0224719101123594};
-ratehistory[174]={year:1946,stockret:-0.0561906278487703,bondret:0.0169019779985107,stret:0.001,infrate:0.181318681318681};
-ratehistory[175]={year:1947,stockret:0.0387904527472535,bondret:0.0105224701400308,stret:0.001,infrate:0.0883720930232556};
-ratehistory[176]={year:1948,stockret:0.0195824087938391,bondret:0.025529097179551,stret:0.001,infrate:0.02991452991453};
-ratehistory[177]={year:1949,stockret:0.208917979500585,bondret:0.0282216607736968,stret:0.001,infrate:-0.020746887966805};
-ratehistory[178]={year:1950,stockret:0.300221098831054,bondret:-0.000833467706634825,stret:0.001,infrate:0.0593220338983049};
-ratehistory[179]={year:1951,stockret:0.227505355301606,bondret:0.0156403118071938,stret:0.001,infrate:0.0600000000000001};
-ratehistory[180]={year:1952,stockret:0.143807211323979,bondret:0.0165198757358595,stret:0.001,infrate:0.00754716981132075};
-ratehistory[181]={year:1953,stockret:0.00462144207441692,bondret:0.0540113281011815,stret:0.001,infrate:0.00749063670411987};
-ratehistory[182]={year:1954,stockret:0.507213750264095,bondret:0.0174280600045754,stret:0.001,infrate:-0.00743494423791824};
-ratehistory[183]={year:1955,stockret:0.264257387397203,bondret:0.00115177147146674,stret:0.001,infrate:0.00374531835205993};
-ratehistory[184]={year:1956,stockret:0.0828815841631355,bondret:-0.00536849853302352,stret:0.001,infrate:0.0298507462686568};
-ratehistory[185]={year:1957,stockret:-0.0973811055881423,bondret:0.061096103261293,stret:0.001,infrate:0.0289855072463767};
-ratehistory[186]={year:1958,stockret:0.464358287563684,bondret:-0.0254849210782948,stret:0.001,infrate:0.017605633802817};
-ratehistory[187]={year:1959,stockret:0.139932049531493,bondret:-0.00582804131571712,stret:0.001,infrate:0.0173010380622838};
-ratehistory[188]={year:1960,stockret:0.0182095695788734,bondret:0.107261707120722,stret:0.001,infrate:0.0136054421768708};
-ratehistory[189]={year:1961,stockret:0.265660887598086,bondret:0.0236384444315387,stret:0.001,infrate:0.00671140939597303};
-ratehistory[190]={year:1962,stockret:-0.0871890179016051,bondret:0.0569218178458915,stret:0.001,infrate:0.0133333333333332};
-ratehistory[191]={year:1963,stockret:0.213814486258914,bondret:0.0142372606557761,stret:0.001,infrate:0.0164473684210527};
-ratehistory[192]={year:1964,stockret:0.16349389449103,bondret:0.0389323282884954,stret:0.001,infrate:0.00970873786407767};
-ratehistory[193]={year:1965,stockret:0.142877921710299,bondret:0.00736843850475463,stret:0.001,infrate:0.0192307692307694};
-ratehistory[194]={year:1966,stockret:-0.086638802197373,bondret:0.048680106791521,stret:0.001,infrate:0.0345911949685533};
-ratehistory[195]={year:1967,stockret:0.271971083565984,bondret:-0.00116100619583429,stret:0.001,infrate:0.0303951367781155};
-ratehistory[196]={year:1968,stockret:0.14412482868446,bondret:0.0214580405208461,stret:0.001,infrate:0.0471976401179941};
-ratehistory[197]={year:1969,stockret:-0.106003158045348,bondret:-0.025619795454562,stret:0.001,infrate:0.0619718309859156};
-ratehistory[198]={year:1970,stockret:0,bondret:0.170853925006197,stret:0.001,infrate:0.0557029177718831};
-ratehistory[199]={year:1971,stockret:0.1615,bondret:0.0771976236557229,stret:0.001,infrate:0.0326633165829147};
-ratehistory[200]={year:1972,stockret:0.1684,bondret:0.0302365033660715,stret:0.001,infrate:0.0340632603406326};
-ratehistory[201]={year:1973,stockret:-0.1806,bondret:0.0358100393543043,stret:0.001,infrate:0.0870588235294118};
-ratehistory[202]={year:1974,stockret:-0.2704,bondret:0.0438722474438586,stret:0.001,infrate:0.123376623376623};
-ratehistory[203]={year:1975,stockret:0.3875,bondret:0.067164855484078,stret:0.001,infrate:0.0693641618497109};
-ratehistory[204]={year:1976,stockret:0.2676,bondret:0.113710084116097,stret:0.001,infrate:0.0486486486486486};
-ratehistory[205]={year:1977,stockret:-0.0426,bondret:0.0256956793792824,stret:0.001,infrate:0.0670103092783505};
-ratehistory[206]={year:1978,stockret:0.0749,bondret:0.016757486317392,stret:0.001,infrate:0.0901771336553945};
-ratehistory[207]={year:1979,stockret:0.2262,bondret:0.0171369094108753,stret:0.001,infrate:0.132939438700148};
-ratehistory[208]={year:1980,stockret:0.3281,bondret:0.0240185159508059,stret:0.001,infrate:0.1251629726206};
-ratehistory[209]={year:1981,stockret:-0.0365,bondret:0.0435888820300159,stret:0.001,infrate:0.0892236384704519};
-ratehistory[210]={year:1982,stockret:0.21,bondret:0.351633020317275,stret:0.001,infrate:0.0382978723404255};
-ratehistory[211]={year:1983,stockret:0.2198,bondret:0.0517051303447352,stret:0.001,infrate:0.0379098360655739};
-ratehistory[212]={year:1984,stockret:0.0451,bondret:0.131544205474741,stret:0.001,infrate:0.0394866732477788};
-ratehistory[213]={year:1985,stockret:0.3217,bondret:0.215784954385898,stret:0.001,infrate:0.0379867046533713};
-ratehistory[214]={year:1986,stockret:0.1619,bondret:0.191393379350936,stret:0.001,infrate:0.010978956999085};
-ratehistory[215]={year:1987,stockret:0.0167,bondret:0.00204337892141823,stret:0.001,infrate:0.044343891402715};
-ratehistory[216]={year:1988,stockret:0.1803,bondret:0.0535977976145876,stret:0.001,infrate:0.0441941074523395};
-ratehistory[217]={year:1989,stockret:0.2886,bondret:0.133419835618274,stret:0.001,infrate:0.0464730290456432};
-ratehistory[218]={year:1990,stockret:-0.0596,bondret:0.094120096117738,stret:0.001,infrate:0.0610626486915149};
-ratehistory[219]={year:1991,stockret:0.3467,bondret:0.146132112948595,stret:0.001,infrate:0.0306427503736921};
-ratehistory[220]={year:1992,stockret:0.098,bondret:0.0778,stret:0.001,infrate:0.0290065264684554};
-ratehistory[221]={year:1993,stockret:0.1062439,bondret:0.1143246,stret:0.001,infrate:0.0274841437632136};
-ratehistory[222]={year:1994,stockret:-0.0016865,bondret:-0.0432623,stret:0.001,infrate:0.0267489711934155};
-ratehistory[223]={year:1995,stockret:0.3578528,bondret:0.2044167,stret:0.001,infrate:0.0253841015364062};
-ratehistory[224]={year:1996,stockret:0.2096198,bondret:0.0191815,stret:0.001,infrate:0.0332247557003258};
-ratehistory[225]={year:1997,stockret:0.3099493,bondret:0.0895729,stret:0.001,infrate:0.0170239596469106};
-ratehistory[226]={year:1998,stockret:0.2326422,bondret:0.1060622,stret:0.001,infrate:0.0161190328580285};
-ratehistory[227]={year:1999,stockret:0.2381314,bondret:-0.0352199,stret:0.001,infrate:0.0268456375838926};
-ratehistory[228]={year:2000,stockret:-0.1057467,bondret:0.140309,stret:0.001,infrate:0.0338680926916219};
-ratehistory[229]={year:2001,stockret:-0.1096591,bondret:0.0754739,stret:0.001,infrate:0.0155172413793103};
-ratehistory[230]={year:2002,stockret:-0.2096089,bondret:0.141481,stret:0.001,infrate:0.0237691001697793};
-ratehistory[231]={year:2003,stockret:0.313538,bondret:0.0236803,stret:0.001,infrate:0.0187949143173025};
-ratehistory[232]={year:2004,stockret:0.1251571,bondret:0.0340293,stret:0.001,infrate:0.032555615843733};
-ratehistory[233]={year:2005,stockret:0.059804,bondret:0.02316,stret:0.001,infrate:0.0341565948502365};
-ratehistory[234]={year:2006,stockret:0.1551101,bondret:0.0313647,stret:0.001,infrate:0.0254065040650406};
-ratehistory[235]={year:2007,stockret:0.0548951,bondret:0.0997935,stret:0.001,infrate:0.0408126858275519};
-ratehistory[236]={year:2008,stockret:-0.3703776,bondret:0.1332444,stret:0.001,infrate:0.000914129006456044};
-ratehistory[237]={year:2009,stockret:0.2869796,bondret:-0.0168526,stret:0.001,infrate:0.0272133112620583};
-ratehistory[238]={year:2010,stockret:0.1709371,bondret:0.0735455,stret:0.001,infrate:0.0149572352731431};
-ratehistory[239]={year:2011,stockret:0.0096204,bondret:0.0979512,stret:0.001,infrate:0.029624188448711};
-ratehistory[240]={year:2012,stockret:0.1625301,bondret:0.0267462,stret:0.001,infrate:0.0174102236874756};
-ratehistory[241]={year:2013,stockret:0.3334968,bondret:-0.0308716,stret:0.001,infrate:0.0150173561961839};
-ratehistory[242]={year:2014,stockret:0.1242925,bondret:0.0431725,stret:0.001,infrate:0.00756493269655745};
-ratehistory[243]={year:2015,stockret:0.0029369,bondret:0.0150475,stret:0.001,infrate:0.00729519786041588};
-ratehistory[244]={year:2016,stockret:0.125333112125257,bondret:0.0118665028716585,stret:0.001,infrate:0.021};
-ratehistory[245]={year:2017,stockret:0.210515319460834,bondret:0.0157377447702158,stret:0.001,infrate:0.021};
-ratehistory[246]={year:2018,stockret:-0.0528,bondret:0.0100286505951323,stret:0.001,infrate:0.019};
-ratehistory[247]={year:2019,stockret:0.3092,bondret:0.0628798680072757,stret:0.001,infrate:0.0171};
-ratehistory[248]={year:2020,stockret:0.2078,bondret:0.0820617115200492,stret:0.001,infrate:0.0125};
-ratehistory[249]={year:2021,stockret:0.2565,bondret:-0.0179,stret:0.01,infrate:0.068};
-ratehistory[250]={year:2022,stockret:-0.1951,bondret:-0.1304,stret:0.02,infrate:0.0710};
+ratehistory[99]={year:1871,stockret:0.1531,bondret:0.0504,stret:0.001,infrate:0.0152};
+ratehistory[100]={year:1872,stockret:0.1049,bondret:0.0384,stret:0.001,infrate:0.023};
+ratehistory[101]={year:1873,stockret:-0.0294,bondret:0.0635,stret:0.001,infrate:-0.044};
+ratehistory[102]={year:1874,stockret:0.0451,bondret:0.083,stret:0.001,infrate:-0.0695};
+ratehistory[103]={year:1875,stockret:0.0551,bondret:0.0854,stret:0.001,infrate:-0.0574};
+ratehistory[104]={year:1876,stockret:-0.1368,bondret:0.0561,stret:0.001,infrate:0.0083};
+ratehistory[105]={year:1877,stockret:-0.0028,bondret:0.0526,stret:0.001,infrate:-0.1563};
+ratehistory[106]={year:1878,stockret:0.16,bondret:0.0522,stret:0.001,infrate:-0.103};
+ratehistory[107]={year:1879,stockret:0.4776,bondret:0.0571,stret:0.001,infrate:0.2066};
+ratehistory[108]={year:1880,stockret:0.2505,bondret:0.0643,stret:0.001,infrate:-0.0571};
+ratehistory[109]={year:1881,stockret:-0.0016,bondret:0.0431,stret:0.001,infrate:0.0807};
+ratehistory[110]={year:1882,stockret:0.0355,bondret:0.0354,stret:0.001,infrate:-0.0186};
+ratehistory[111]={year:1883,stockret:-0.0534,bondret:0.0371,stret:0.001,infrate:-0.0761};
+ratehistory[112]={year:1884,stockret:-0.1178,bondret:0.0438,stret:0.001,infrate:-0.103};
+ratehistory[113]={year:1885,stockret:0.2972,bondret:0.0467,stret:0.001,infrate:-0.0349};
+ratehistory[114]={year:1886,stockret:0.1192,bondret:0.0223,stret:0.001,infrate:0};
+ratehistory[115]={year:1887,stockret:-0.009,bondret:0.0239,stret:0.001,infrate:0.0474};
+ratehistory[116]={year:1888,stockret:0.0339,bondret:0.0535,stret:0.001,infrate:-0.0453};
+ratehistory[117]={year:1889,stockret:0.0706,bondret:0.0368,stret:0.001,infrate:-0.0476};
+ratehistory[118]={year:1890,stockret:-0.0595,bondret:0.0191,stret:0.001,infrate:0.0249};
+ratehistory[119]={year:1891,stockret:0.1839,bondret:0.0377,stret:0.001,infrate:-0.0602};
+ratehistory[120]={year:1892,stockret:0.0581,bondret:0.0247,stret:0.001,infrate:0.0777};
+ratehistory[121]={year:1893,stockret:-0.1872,bondret:0.0413,stret:0.001,infrate:-0.1328};
+ratehistory[122]={year:1894,stockret:0.0417,bondret:0.0553,stret:0.001,infrate:-0.0409};
+ratehistory[123]={year:1895,stockret:0.0541,bondret:0.024,stret:0.001,infrate:0.0137};
+ratehistory[124]={year:1896,stockret:0.0328,bondret:0.0513,stret:0.001,infrate:-0.0284};
+ratehistory[125]={year:1897,stockret:0.1991,bondret:0.0378,stret:0.001,infrate:0.0293};
+ratehistory[126]={year:1898,stockret:0.2828,bondret:0.0529,stret:0.001,infrate:0.015};
+ratehistory[127]={year:1899,stockret:0.0362,bondret:0.0271,stret:0.001,infrate:0.1687};
+ratehistory[128]={year:1900,stockret:0.1951,bondret:0.0354,stret:0.001,infrate:-0.024};
+ratehistory[129]={year:1901,stockret:0.1909,bondret:0.0248,stret:0.001,infrate:0.0247};
+ratehistory[130]={year:1902,stockret:0.0813,bondret:0.0226,stret:0.001,infrate:0.0963};
+ratehistory[131]={year:1903,stockret:-0.1714,bondret:0.0254,stret:0.001,infrate:-0.0439};
+ratehistory[132]={year:1904,stockret:0.3144,bondret:0.0279,stret:0.001,infrate:0.0229};
+ratehistory[133]={year:1905,stockret:0.2076,bondret:0.0386,stret:0.001,infrate:0};
+ratehistory[134]={year:1906,stockret:0.003,bondret:0.0162,stret:0.001,infrate:0.0448};
+ratehistory[135]={year:1907,stockret:-0.2416,bondret:0.0217,stret:0.001,infrate:-0.0214};
+ratehistory[136]={year:1908,stockret:0.3869,bondret:0.047,stret:0.001,infrate:0.0323};
+ratehistory[137]={year:1909,stockret:0.1567,bondret:0.0264,stret:0.001,infrate:0.1075};
+ratehistory[138]={year:1910,stockret:-0.0367,bondret:0.0339,stret:0.001,infrate:-0.0677};
+ratehistory[139]={year:1911,stockret:0.0345,bondret:0.0376,stret:0.001,infrate:-0.0108};
+ratehistory[140]={year:1912,stockret:0.0713,bondret:0.008,stret:0.001,infrate:0.0734};
+ratehistory[141]={year:1913,stockret:-0.0484,bondret:0.0659,stret:0.001,infrate:0.0204};
+ratehistory[142]={year:1914,stockret:-0.049,bondret:0.0357,stret:0.001,infrate:0.01};
+ratehistory[143]={year:1915,stockret:0.3035,bondret:0.0565,stret:0.001,infrate:0.0297};
+ratehistory[144]={year:1916,stockret:0.0729,bondret:0.0273,stret:0.001,infrate:0.125};
+ratehistory[145]={year:1917,stockret:-0.187,bondret:0.0177,stret:0.001,infrate:0.1966};
+ratehistory[146]={year:1918,stockret:0.1831,bondret:0.0508,stret:0.001,infrate:0.1786};
+ratehistory[147]={year:1919,stockret:0.1975,bondret:0.0115,stret:0.001,infrate:0.1697};
+ratehistory[148]={year:1920,stockret:-0.1348,bondret:0.0412,stret:0.001,infrate:-0.0155};
+ratehistory[149]={year:1921,stockret:0.0984,bondret:0.1088,stret:0.001,infrate:-0.1106};
+ratehistory[150]={year:1922,stockret:0.2822,bondret:0.0386,stret:0.001,infrate:-0.0059};
+ratehistory[151]={year:1923,stockret:0.0494,bondret:0.0658,stret:0.001,infrate:0.0298};
+ratehistory[152]={year:1924,stockret:0.2582,bondret:0.0556,stret:0.001,infrate:0};
+ratehistory[153]={year:1925,stockret:0.2476,bondret:0.0522,stret:0.001,infrate:0.0347};
+ratehistory[154]={year:1926,stockret:0.1075,bondret:0.0629,stret:0.001,infrate:-0.0224};
+ratehistory[155]={year:1927,stockret:0.3604,bondret:0.0342,stret:0.001,infrate:-0.0114};
+ratehistory[156]={year:1928,stockret:0.4626,bondret:0.0129,stret:0.001,infrate:-0.0116};
+ratehistory[157]={year:1929,stockret:-0.0921,bondret:0.0598,stret:0.001,infrate:0};
+ratehistory[158]={year:1930,stockret:-0.2193,bondret:0.0291,stret:0.001,infrate:-0.0702};
+ratehistory[159]={year:1931,stockret:-0.4199,bondret:0.0077,stret:0.001,infrate:-0.1006};
+ratehistory[160]={year:1932,stockret:-0.0506,bondret:0.0652,stret:0.001,infrate:-0.0979};
+ratehistory[161]={year:1933,stockret:0.5571,bondret:0.0478,stret:0.001,infrate:0.0232};
+ratehistory[162]={year:1934,stockret:-0.0797,bondret:0.0571,stret:0.001,infrate:0.0304};
+ratehistory[163]={year:1935,stockret:0.5346,bondret:0.039,stret:0.001,infrate:0.0147};
+ratehistory[164]={year:1936,stockret:0.3132,bondret:0.0241,stret:0.001,infrate:0.0218};
+ratehistory[165]={year:1937,stockret:-0.3155,bondret:0.0363,stret:0.001,infrate:0.0071};
+ratehistory[166]={year:1938,stockret:0.1751,bondret:0.0416,stret:0.001,infrate:-0.0141};
+ratehistory[167]={year:1939,stockret:0.0248,bondret:0.0357,stret:0.001,infrate:-0.0071};
+ratehistory[168]={year:1940,stockret:-0.0919,bondret:0.0434,stret:0.001,infrate:0.0144};
+ratehistory[169]={year:1941,stockret:-0.09,bondret:-0.0212,stret:0.001,infrate:0.1134};
+ratehistory[170]={year:1942,stockret:0.2083,bondret:0.0238,stret:0.001,infrate:0.0764};
+ratehistory[171]={year:1943,stockret:0.2329,bondret:0.0239,stret:0.001,infrate:0.0296};
+ratehistory[172]={year:1944,stockret:0.1899,bondret:0.0336,stret:0.001,infrate:0.023};
+ratehistory[173]={year:1945,stockret:0.3832,bondret:0.0383,stret:0.001,infrate:0.0225};
+ratehistory[174]={year:1946,stockret:-0.1188,bondret:0.0171,stret:0.001,infrate:0.1813};
+ratehistory[175]={year:1947,stockret:0.0217,bondret:0.0073,stret:0.001,infrate:0.1024};
+ratehistory[176]={year:1948,stockret:0.0924,bondret:0.0349,stret:0.001,infrate:0.0126};
+ratehistory[177]={year:1949,stockret:0.1608,bondret:0.0223,stret:0.001,infrate:-0.0209};
+ratehistory[178]={year:1950,stockret:0.3246,bondret:0.0033,stret:0.001,infrate:0.0809};
+ratehistory[179]={year:1951,stockret:0.2107,bondret:0.017,stret:0.001,infrate:0.0433};
+ratehistory[180]={year:1952,stockret:0.1406,bondret:0.015,stret:0.001,infrate:0.0038};
+ratehistory[181]={year:1953,stockret:0.0264,bondret:0.0562,stret:0.001,infrate:0.0113};
+ratehistory[182]={year:1954,stockret:0.4556,bondret:0.0145,stret:0.001,infrate:-0.0075};
+ratehistory[183]={year:1955,stockret:0.2837,bondret:0.0034,stret:0.001,infrate:0.0037};
+ratehistory[184]={year:1956,stockret:0.0668,bondret:-0.0137,stret:0.001,infrate:0.0299};
+ratehistory[185]={year:1957,stockret:-0.0566,bondret:0.0633,stret:0.001,infrate:0.0362};
+ratehistory[186]={year:1958,stockret:0.3959,bondret:-0.0382,stret:0.001,infrate:0.014};
+ratehistory[187]={year:1959,stockret:0.075,bondret:-0.0102,stret:0.001,infrate:0.0104};
+ratehistory[188]={year:1960,stockret:0.0613,bondret:0.1131,stret:0.001,infrate:0.017};
+ratehistory[189]={year:1961,stockret:0.1892,bondret:0.0206,stret:0.001,infrate:0.0067};
+ratehistory[190]={year:1962,stockret:-0.0287,bondret:0.0595,stret:0.001,infrate:0.0133};
+ratehistory[191]={year:1963,stockret:0.208,bondret:0.0132,stret:0.001,infrate:0.0165};
+ratehistory[192]={year:1964,stockret:0.1566,bondret:0.0402,stret:0.001,infrate:0.0097};
+ratehistory[193]={year:1965,stockret:0.1129,bondret:0.0115,stret:0.001,infrate:0.0192};
+ratehistory[194]={year:1966,stockret:-0.0657,bondret:0.0483,stret:0.001,infrate:0.0346};
+ratehistory[195]={year:1967,stockret:0.1595,bondret:-0.0202,stret:0.001,infrate:0.0365};
+ratehistory[196]={year:1968,stockret:0.1041,bondret:0.0207,stret:0.001,infrate:0.044};
+ratehistory[197]={year:1969,stockret:-0.0844,bondret:-0.0499,stret:0.001,infrate:0.0618};
+ratehistory[198]={year:1970,stockret:0.0702,bondret:0.1822,stret:0.001,infrate:0.0529};
+ratehistory[199]={year:1971,stockret:0.1384,bondret:0.0822,stret:0.001,infrate:0.0327};
+ratehistory[200]={year:1972,stockret:0.1759,bondret:0.0255,stret:0.001,infrate:0.0365};
+ratehistory[201]={year:1973,stockret:-0.1616,bondret:0.0301,stret:0.001,infrate:0.0939};
+ratehistory[202]={year:1974,stockret:-0.2097,bondret:0.0374,stret:0.001,infrate:0.118};
+ratehistory[203]={year:1975,stockret:0.3848,bondret:0.0598,stret:0.001,infrate:0.0671};
+ratehistory[204]={year:1976,stockret:0.1096,bondret:0.1116,stret:0.001,infrate:0.0522};
+ratehistory[205]={year:1977,stockret:-0.091,bondret:0.0252,stret:0.001,infrate:0.0684};
+ratehistory[206]={year:1978,stockret:0.157,bondret:0.0115,stret:0.001,infrate:0.0928};
+ratehistory[207]={year:1979,stockret:0.1635,bondret:-0.0039,stret:0.001,infrate:0.1391};
+ratehistory[208]={year:1980,stockret:0.2507,bondret:0.0157,stret:0.001,infrate:0.1183};
+ratehistory[209]={year:1981,stockret:-0.0714,bondret:0.0279,stret:0.001,infrate:0.0839};
+ratehistory[210]={year:1982,stockret:0.287,bondret:0.3795,stret:0.001,infrate:0.0371};
+ratehistory[211]={year:1983,stockret:0.2008,bondret:0.0393,stret:0.001,infrate:0.0419};
+ratehistory[212]={year:1984,stockret:0.074,bondret:0.1325,stret:0.001,infrate:0.0353};
+ratehistory[213]={year:1985,stockret:0.2574,bondret:0.2441,stret:0.001,infrate:0.0388};
+ratehistory[214]={year:1986,stockret:0.3085,bondret:0.2289,stret:0.001,infrate:0.0146};
+ratehistory[215]={year:1987,stockret:-0.0216,bondret:-0.0258,stret:0.001,infrate:0.0405};
+ratehistory[216]={year:1988,stockret:0.1747,bondret:0.0616,stret:0.001,infrate:0.0467};
+ratehistory[217]={year:1989,stockret:0.2256,bondret:0.1454,stret:0.001,infrate:0.052};
+ratehistory[218]={year:1990,stockret:-0.0098,bondret:0.0896,stret:0.001,infrate:0.0565};
+ratehistory[219]={year:1991,stockret:0.3155,bondret:0.1499,stret:0.001,infrate:0.026};
+ratehistory[220]={year:1992,stockret:0.0754,bondret:0.0988,stret:0.001,infrate:0.0326};
+ratehistory[221]={year:1993,stockret:0.1153,bondret:0.1244,stret:0.001,infrate:0.0252};
+ratehistory[222]={year:1994,stockret:0.0103,bondret:-0.0705,stret:0.001,infrate:0.028};
+ratehistory[223]={year:1995,stockret:0.3489,bondret:0.2249,stret:0.001,infrate:0.0273};
+ratehistory[224]={year:1996,stockret:0.2697,bondret:-0.0052,stret:0.001,infrate:0.0304};
+ratehistory[225]={year:1997,stockret:0.2768,bondret:0.138,stret:0.001,infrate:0.0157};
+ratehistory[226]={year:1998,stockret:0.3124,bondret:0.1144,stret:0.001,infrate:0.0167};
+ratehistory[227]={year:1999,stockret:0.1546,bondret:-0.081,stret:0.001,infrate:0.0274};
+ratehistory[228]={year:2000,stockret:-0.0514,bondret:0.1725,stret:0.001,infrate:0.0373};
+ratehistory[229]={year:2001,stockret:-0.1342,bondret:0.0601,stret:0.001,infrate:0.0114};
+ratehistory[230]={year:2002,stockret:-0.2005,bondret:0.1238,stret:0.001,infrate:0.026};
+ratehistory[231]={year:2003,stockret:0.2822,bondret:0.0331,stret:0.001,infrate:0.0193};
+ratehistory[232]={year:2004,stockret:0.0587,bondret:0.0363,stret:0.001,infrate:0.0297};
+ratehistory[233]={year:2005,stockret:0.0991,bondret:0.0276,stret:0.001,infrate:0.0398};
+ratehistory[234]={year:2006,stockret:0.1313,bondret:0.0198,stret:0.001,infrate:0.0208};
+ratehistory[235]={year:2007,stockret:-0.0143,bondret:0.1243,stret:0.001,infrate:0.0428};
+ratehistory[236]={year:2008,stockret:-0.3519,bondret:0.1346,stret:0.001,infrate:0.0003};
+ratehistory[237]={year:2009,stockret:0.3304,bondret:-0.0659,stret:0.001,infrate:0.0263};
+ratehistory[238]={year:2010,stockret:0.1613,bondret:0.0633,stret:0.001,infrate:0.0163};
+ratehistory[239]={year:2011,stockret:0.0319,bondret:0.15,stret:0.001,infrate:0.0293};
+ratehistory[240]={year:2012,stockret:0.1588,bondret:0.0246,stret:0.001,infrate:0.016};
+ratehistory[241]={year:2013,stockret:0.2523,bondret:-0.0554,stret:0.001,infrate:0.0159};
+ratehistory[242]={year:2014,stockret:0.1324,bondret:0.109,stret:0.001,infrate:-0.0009};
+ratehistory[243]={year:2015,stockret:-0.0344,bondret:0.0017,stret:0.001,infrate:0.0138};
+ratehistory[244]={year:2016,stockret:0.2085,bondret:-0.0063,stret:0.001,infrate:0.0192};
+ratehistory[245]={year:2017,stockret:0.2463,bondret:0.0124,stret:0.001,infrate:0.0265};
+ratehistory[246]={year:2018,stockret:-0.0477,bondret:0.0155,stret:0.001,infrate:0.0155};
+ratehistory[247]={year:2019,stockret:0.278,bondret:0.1055,stret:0.001,infrate:0.0249};
+ratehistory[248]={year:2020,stockret:0.1752,bondret:0.0756,stret:0.001,infrate:0.014};
+ratehistory[249]={year:2021,stockret:0.221,bondret:-0.0453,stret:0.02,infrate:0.0748};
+ratehistory[250]={year:2022,stockret:-0.149,bondret:0.0176,stret:0.02,infrate:0.0711};
 ratehistory[251]={year:2023,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[252]={year:2024,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[253]={year:2025,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
