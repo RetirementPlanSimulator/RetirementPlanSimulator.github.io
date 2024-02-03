@@ -38,6 +38,9 @@ div.b {
 <div align="left">
 <p> 
 
+<fieldset>
+  <legend> <b> Plan Info </b> </legend>
+
 <input type="button" value="List Plans" onclick="listplans(this.form)">
 
 <label for="plan_id">Plan Name:</label> 
@@ -45,17 +48,18 @@ div.b {
 
 <input type="button" value="Get Plan" onclick="getprev(this.form)">
 
+ <label for="sim_start_yr">Simulation Start Year: </label> 
+     <input id='sim_start_yr' type="number" name="sim_start_yr" value=2023 min="1900" max="2100" style="width: 55px;"> 
+
 <label for="plan_dsc">Plan Desc:</label> 
-    <input type="text" name="plan_dsc" value="Default Name for Demonstration.  Scroll down and press Run Simulation button." style="width: 750;">
+    <input type="text" name="plan_dsc" value="Default Name for Demonstration.  Scroll down and press Run Simulation button." style="width: 600;">
+</fieldset>
+<br>
 
-
-</p>
-
-<p>
 <fieldset>
   <legend> <b> Your Information </b> </legend>
      <label for="you_birth_yr">Birth Year: </label> 
-     <input id='you_birth_yr' type="number" name="you_birth_yr" value=1961 min="1900" max="2100" style="width: 50px;"> 
+     <input id='you_birth_yr' type="number" name="you_birth_yr" value=1961 style="width: 55px;"> 
 
      <label for="you_birth_mth">Birth Month: </label> 
      <input id='you_birth_mth' type="number" name="you_birth_mth" value=01 min="01" max="12" style="width: 50px;"> 
@@ -99,7 +103,7 @@ div.b {
   <legend><b> Spouse Information </b> </legend>
      
      <label for="spo_birth_yr">Birth Year: </label> 
-     <input id='spo_birth_yr' type="number" name="spo_birth_yr" value=1961 min="1900" max="2100" style="width: 50px;"> 
+     <input id='spo_birth_yr' type="number" name="spo_birth_yr" value=1961 style="width: 55px;"> 
 
      <label for="spo_birth_mth">Birth Month: </label> 
      <input id='spo_birth_mth' type="number" name="spo_birth_mth" value=01 min="01" max="12" style="width: 50px;"> 
@@ -299,7 +303,7 @@ div.b {
 <fieldset>
   <legend><b> Misc Parameters </b> </legend>
     
-    <label for="medb_flag">Enroll Medicare B:</label>
+   <label for="medb_flag">Enroll Medicare B:</label>
          <select name="medb_flag" id="medb_flag">
            <option value="NO">No</option>
            <option value="YES">Yes</option>
@@ -427,6 +431,10 @@ div.b {
    if (form.early_death_pct.value == "") {form.early_death_pct.value = 75;}
 
    form.rpt_fmt_flag.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"));
+
+   form.sim_start_yr.value = localStorage.getItem(fFrm_Plan_Id.concat("SimpSim_sim_start_yr"));
+   
+   if (form.sim_start_yr.value == "") {form.sim_start_yr.value = 2023;}
   }  
 </script>
 
@@ -938,6 +946,8 @@ div.b {
 
    localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"), form.rpt_fmt_flag.value);
 
+   localStorage.setItem(fFrm_Plan_Id.concat("SimpSim_sim_start_yr"), form.sim_start_yr.value);
+
    display_message1 = fFrm_Plan_Id;
    display_message2 = " Plan Saved!";
    display_message_final = display_message1.concat(display_message2);
@@ -1071,6 +1081,8 @@ div.b {
 
    localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_rpt_fmt_flag"));
 
+   localStorage.removeItem(fFrm_Plan_Id.concat("SimpSim_sim_start_yr"));
+
 
    display_message1 = fFrm_Plan_Id;
    display_message2 = " Plan Deleted!";
@@ -1092,7 +1104,7 @@ div.b {
     var simulation_scenario = new Array( );
     var scenario_summary = new Array( );
 
-    var fCurrent_Year = getcurrentyear();
+    fCurrent_Year = form.sim_start_yr.value * 1;
 
     var fRowNbr      = 0;
     
@@ -1341,14 +1353,38 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
        
       {
           fYear_Cnt++; 
+                                   
+                                   
+//*********************************************************************************************
+//* determine retired status - fully retired / not retired, or in transition (i.e. one retired, one not retired
+//*********************************************************************************************
+         fRetired_Flag = "NO";
+         fTrans_Flag = "NO";
+      
+         if (fFrm_Spo_Current_Age > 0)
+              {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
+                 {fRetired_Flag = "YES";}}
+         
+         if (fFrm_Spo_Current_Age == 0)
+              {if (fYou_Age >= fFrm_You_Retire_Age) 
+                 {fRetired_Flag = "YES";}}
 
-          fYou_SocSec_Amt = 0;
-          fSpo_SocSec_Amt = 0;
+        if (fFrm_Spo_Current_Age > 0)
+              {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age < fFrm_Spo_Retire_Age) 
+                 {fTrans_Flag = "YES";}}
+        
+        if (fFrm_Spo_Current_Age > 0)
+              {if (fYou_Age < fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
+                 {fTrans_Flag = "YES";}}                                   
+ 
 
 //*********************************************************************************************
 //* if still alive and greater than social security start age, include social security benefit
 //*********************************************************************************************
-          if (fYou_Age > fFrm_You_SocSec_Age)
+          fYou_SocSec_Amt = 0;
+          fSpo_SocSec_Amt = 0;
+  
+        if (fYou_Age > fFrm_You_SocSec_Age)
                 {fYou_SocSec_Amt = fInfAdj_You_SocSec_Amt;}
           
           if (fYou_Age == fFrm_You_SocSec_Age)
@@ -1384,7 +1420,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
           fMedb_Premium_Amt = 0;
     
           if (fYear_Cnt > 1)
-            {if (fFrm_Medb_Flag == "YES")   
+            {if (fFrm_Medb_Flag == "YES" && fTrans_Flag == "NO")   
               {fMedb_Premium_Amt = 
                  calc_medb_premium(fAdjusted_Gross_Amt, fExemptions, fYou_Age, fFrm_You_Retire_End_Age, fSpo_Age, fFrm_Spo_Retire_End_Age, fFrm_Spo_Current_Age);}
             }
@@ -1417,25 +1453,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
          fInfAdj_Budget_Amt = 0;
          fTotal_Need_Amt = 0;
          fUse_Mortgage_Budget_Amt = 0;
-         fRetired_Flag = "NO";
-         fTrans_Flag = "NO";
-    
-         if (fFrm_Spo_Current_Age > 0)
-              {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
-                 {fRetired_Flag = "YES";}}
-         
-         if (fFrm_Spo_Current_Age == 0)
-              {if (fYou_Age >= fFrm_You_Retire_Age) 
-                 {fRetired_Flag = "YES";}}
-
-        if (fFrm_Spo_Current_Age > 0)
-              {if (fYou_Age >= fFrm_You_Retire_Age && fSpo_Age < fFrm_Spo_Retire_Age) 
-                 {fTrans_Flag = "YES";}}
         
-        if (fFrm_Spo_Current_Age > 0)
-              {if (fYou_Age < fFrm_You_Retire_Age && fSpo_Age >= fFrm_Spo_Retire_Age) 
-                 {fTrans_Flag = "YES";}}
-
 //        fVPW_Lookup = Math.max(fYou_Age, fSpo_Age) - 40;    
 //        fVPW_Factor = vpwtable[fVPW_Lookup].factor;
 //        fVPW_Draw_Amt = 
@@ -2106,7 +2124,8 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
 //    window.scrollTo(0, 700);
     
    if (fDownload_Results == "YES")
-        {download_simulation_result_detail(simulation_scenario); }
+        {download_simulation_result_detail(simulation_scenario);
+         download_simulation_input_variables(form);}
     
  }
 </script>
@@ -2370,7 +2389,8 @@ function closeWin() {
                           " </tr> " ;
      
       
-      fBaseline_Year = getcurrentyear();  
+//      fBaseline_Year = getcurrentyear();  
+        fBaseline_Year = fCurrent_Year;
       
       for (var i=0; i<fsimulation_scenarioLen; i++)
        
@@ -2832,6 +2852,100 @@ for (var i=0; i<fsimulation_scenarioLen; i++)
  }	
 </script> 
     
+<script type="text/javascript">
+ function download_simulation_input_variables (form) {
+
+   csv="fFrm_Plan_Id" +  ","  +  fFrm_Plan_Id      +  "\r\n";
+    csv=csv  +  "form.sim_start_yr.value" +  ","  + form.sim_start_yr.value     +  "\r\n";
+    csv=csv  +  "form.plan_dsc.value" +  ","  + form.plan_dsc.value     +  "\r\n";
+
+    csv=csv  +  "form.you_birth_yr.value" +  ","  + form.you_birth_yr.value     +  "\r\n";
+    csv=csv  +  "form.you_birth_mth.value" +  ","  + form.you_birth_mth.value     +  "\r\n";
+    csv=csv  +  "form.you_retire_age.value" +  ","  + form.you_retire_age.value     +  "\r\n";
+    csv=csv  +  "form.you_retire_end_age.value" +  ","  + form.you_retire_end_age.value     +  "\r\n";
+    csv=csv  +  "form.you_socsec_age.value" +  ","  + form.you_socsec_age.value     +  "\r\n";
+    csv=csv  +  "form.you_socsec_amt.value" +  ","  + form.you_socsec_amt.value     +  "\r\n";
+    csv=csv  +  "form.you_ira_start_bal_amt.value" +  ","  + form.you_ira_start_bal_amt.value     +  "\r\n";
+    csv=csv  +  "form.you_ira_ann_dep_amt.value" +  ","  + form.you_ira_ann_dep_amt.value     +  "\r\n";
+    csv=csv  +  "form.you_pension_amt.value" +  ","  + form.you_pension_amt.value     +  "\r\n";
+    csv=csv  +  "form.you_pension_begin_age.value" +  ","  + form.you_pension_begin_age.value     +  "\r\n";
+    csv=csv  +  "form.you_pension_inf_pct.value" +  ","  + form.you_pension_inf_pct.value     +  "\r\n";
+    csv=csv  +  "form.you_pension_survivor_pct.value" +  ","  + form.you_pension_survivor_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.spo_birth_yr.value" +  ","  + form.spo_birth_yr.value     +  "\r\n";
+    csv=csv  +  "form.spo_birth_mth.value" +  ","  + form.spo_birth_mth.value     +  "\r\n";
+    csv=csv  +  "form.spo_retire_age.value" +  ","  + form.spo_retire_age.value     +  "\r\n";
+    csv=csv  +  "form.spo_retire_end_age.value" +  ","  + form.spo_retire_end_age.value     +  "\r\n";
+    csv=csv  +  "form.spo_socsec_age.value" +  ","  + form.spo_socsec_age.value     +  "\r\n";
+    csv=csv  +  "form.spo_socsec_amt.value" +  ","  + form.spo_socsec_amt.value     +  "\r\n";
+    csv=csv  +  "form.spo_ira_start_bal_amt.value" +  ","  + form.spo_ira_start_bal_amt.value     +  "\r\n";
+    csv=csv  +  "form.spo_ira_ann_dep_amt.value" +  ","  + form.spo_ira_ann_dep_amt.value     +  "\r\n";
+    csv=csv  +  "form.spo_pension_amt.value" +  ","  + form.spo_pension_amt.value     +  "\r\n";
+    csv=csv  +  "form.spo_pension_begin_age.value" +  ","  + form.spo_pension_begin_age.value     +  "\r\n";
+    csv=csv  +  "form.spo_pension_inf_pct.value" +  ","  + form.spo_pension_inf_pct.value     +  "\r\n";
+    csv=csv  +  "form.spo_pension_survivor_pct.value" +  ","  + form.spo_pension_survivor_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.brkrg_start_bal_amt.value" +  ","  + form.brkrg_start_bal_amt.value     +  "\r\n";
+    csv=csv  +  "form.brkrg_cost_basis_amt.value" +  ","  + form.brkrg_cost_basis_amt.value     +  "\r\n";
+    csv=csv  +  "form.brkrg_ann_dep_amt.value" +  ","  + form.brkrg_ann_dep_amt.value     +  "\r\n";
+    csv=csv  +  "form.brkrg_taxable_dist_pct.value" +  ","  + form.brkrg_taxable_dist_pct.value     +  "\r\n";
+    csv=csv  +  "form.home_equity_amt.value" +  ","  + form.home_equity_amt.value     +  "\r\n";
+
+    csv=csv  +  "form.roth_start_bal_amt.value" +  ","  + form.roth_start_bal_amt.value     +  "\r\n";
+    csv=csv  +  "form.roth_ann_dep_amt.value" +  ","  + form.roth_ann_dep_amt.value     +  "\r\n";
+    csv=csv  +  "form.roth_conv_pct.value" +  ","  + form.roth_conv_pct.value     +  "\r\n";
+    csv=csv  +  "form.roth_draw_begin_age.value" +  ","  + form.roth_draw_begin_age.value     +  "\r\n";
+    csv=csv  +  "form.pre_roth_ftb_pct.value" +  ","  + form.pre_roth_ftb_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.hsa_start_bal_amt.value" +  ","  + form.hsa_start_bal_amt.value     +  "\r\n";
+    csv=csv  +  "form.hsa_ann_dep_amt.value" +  ","  + form.hsa_ann_dep_amt.value     +  "\r\n";
+    csv=csv  +  "form.hsa_flat_draw_amt.value" +  ","  + form.hsa_flat_draw_amt.value     +  "\r\n";
+    csv=csv  +  "form.hsa_draw_begin_age.value" +  ","  + form.hsa_draw_begin_age.value     +  "\r\n";
+    csv=csv  +  "form.hsa_draw_end_age.value" +  ","  + form.hsa_draw_end_age.value     +  "\r\n";
+    csv=csv  +  "form.hsa_use_flag.value" +  ","  + form.hsa_use_flag.value     +  "\r\n";
+
+    csv=csv  +  "form.trans_budget_amt.value" +  ","  + form.trans_budget_amt.value     +  "\r\n";
+    csv=csv  +  "form.full_budget_amt.value" +  ","  + form.full_budget_amt.value     +  "\r\n";
+    csv=csv  +  "form.last3_budget_amt.value" +  ","  + form.last3_budget_amt.value     +  "\r\n";
+    csv=csv  +  "form.mortgage_budget_amt.value" +  ","  + form.mortgage_budget_amt.value     +  "\r\n";
+    csv=csv  +  "form.mortgage_end_age.value" +  ","  + form.mortgage_end_age.value     +  "\r\n";
+
+    csv=csv  +  "form.gogo_reduce_pct.value" +  ","  + form.gogo_reduce_pct.value     +  "\r\n";
+    csv=csv  +  "form.nogo_reduce_pct.value" +  ","  + form.nogo_reduce_pct.value     +  "\r\n";
+    csv=csv  +  "form.slogo_reduce_pct.value" +  ","  + form.slogo_reduce_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.gogo_stock_pct.value" +  ","  + form.gogo_stock_pct.value     +  "\r\n";
+    csv=csv  +  "form.slogo_stock_pct.value" +  ","  + form.slogo_stock_pct.value     +  "\r\n";
+    csv=csv  +  "form.nogo_stock_pct.value" +  ","  + form.nogo_stock_pct.value     +  "\r\n";
+    csv=csv  +  "form.last3_stock_pct.value" +  ","  + form.last3_stock_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.bonus_pct.value" +  ","  + form.bonus_pct.value     +  "\r\n";
+    csv=csv  +  "form.baseline_stock_return_pct.value" +  ","  + form.baseline_stock_return_pct.value     +  "\r\n";
+    csv=csv  +  "form.baseline_bond_return_pct.value" +  ","  + form.baseline_bond_return_pct.value     +  "\r\n";
+    csv=csv  +  "form.baseline_inf_pct.value" +  ","  + form.baseline_inf_pct.value     +  "\r\n";
+
+    csv=csv  +  "form.medb_flag.value" +  ","  + form.medb_flag.value     +  "\r\n";
+    csv=csv  +  "form.qcd_pct.value" +  ","  + form.qcd_pct.value     +  "\r\n";
+    csv=csv  +  "form.early_death_pct.value" +  ","  + form.early_death_pct.value     +  "\r\n";
+    csv=csv  +  "form.rpt_fmt_flag.value" +  ","  + form.rpt_fmt_flag.value     +  "\r\n";
+
+
+     fileName1 = fFrm_Plan_Id.concat("_");
+     fileName = fileName1.concat("RPS_sim_input_var");
+     
+     let csvData = new Blob([csv], { type: 'text/csv' });  
+     let csvUrl = URL.createObjectURL(csvData);
+ 
+     let hiddenElement = document.createElement('a');
+     hiddenElement.href = csvUrl;
+     hiddenElement.target = '_blank';
+     hiddenElement.download = fileName + '.csv';
+     hiddenElement.click();
+
+
+}	
+</script> 
+         
     
 <script type="text/javascript">
  function downloadrates () {
@@ -3289,29 +3403,29 @@ function calc_medb_premium (fAdjusted_Gross_Amt, fExemptions, fYou_Age, fYou_Ret
 
 var myWindow;
 
-var stddeductmarried = 27700;
-var stddeductsingle = 13850;
+var stddeductmarried = 29200;
+var stddeductsingle = 14600;
 
-var senior_deduct_amt = 1500;
+var senior_deduct_amt = 1550;
 
 var taxtablemarried = new Array( );
-taxtablemarried[0] = {pct:.10, from:0, thru:22000};
-taxtablemarried[1] = {pct:.12, from:22001, thru:89450};
-taxtablemarried[2] = {pct:.22, from:89451, thru:190750};
-taxtablemarried[3] = {pct:.24, from:190751, thru:364200};
-taxtablemarried[4] = {pct:.32, from:364201, thru:462500};
-taxtablemarried[5] = {pct:.35, from:462501, thru:693750};
-taxtablemarried[6] = {pct:.37, from:693751, thru:9999999999};
+taxtablemarried[0] = {pct:.10, from:0, thru:23200};
+taxtablemarried[1] = {pct:.12, from:23201,  thru:94300};
+taxtablemarried[2] = {pct:.22, from:94301,  thru:201050};
+taxtablemarried[3] = {pct:.24, from:201051, thru:383900};
+taxtablemarried[4] = {pct:.32, from:383901, thru:487450};
+taxtablemarried[5] = {pct:.35, from:487451, thru:731200};
+taxtablemarried[6] = {pct:.37, from:731201, thru:9999999999};
 var TaxTableMarriedLen = taxtablemarried.length;
 
 var taxtablesingle = new Array( );
-taxtablesingle[0] = {pct:.10, from:0, thru:11000};
-taxtablesingle[1] = {pct:.12, from:11001, thru:44725};
-taxtablesingle[2] = {pct:.22, from:44726, thru:95375};
-taxtablesingle[3] = {pct:.24, from:99376, thru:182100};
-taxtablesingle[4] = {pct:.32, from:182101, thru:231250};
-taxtablesingle[5] = {pct:.35, from:231251, thru:578125};
-taxtablesingle[6] = {pct:.37, from:578126, thru:9999999999};
+taxtablesingle[0] = {pct:.10, from:0, thru:11600};
+taxtablesingle[1] = {pct:.12, from:11601, thru:47150};
+taxtablesingle[2] = {pct:.22, from:47151, thru:100525};
+taxtablesingle[3] = {pct:.24, from:100526, thru:191950};
+taxtablesingle[4] = {pct:.32, from:191951, thru:243725};
+taxtablesingle[5] = {pct:.35, from:243726, thru:609350};
+taxtablesingle[6] = {pct:.37, from:609351, thru:9999999999};
 var TaxTableSingleLen = taxtablesingle.length;
 
 var infadj_taxtable_married = new Array();
@@ -3321,25 +3435,25 @@ var capgains_taxtable = new Array( );
 capgains_taxtable[0] = {file_status: "married", pct:.0,  from:0, thru: 89250};
 capgains_taxtable[1] = {file_status: "married", pct:.15, from:89251, thru: 553850};
 capgains_taxtable[2] = {file_status: "married", pct:.20, from:553851, thru: 999999999};
-capgains_taxtable[3] = {file_status: "single", pct:.0, from:0, thru: 44625};
-capgains_taxtable[4] = {file_status: "single", pct:.15, from:44626, thru: 492300};
-capgains_taxtable[5] = {file_status: "single", pct:.20, from:492301, thru: 999999999};
+capgains_taxtable[3] = {file_status: "single", pct:.0, from:0, thru: 47025};
+capgains_taxtable[4] = {file_status: "single", pct:.15, from:47026, thru: 518900};
+capgains_taxtable[5] = {file_status: "single", pct:.20, from:518901, thru: 999999999};
 var infadj_capgains_taxtable = new Array();
 var capgains_taxtable_len = capgains_taxtable.length;
 
 var medb_premium_table = new Array( );
-medb_premium_table[0] = {file_status: "married", adj_gross_from:0,      adj_gross_thru:194000,    mthly_rate:164.90};
-medb_premium_table[1] = {file_status: "married", adj_gross_from:194001, adj_gross_thru:246000,    mthly_rate:230.80};
-medb_premium_table[2] = {file_status: "married", adj_gross_from:246001, adj_gross_thru:306000,    mthly_rate:329.70};
-medb_premium_table[3] = {file_status: "married", adj_gross_from:306001, adj_gross_thru:366000,    mthly_rate:428.60};
-medb_premium_table[4] = {file_status: "married", adj_gross_from:366001, adj_gross_thru:750000,    mthly_rate:527.50};
-medb_premium_table[5] = {file_status: "married", adj_gross_from:750001, adj_gross_thru:999999999, mthly_rate:560.50};
-medb_premium_table[6] =  {file_status: "single", adj_gross_from:0,      adj_gross_thru:97000,     mthly_rate:164.90};
-medb_premium_table[7] =  {file_status: "single", adj_gross_from:97001,  adj_gross_thru:123000,    mthly_rate:238.80};
-medb_premium_table[8] =  {file_status: "single", adj_gross_from:123001, adj_gross_thru:153000,    mthly_rate:329.70};
-medb_premium_table[9] =  {file_status: "single", adj_gross_from:153001, adj_gross_thru:183000,    mthly_rate:428.60};
-medb_premium_table[10] = {file_status: "single", adj_gross_from:183001, adj_gross_thru:499999,    mthly_rate:527.50};
-medb_premium_table[11] = {file_status: "single", adj_gross_from:500000, adj_gross_thru:999999999, mthly_rate:560.50};
+medb_premium_table[0] = {file_status: "married", adj_gross_from:0,      adj_gross_thru:206000,    mthly_rate:174.70};
+medb_premium_table[1] = {file_status: "married", adj_gross_from:206001, adj_gross_thru:258000,    mthly_rate:244.60};
+medb_premium_table[2] = {file_status: "married", adj_gross_from:258001, adj_gross_thru:322000,    mthly_rate:349.40};
+medb_premium_table[3] = {file_status: "married", adj_gross_from:322001, adj_gross_thru:386000,    mthly_rate:454.20};
+medb_premium_table[4] = {file_status: "married", adj_gross_from:386001, adj_gross_thru:750000,    mthly_rate:559.00};
+medb_premium_table[5] = {file_status: "married", adj_gross_from:750001, adj_gross_thru:999999999, mthly_rate:594.00};
+medb_premium_table[6] =  {file_status: "single", adj_gross_from:0,      adj_gross_thru:103000,    mthly_rate:174.70};
+medb_premium_table[7] =  {file_status: "single", adj_gross_from:103001, adj_gross_thru:129000,    mthly_rate:244.60};
+medb_premium_table[8] =  {file_status: "single", adj_gross_from:129001, adj_gross_thru:161000,    mthly_rate:349.40};
+medb_premium_table[9] =  {file_status: "single", adj_gross_from:161001, adj_gross_thru:193000,    mthly_rate:454.20};
+medb_premium_table[10] = {file_status: "single", adj_gross_from:193001, adj_gross_thru:499999,    mthly_rate:559.00};
+medb_premium_table[11] = {file_status: "single", adj_gross_from:500000, adj_gross_thru:999999999, mthly_rate:594.00};
 var infadj_medb_premium_table = new Array();
 var medb_premium_table_len = medb_premium_table.length;
     
@@ -3705,7 +3819,7 @@ ratehistory[247]={year:2019,stockret:0.278,bondret:0.1055,stret:0.001,infrate:0.
 ratehistory[248]={year:2020,stockret:0.1752,bondret:0.0756,stret:0.001,infrate:0.014};
 ratehistory[249]={year:2021,stockret:0.221,bondret:-0.0453,stret:0.02,infrate:0.0748};
 ratehistory[250]={year:2022,stockret:-0.149,bondret:0.0176,stret:0.02,infrate:0.0711};
-ratehistory[251]={year:2023,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
+ratehistory[251]={year:2023,stockret:0.2612,bondret:0.0555,stret:0.02,infrate:0.0310};
 ratehistory[252]={year:2024,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[253]={year:2025,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
 ratehistory[254]={year:2026,stockret:0.06,bondret:0.03,stret:0.02,infrate:0.0225};
