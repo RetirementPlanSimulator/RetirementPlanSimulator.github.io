@@ -27,7 +27,7 @@ div.b {
 <div class="w3-bar w3-black">
    <a href="RPS_Disclaimer.html" >Disclaimer</a>
    &nbsp;&nbsp;&nbsp;
-   <a href="RPS_User_Guide.html" >User Guide</a> 
+   <a href="test_pdf.pdf" >User Guide</a> 
    &nbsp;&nbsp;&nbsp;
    <a href="Recent_Changes.html" >Recent Changes</a> 
    &nbsp;&nbsp;&nbsp;
@@ -49,7 +49,7 @@ div.b {
 <input type="button" value="Get Plan" onclick="getprev(this.form)">
 
  <label for="sim_start_yr">Simulation Start Year: </label> 
-     <input id='sim_start_yr' type="number" name="sim_start_yr" value=2023 min="1900" max="2100" style="width: 55px;"> 
+     <input id='sim_start_yr' type="number" name="sim_start_yr" value=2024 min="1900" max="2100" style="width: 55px;"> 
 
 <label for="plan_dsc">Plan Desc:</label> 
     <input type="text" name="plan_dsc" value="Default Name for Demonstration.  Scroll down and press Run Simulation button." style="width: 600;">
@@ -207,23 +207,24 @@ div.b {
    <label for="hsa_ann_dep_amt">HSA Annual Deposit:</label> 
      <input type="number" name="hsa_ann_dep_amt" value=0 min="0" max="999999" style="width: 75px;">
 
-   
-
-  <label for="hsa_flat_draw_amt">HSA Flat Draw Amt:</label> 
-     <input type="number" name="hsa_flat_draw_amt" value=0 min="0" max="999999" style="width: 75px;">
-
-  <label for="hsa_draw_begin_age">HSA Draw Begin Age:</label> 
-     <input type="number" name="hsa_draw_begin_age" value=65 min="20" max="99" style="width: 50px;"> 
-
-  <label for="hsa_draw_end_age">HSA Draw End Age:</label> 
-     <input type="number" name="hsa_draw_end_age" value=65 min="20" max="99" style="width: 50px;"> 
-
-  <label for="hsa_use_flag">HSA MedB Prem Use:</label>
+   <label for="hsa_use_flag">HSA MedB Prem Use:</label>
          <select name="hsa_use_flag" id="hsa_use_flag">
            <option value="none">None</option>
            <option value="medb">MedB</option>
          </select>
-  
+
+   <div class="b"><br> </div>
+
+  <label for="hsa_flat_draw_amt">HSA Annual Flat Draw Amt:</label> 
+     <input type="number" name="hsa_flat_draw_amt" value=0 min="0" max="999999" style="width: 75px;">
+
+  <label for="hsa_draw_begin_age">HSA Flat Draw Begin Age:</label> 
+     <input type="number" name="hsa_draw_begin_age" value=65 min="20" max="99" style="width: 50px;"> 
+
+  <label for="hsa_draw_end_age">HSA Flat Draw End Age:</label> 
+     <input type="number" name="hsa_draw_end_age" value=65 min="20" max="99" style="width: 50px;"> 
+
+    
 </fieldset> 
 <br>
 <fieldset>
@@ -303,7 +304,7 @@ div.b {
 <fieldset>
   <legend><b> Misc Parameters </b> </legend>
     
-   <label for="medb_flag">Enroll Medicare B:</label>
+   <label for="medb_flag">Include Medicare B Premium:</label>
          <select name="medb_flag" id="medb_flag">
            <option value="NO">No</option>
            <option value="YES">Yes</option>
