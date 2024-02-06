@@ -27,9 +27,7 @@ div.b {
 <div class="w3-bar w3-black">
    <a href="RPS_Disclaimer.html" >Disclaimer</a>
    &nbsp;&nbsp;&nbsp;
-   <a href="test_pdf.pdf" >User Guide</a> 
-   &nbsp;&nbsp;&nbsp;
-   <a href="Recent_Changes.html" >Recent Changes</a> 
+   <a href="RPS_User_Guide.pdf" >User Guide</a> 
    &nbsp;&nbsp;&nbsp;
    <a href="mailto:josephnagy72@gmail.com" >Contact Me</a>   
 </div>
@@ -283,18 +281,18 @@ div.b {
 
 
 <fieldset>
-  <legend><b> Variable Withdraw / Baseline Plan Parameters </b> </legend>
+  <legend><b> Variable Withdraw / Base Plan Parameters </b> </legend>
     
     <label for="bonus_pct">Variable Withdraw %:</label>
     <input type="number" name="bonus_pct" value=10 min="0" max="100" style="width: 50px;">
 
-    <label for="baseline_stock_return_pct">Baseline Stock Return %:</label>
+    <label for="baseline_stock_return_pct">Base Stock Return %:</label>
     <input type="number" name="baseline_stock_return_pct" value=7 min="0" max="10" style="width: 50px;">
 
-    <label for="baseline_bond_return_pct">Baseline Bond Return %:</label>
+    <label for="baseline_bond_return_pct">Base Bond Return %:</label>
     <input type="number" name="baseline_bond_return_pct" value=3 min="0" max="10" style="width: 50px;">
 
-     <label for="baseline_inf_pct">Baseline Inf %:</label>
+     <label for="baseline_inf_pct">Base Inflation %:</label>
     <input type="number" name="baseline_inf_pct" value=2.25 min="0" max="10" style="width: 50px;">
 
 </fieldset> 
@@ -2108,7 +2106,7 @@ for (var x=0; ratehistory[x].year <= fMax_Year ; x++)
     if (fDownload_Results == "YES")
          {download_simulation_result_summary(scenario_summary, fFrm_You_Retire_End_Age, fNbr_Years); }
        
-    TableResults = showdetails(TableResults,simulation_scenario, 1, "Baseline");
+    TableResults = showdetails(TableResults,simulation_scenario, 1, "Base");
 
     TableResults = showdetails(TableResults,simulation_scenario, fWorst_Year, " - Worst Case");
  
@@ -2171,7 +2169,7 @@ function closeWin() {
 
       var fsimulation_scenarioLen = simulation_scenario.length;
 
-      fCaption =  '<caption style="text-align:left"> <h3> Detail simulation results using Baseline Rates </h3></caption>';
+      fCaption =  '<caption style="text-align:left"> <h3> Detail simulation results using Base Rates </h3></caption>';
       
       if (fYear != 1) 
 	  {fCaption = '<caption style="text-align:left"> <h3> Detail simulation results using rates starting in ' + fYear + fCase + '</h3></caption>';}
@@ -2287,7 +2285,7 @@ function closeWin() {
         if (fFrm_Rpt_Fmt_Flg == "Detail")
               {    
                  TableResults = TableResults +
-                         '<th style="background-color:#ff33cc">Baseline</th> ';
+                         '<th style="background-color:#ff33cc">Base</th> ';
 	                
                  TableResults = TableResults +    
                      '<th style="background-color:#000000">SS Taxable</th> ' +
@@ -2613,7 +2611,7 @@ function closeWin() {
            if (scenario_summary[i].scenario_year == fWorst_Year) {fScenario_Status = "Worst Case"; fShow="Y";}
            if (scenario_summary[i].scenario_year == fBest_Year) {fScenario_Status = "Best Case"; fShow="Y";}
            if (scenario_summary[i].scenario_year == fMedian_Year) {fScenario_Status = "Median Case"; fShow="Y";}
-           if (scenario_summary[i].scenario_year == 1) {fScenario_Status = "Baseline Plan"; fShow="Y";}
+           if (scenario_summary[i].scenario_year == 1) {fScenario_Status = "Base Plan"; fShow="Y";}
            if (scenario_summary[i].scenario_year == fMost_Recent_Year) {fScenario_Status = "Recent Case"; fShow="Y";}
            
            if (fShow == "Y")
@@ -2628,7 +2626,7 @@ function closeWin() {
                {fBackGround = 'style="background-color:#ffff00">'};  // set to yellow "background-color:#FF0000"
 
               fScenarioRange = scenario_summary[i].scenario_year + " thru " + (scenario_summary[i].scenario_year + fNbr_Years);
-              if (scenario_summary[i].scenario_year == 1) {fScenarioRange = "Baseline";}
+              if (scenario_summary[i].scenario_year == 1) {fScenarioRange = "Base";}
            
               fResult = "Success!" 
               
@@ -2707,7 +2705,7 @@ function closeWin() {
            fAvg_Bonus = Math.round((scenario_summary[i].bonus_running_total / scenario_summary[i].infadj_budget_running_total)*100);
            
               fScenarioRange = scenario_summary[i].scenario_year + " thru " + (scenario_summary[i].scenario_year + fNbr_Years);
-              if (scenario_summary[i].scenario_year == 1) {fScenarioRange = "Baseline";}
+              if (scenario_summary[i].scenario_year == 1) {fScenarioRange = "Base";}
            
               fResult = "Success!";
 
@@ -2763,7 +2761,7 @@ function closeWin() {
                "Scenario, Year, You, Spouse, Budget, Mortgage,Variable, Inc Tax, Cap Gains Tax, Med B Prem, You Soc Sec, " +
                "Spouse Soc Sec, You Pension, Spouse Pension, Withdraw From Savings, You IRA, Spouse IRA," +
                "Brokerage, Roth, HSA, Home Equity, Beg Bal, Withdraw, Gain(Loss), Deposit, End Bal, Home Equity," +
-               "Baseline, Stock Ret, Bond Ret, Inf Rate," +
+               "Base, Stock Ret, Bond Ret, Inf Rate," +
                "Beg Bal, Draw RMD ,Draw Addl, Gain / Loss, Deposit, End Bal," +
                "Beg Bal, Draw RMD, Draw Addl, Gain / Loss, Deposit, End Bal," +
                "Beg Bal, Draw / Deposit, Gain / Loss, Deposit, End Bal," +
