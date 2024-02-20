@@ -3254,22 +3254,49 @@ function calc_capgains_tax(fAdjusted_Gross_Amt, fDeductions_Amt, fCapgains_Amt, 
    if (fLast_Alive == "you" && fYou_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}
    if (fLast_Alive == "spouse" && fSpo_Age >= fLast3_Start_Age) {fAdjusted_Gross_Amt = 0;}    
        
-   fTaxable_Income = fAdjusted_Gross_Amt -fDeductions_Amt + fCapgains_Amt;       
+   fTaxable_Income_With_CapGains = fAdjusted_Gross_Amt -fDeductions_Amt + fCapgains_Amt;       
+   
+   fTaxable_Income_No_CapGains = fAdjusted_Gross_Amt -fDeductions_Amt;       
   
-   if (fTaxable_Income < 0)  {fTaxable_Income = 0;}
-  
+   if (fTaxable_Income_With_CapGains < 0)  {fTaxable_Income_With_CapGains = 0;}
+
+   if (fTaxable_Income_No_CapGains < 0)  {fTaxable_Income_No_Capgains = 0;}    
+    
+   var fBracket_Nbr = 1;
+   var fRemaining_To_Tax = 0;
+   var fElig_To_Tax_Accum = 0;
+   var fTax_Amt_Accum = 0;
+   
    for (ri=0; ri < capgains_taxtable_len; ri++)
         {
          if (fFile_Status == capgains_taxtable[ri].file_status) 
-         
-           {fThru = Math.min(fTaxable_Income, infadj_capgains_taxtable[ri].thru);
-            fTax_Amt = fTax_Amt + Math.round((fThru - infadj_capgains_taxtable[ri].from) * capgains_taxtable[ri].pct);
-            if (fThru == fTaxable_Income) {break;}
+            {
+            fThis_Bracket_Amt = infadj_capgains_taxtable[ri].thru - infadj_capgains_taxtable[ri].from;
+            
+            fElig_To_Tax = Math.min(fThis_Bracket_Amt,fRemaining_To_Tax);
+            if (fBracket_Nbr == 1) {fElig_To_Tax = Math.min(fTaxable_Income_With_CapGains, infadj_capgains_taxtable[ri].thru)};
+            
+            fAmt_Over_Inc = 0;
+            if (fBracket_Nbr == 1) {fAmt_Over_Inc = fElig_To_Tax - fTaxable_Income_No_CapGains};
+            
+            fAmt_To_Tax = fElig_To_Tax;
+            if (fBracket_Nbr == 1) {fAmt_To_Tax = Math.min(infadj_capgains_taxtable[ri].thru, fAmt_Over_Inc)};
+            
+            fTax_Amt_This_Bracket = Math.round(fAmt_To_Tax * capgains_taxtable[ri].pct);
+            
+            fTax_Amt_Accum += fTax_Amt_This_Bracket;
+            
+            fElig_To_Tax_Accum += fElig_To_Tax;
+            
+            fRemaining_To_Tax = Math.max(0,(fTaxable_Income_With_CapGains - fElig_To_Tax_Accum));
+            
+            fBracket_Nbr++;
+            
            }
         } 
 
-    oCapgains_Tax_Results = {total_income    : fTaxable_Income,
-                             tax_amt         : fTax_Amt};
+    oCapgains_Tax_Results = {total_income    : fTaxable_Income_With_CapGains,
+                             tax_amt         : fTax_Amt_Accum};
 
     return oCapgains_Tax_Results;  
   
@@ -3431,9 +3458,9 @@ var infadj_taxtable_married = new Array();
 var infadj_taxtable_single = new Array();
 
 var capgains_taxtable = new Array( );
-capgains_taxtable[0] = {file_status: "married", pct:.0,  from:0, thru: 89250};
-capgains_taxtable[1] = {file_status: "married", pct:.15, from:89251, thru: 553850};
-capgains_taxtable[2] = {file_status: "married", pct:.20, from:553851, thru: 999999999};
+capgains_taxtable[0] = {file_status: "married", pct:.0,  from:0, thru: 94050};
+capgains_taxtable[1] = {file_status: "married", pct:.15, from:94051, thru: 583750};
+capgains_taxtable[2] = {file_status: "married", pct:.20, from:583751, thru: 999999999};
 capgains_taxtable[3] = {file_status: "single", pct:.0, from:0, thru: 47025};
 capgains_taxtable[4] = {file_status: "single", pct:.15, from:47026, thru: 518900};
 capgains_taxtable[5] = {file_status: "single", pct:.20, from:518901, thru: 999999999};
